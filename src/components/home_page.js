@@ -81,39 +81,46 @@ class HomePage extends Component {
             // console.log(`event.target.elements: Text ${i + 1}`, event.target.elements[i].value);
             str += `&boxes[${i}][text]=${event.target.elements[i].value}&boxes[${i}][color]=%23C0C0C0`;
         }
-        let url = `https://api.imgflip.com/caption_image?username=AurelienVAILLANT&password=nW@:-*9a&template_id=${this.state.currentMemeSelected.movie_id}&font=arial` + str;
-        console.log('url : ', url);
+        let urlToCreateMeme = `https://api.imgflip.com/caption_image?username=AurelienVAILLANT&password=nW@:-*9a&template_id=${this.state.currentMemeSelected.movie_id}&font=arial` + str;
 
-
-        // this.getMemeFromImgflip(url);
+        console.log('urlToCreateMeme : ', urlToCreateMeme);
 
         this.setState({
             currentMemeSelected: {
                 showModalCreateMeme: false,
-                urlToCreateMeme: url
+                urlToCreateMeme: urlToCreateMeme
             }
         });
+
+        this.getMemeFromImgflip(urlToCreateMeme);
     }
 
-    getMemeFromImgflip(url) {
+    getMemeFromImgflip(urlToCreateMeme) {
         // urlToRetriveMeme
-        fetch(url)
+        fetch('http://localhost:5000/api/memes/createMeme/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({urlToCreateMeme: urlToCreateMeme})
+        })
             .then(response => response.json())
             .then(data => {
+                    console.log('Client: +++++++++++++++++++++++++', data)
                     this.setState({
                         currentMemeSelected: {
-                            urlToRetriveMeme: data['data']['url'],
+                            urlToRetriveMeme: data['url'],
                         }
                     });
                 }
-            ).then((_) => this.createComponents())
-            .catch(err => {
-                    console.error(err);
-                    const errorMessage = document.createElement('marquee');
-                    errorMessage.textContent = `Gah, ${err.message} !`;
-                    app.appendChild(errorMessage);
-                }
-            );
+            ).catch(err => {
+                console.error(err);
+                const errorMessage = document.createElement('marquee');
+                errorMessage.textContent = `Gah, ${err.message} !`;
+                app.appendChild(errorMessage);
+            }
+        );
     }
 
     render() {
@@ -144,7 +151,7 @@ class HomePage extends Component {
     }
 
     componentDidMount() {
-        fetch('https://api.imgflip.com/get_memes')
+        fetch('http://localhost:5000/api/memes/imgflip/')
             .then(response => response.json())
             .then(data => {
                     this.memes = data['data']['memes'];
