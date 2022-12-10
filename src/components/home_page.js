@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import logo from "../assets/img/feather.svg";
+import logo from "../assets/img/banksy.svg";
 import MydModalWithGrid from "./modal_create_meme2";
 
 const app = document.getElementById('App');
@@ -20,7 +20,7 @@ class HomePage extends Component {
                 movie_box_count: null,
                 movie_captions: null,
                 showModalCreateMeme: false,
-                urlToCreateMeme: null,
+                urlToGenerateMeme: null,
                 urlToRetriveMeme: null,
                 commentBoxes: null,
                 handleSubmitForm: null,
@@ -46,25 +46,23 @@ class HomePage extends Component {
             commentBoxes.push({key: i, value: i});
         }
 
-        await this.setState({
-            currentMemeSelected: {
-                movie_id: movie_id,
-                movie_name: movie_name,
-                movie_url: movie_url,
-                movie_width: movie_width,
-                movie_height: movie_height,
-                movie_box_count: movie_box_count,
-                movie_captions: movie_captions,
-                commentBoxes: commentBoxes,
-                handleSubmitForm: this.handleSubmitForm,
-                showModalCreateMeme: true,
-            },
-        });
+        this.state.currentMemeSelected.movie_id = movie_id;
+        this.state.currentMemeSelected.movie_name = movie_name;
+        this.state.currentMemeSelected.movie_url = movie_url;
+        this.state.currentMemeSelected.movie_width = movie_width;
+        this.state.currentMemeSelected.movie_height = movie_height;
+        this.state.currentMemeSelected.movie_box_count = movie_box_count;
+        this.state.currentMemeSelected.movie_captions = movie_captions;
+        this.state.currentMemeSelected.commentBoxes = commentBoxes;
+        this.state.currentMemeSelected.handleSubmitForm = this.handleSubmitForm;
+        this.state.currentMemeSelected.showModalCreateMeme = true;
+        this.setState({});
     }
 
-    handleSubmitForm = (event) => {
+    handleSubmitForm = async (event) => {
         event.preventDefault();
         /*
+                const data = new FormData(event.target);
         const data = new FormData(event.target);
         const formData = new FormData(event.currentTarget);
 
@@ -75,44 +73,49 @@ class HomePage extends Component {
              console.log(`data[i].value: text ${i + 1}`, data.get(`Texte ${i + 1}`));
          }*/
 
-
+        let commentBoxes = [];
         let str = "";
         for (let i = 0; i < event.target.length - 1; i++) {
             // console.log(`event.target.elements: Text ${i + 1}`, event.target.elements[i].value);
             str += `&boxes[${i}][text]=${event.target.elements[i].value}&boxes[${i}][color]=%23C0C0C0`;
+
+            // Save comments
+            commentBoxes.push(event.target.elements[i].value);
         }
-        let urlToCreateMeme = `https://api.imgflip.com/caption_image?username=AurelienVAILLANT&password=nW@:-*9a&template_id=${this.state.currentMemeSelected.movie_id}&font=arial` + str;
 
-        console.log('urlToCreateMeme : ', urlToCreateMeme);
+        this.state.currentMemeSelected.urlToGenerateMeme = `https://api.imgflip.com/caption_image?username=AurelienVAILLANT&password=nW@:-*9a&template_id=${this.state.currentMemeSelected.movie_id}&font=arial` + str;
+        this.state.currentMemeSelected.showModalCreateMeme = false;
+        this.state.currentMemeSelected.commentBoxes = commentBoxes;
 
-        this.setState({
-            currentMemeSelected: {
-                showModalCreateMeme: false,
-                urlToCreateMeme: urlToCreateMeme
-            }
+        this.setState({});
+
+        this.generateMemeOnImgflip({
+            movie_id: this.state.currentMemeSelected.movie_id,
+            movie_name: this.state.currentMemeSelected.movie_name,
+            movie_url: this.state.currentMemeSelected.movie_url,
+            movie_width: this.state.currentMemeSelected.movie_width,
+            movie_height: this.state.currentMemeSelected.movie_height,
+            movie_box_count: this.state.currentMemeSelected.movie_box_count,
+            movie_captions: this.state.currentMemeSelected.movie_captions,
+            urlToGenerateMeme: this.state.currentMemeSelected.urlToGenerateMeme,
+            commentBoxes: this.state.currentMemeSelected.commentBoxes,
         });
-
-        this.getMemeFromImgflip(urlToCreateMeme);
     }
 
-    getMemeFromImgflip(urlToCreateMeme) {
-        // urlToRetriveMeme
+    generateMemeOnImgflip(data) {
         fetch('http://localhost:5000/api/memes/createMeme/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({urlToCreateMeme: urlToCreateMeme})
+            body: JSON.stringify({
+                data: data
+            })
         })
             .then(response => response.json())
             .then(data => {
-                    console.log('Client: +++++++++++++++++++++++++', data)
-                    this.setState({
-                        currentMemeSelected: {
-                            urlToRetriveMeme: data['url'],
-                        }
-                    });
+                    this.state.currentMemeSelected.urlToRetriveMeme = data['urlToRetriveMeme'];
                 }
             ).catch(err => {
                 console.error(err);
@@ -180,31 +183,31 @@ class HomePage extends Component {
         if (this.isEmpty('result')) {
             var that = this;
             const container = document.getElementById('result');
-            this.memes.forEach((movie, index) => {
+            this.memes.forEach((meme, index) => {
                     const cardLi = document.createElement('li');
                     cardLi.setAttribute('key', index.toString());
 
                     const h2 = document.createElement('h2');
-                    h2.textContent = movie.name;
+                    h2.textContent = meme.name;
 
                     const divCardContent = document.createElement('div');
                     divCardContent.setAttribute('className', "card-content");
 
                     const image = document.createElement('img');
-                    image.src = movie.url;
+                    image.src = meme.url;
                     image.alt = "my-image";
 
                     const divInfo = document.createElement('div');
                     divInfo.setAttribute('className', "info");
 
                     const pNbZoneTexte = document.createElement('div');
-                    pNbZoneTexte.textContent = movie.box_count;
+                    pNbZoneTexte.textContent = meme.box_count;
 
                     const pTailleImage = document.createElement('div');
-                    pTailleImage.textContent = movie.width + 'x' + movie.height;
+                    pTailleImage.textContent = meme.width + 'x' + meme.height;
 
                     const pIdMovie = document.createElement('div');
-                    pIdMovie.textContent = movie.id;
+                    pIdMovie.textContent = meme.id;
 
                     divInfo.appendChild(pNbZoneTexte);
                     divInfo.appendChild(pTailleImage);
@@ -220,7 +223,7 @@ class HomePage extends Component {
 
                     cardLi.addEventListener("click", function (e) {
                         that.handleClickCard(
-                            movie.id, movie.name, movie.url, movie.width, movie.height, movie.box_count, movie.captions,
+                            meme.id, meme.name, meme.url, meme.width, meme.height, meme.box_count, meme.captions,
                         );
                     });
                 },

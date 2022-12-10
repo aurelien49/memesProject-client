@@ -7,7 +7,6 @@ class TopBarMenu extends Component {
         that: this,
         uneProp: "Salut",
         async trigger(index) {
-            console.log('index : +++++++++++++++++++++++++ ', index);
             await this.that.setState({MindexMenuSelected: index});
             this.that.props.menuAppCallBack(this.that.state.MindexMenuSelected);
         },
