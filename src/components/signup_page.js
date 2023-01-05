@@ -49,8 +49,7 @@ const SignUpPage = () => {
                 );
         }
     }
-
-// onSubmit={handleSubmit}
+    
     return (<Form onSubmit={handleSubmit}>
             <h1>Sign-up page</h1>
             <Form.Group className="mb-3" controlId="formBasicEmail">

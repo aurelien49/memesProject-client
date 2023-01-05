@@ -12,6 +12,7 @@ class HomePage extends Component {
             name: "HomePage",
             memes: [],
             currentMemeSelected: {
+                user_id: null,
                 meme_id: null,
                 meme_name: '',
                 meme_url: null,
@@ -42,12 +43,16 @@ class HomePage extends Component {
     async handleClickCard(meme_id, meme_name, meme_url, meme_width, meme_height, meme_box_count, meme_captions) {
 
         // Modification available only i a user is logged
-        if (this.props.userLogged) {
+        if (this.props.isUserLogged) {
             let commentBoxes = [];
             for (let i = 0; i < meme_box_count; i++) {
                 commentBoxes.push({key: i, value: i});
             }
 
+            console.log('+++++++++++++++++++++++++++ this.props.isUserLogged: ', this.props.isUserLogged);
+            console.log('+++++++++++++++++++++++++++ this.props.user_id: ', this.props.user_id);
+
+            this.state.currentMemeSelected.user_id = this.props.user_id;
             this.state.currentMemeSelected.meme_id = meme_id;
             this.state.currentMemeSelected.meme_name = meme_name;
             this.state.currentMemeSelected.meme_url = meme_url;
@@ -93,6 +98,7 @@ class HomePage extends Component {
         this.setState({});
 
         this.createMemeOnImgflip({
+            user_id: this.state.currentMemeSelected.user_id,
             meme_id: this.state.currentMemeSelected.meme_id,
             meme_name: this.state.currentMemeSelected.meme_name,
             meme_url: this.state.currentMemeSelected.meme_url,
@@ -140,10 +146,10 @@ class HomePage extends Component {
                 {this.state.currentMemeSelected.meme_id ?
                     <MydModalWithGrid
                         backdrop="static"
-                        keyboard={false}
+                        keyboard={this.state.currentMemeSelected.showModalCreateMeme}
                         centered
                         size="sm"
-                        show={this.state.currentMemeSelected.showModalCreateMeme}
+                        show={true}
                         onHide={this.handleModalClose}
                         props={this.state.currentMemeSelected}
                     /> : null}

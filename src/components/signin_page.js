@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import React, {Component, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-export default function SignInPage() {
+export default function SignInPage(props) {
     const navigate = useNavigate()
 
     const [email, setEmail] = React.useState('');
@@ -36,7 +36,7 @@ export default function SignInPage() {
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log('data login: ', data);
+                    props.fromParentApp(data);
                 })
                 .then(_ => navigate("/"))
                 .catch(err => {
@@ -52,9 +52,6 @@ export default function SignInPage() {
             <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control type="email" placeholder="Enter email"/>
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                </Form.Text>
             </Form.Group>
 
             <Form.Group className="mb-3" controlId="formBasicPassword">
