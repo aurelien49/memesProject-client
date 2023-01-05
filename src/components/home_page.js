@@ -12,13 +12,13 @@ class HomePage extends Component {
             name: "HomePage",
             memes: [],
             currentMemeSelected: {
-                movie_id: null,
-                movie_name: '',
-                movie_url: null,
-                movie_width: null,
-                movie_height: null,
-                movie_box_count: null,
-                movie_captions: null,
+                meme_id: null,
+                meme_name: '',
+                meme_url: null,
+                meme_width: null,
+                meme_height: null,
+                meme_box_count: null,
+                meme_captions: null,
                 showModalCreateMeme: false,
                 urlToGenerateMeme: null,
                 urlToRetriveMeme: null,
@@ -39,24 +39,27 @@ class HomePage extends Component {
         });
     };
 
-    async handleClickCard(movie_id, movie_name, movie_url, movie_width, movie_height, movie_box_count, movie_captions) {
+    async handleClickCard(meme_id, meme_name, meme_url, meme_width, meme_height, meme_box_count, meme_captions) {
 
-        let commentBoxes = [];
-        for (let i = 0; i < movie_box_count; i++) {
-            commentBoxes.push({key: i, value: i});
+        // Modification available only i a user is logged
+        if (this.props.userLogged) {
+            let commentBoxes = [];
+            for (let i = 0; i < meme_box_count; i++) {
+                commentBoxes.push({key: i, value: i});
+            }
+
+            this.state.currentMemeSelected.meme_id = meme_id;
+            this.state.currentMemeSelected.meme_name = meme_name;
+            this.state.currentMemeSelected.meme_url = meme_url;
+            this.state.currentMemeSelected.meme_width = meme_width;
+            this.state.currentMemeSelected.meme_height = meme_height;
+            this.state.currentMemeSelected.meme_box_count = meme_box_count;
+            this.state.currentMemeSelected.meme_captions = meme_captions;
+            this.state.currentMemeSelected.commentBoxes = commentBoxes;
+            this.state.currentMemeSelected.handleSubmitForm = this.handleSubmitForm;
+            this.state.currentMemeSelected.showModalCreateMeme = true;
+            this.setState({});
         }
-
-        this.state.currentMemeSelected.movie_id = movie_id;
-        this.state.currentMemeSelected.movie_name = movie_name;
-        this.state.currentMemeSelected.movie_url = movie_url;
-        this.state.currentMemeSelected.movie_width = movie_width;
-        this.state.currentMemeSelected.movie_height = movie_height;
-        this.state.currentMemeSelected.movie_box_count = movie_box_count;
-        this.state.currentMemeSelected.movie_captions = movie_captions;
-        this.state.currentMemeSelected.commentBoxes = commentBoxes;
-        this.state.currentMemeSelected.handleSubmitForm = this.handleSubmitForm;
-        this.state.currentMemeSelected.showModalCreateMeme = true;
-        this.setState({});
     }
 
     handleSubmitForm = async (event) => {
@@ -83,26 +86,26 @@ class HomePage extends Component {
             commentBoxes.push(event.target.elements[i].value);
         }
 
-        this.state.currentMemeSelected.urlToGenerateMeme = `https://api.imgflip.com/caption_image?username=AurelienVAILLANT&password=nW@:-*9a&template_id=${this.state.currentMemeSelected.movie_id}&font=arial` + str;
+        this.state.currentMemeSelected.urlToGenerateMeme = `https://api.imgflip.com/caption_image?username=AurelienVAILLANT&password=nW@:-*9a&template_id=${this.state.currentMemeSelected.meme_id}&font=arial` + str;
         this.state.currentMemeSelected.showModalCreateMeme = false;
         this.state.currentMemeSelected.commentBoxes = commentBoxes;
 
         this.setState({});
 
-        this.generateMemeOnImgflip({
-            movie_id: this.state.currentMemeSelected.movie_id,
-            movie_name: this.state.currentMemeSelected.movie_name,
-            movie_url: this.state.currentMemeSelected.movie_url,
-            movie_width: this.state.currentMemeSelected.movie_width,
-            movie_height: this.state.currentMemeSelected.movie_height,
-            movie_box_count: this.state.currentMemeSelected.movie_box_count,
-            movie_captions: this.state.currentMemeSelected.movie_captions,
+        this.createMemeOnImgflip({
+            meme_id: this.state.currentMemeSelected.meme_id,
+            meme_name: this.state.currentMemeSelected.meme_name,
+            meme_url: this.state.currentMemeSelected.meme_url,
+            meme_width: this.state.currentMemeSelected.meme_width,
+            meme_height: this.state.currentMemeSelected.meme_height,
+            meme_box_count: this.state.currentMemeSelected.meme_box_count,
+            meme_captions: this.state.currentMemeSelected.meme_captions,
             urlToGenerateMeme: this.state.currentMemeSelected.urlToGenerateMeme,
             commentBoxes: this.state.currentMemeSelected.commentBoxes,
         });
     }
 
-    generateMemeOnImgflip(data) {
+    createMemeOnImgflip(data) {
         fetch('http://localhost:5000/api/memes/createMeme/', {
             method: 'POST',
             headers: {
@@ -134,7 +137,7 @@ class HomePage extends Component {
                     <ul id="result"></ul>
                 </div>
                 <img src={logo} alt="logo"/>
-                {this.state.currentMemeSelected.movie_id ?
+                {this.state.currentMemeSelected.meme_id ?
                     <MydModalWithGrid
                         backdrop="static"
                         keyboard={false}

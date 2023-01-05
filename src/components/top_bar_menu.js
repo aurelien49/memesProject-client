@@ -5,9 +5,8 @@ import {IconPhoto, IconMessageCircle, IconSettings} from '@tabler/icons';
 class TopBarMenu extends Component {
     onMenuTrigger = {
         that: this,
-        uneProp: "Salut",
         async trigger(index) {
-            await this.that.setState({MindexMenuSelected: index});
+            this.that.state.MindexMenuSelected = index;
             this.that.props.menuAppCallBack(this.that.state.MindexMenuSelected);
         },
     }
@@ -15,7 +14,6 @@ class TopBarMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "TopBarMenu",
             MindexMenuSelected: "gallery",
         };
     }
@@ -37,6 +35,5 @@ class TopBarMenu extends Component {
         );
     }
 }
-
 
 export default TopBarMenu;
