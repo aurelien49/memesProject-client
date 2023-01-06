@@ -32,7 +32,6 @@ class HomePage extends Component {
     }
 
     handleModalClose = () => {
-
         this.setState({
             currentMemeSelected: {
                 showModalCreateMeme: false
@@ -112,6 +111,8 @@ class HomePage extends Component {
     }
 
     createMemeOnImgflip(data) {
+        console.log(`__________________________ createMemeOnImgflip: `, data);
+
         fetch('http://localhost:5000/api/memes/createMeme/', {
             method: 'POST',
             headers: {
@@ -122,9 +123,16 @@ class HomePage extends Component {
                 data: data
             })
         })
-            .then(response => response.json())
+            .then(response => {
+                console.log(`client/HomePage/createMemeOnImgflip/response.status: ${response.status}`)
+                console.log(`client/HomePage/createMemeOnImgflip/response: `, response)
+                return response.json()
+            })
             .then(data => {
                     this.state.currentMemeSelected.urlToRetriveMeme = data['urlToRetriveMeme'];
+                    // Refresh memes history
+                    console.log(`client/HomePage/createMemeOnImgflip: data = `, data)
+                    this.props.getUserMemesHistory(data['idUser']);
                 }
             ).catch(err => {
                 console.error(err);
@@ -138,7 +146,6 @@ class HomePage extends Component {
     render() {
         return (
             <>
-                <h1>Créateur de mèmes</h1>
                 <div className="result-container">
                     <ul id="result"></ul>
                 </div>

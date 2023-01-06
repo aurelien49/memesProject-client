@@ -4,94 +4,191 @@ import HomePage from "./components/home_page";
 import NavBar from "./components/navbar";
 import SignInPage from "./components/signin_page";
 import SignUpPage from "./components/signup_page";
-import {Route, Routes} from "react-router-dom";
+import HistoryPage from "./components/history_page";
 
 class App extends React.Component {
 
     constructor(props) {
         super(props);
-
-        const locStorage = this.getLocalStorage();
-
         this.state = {
-            showHideLoginPage: false,
-            showHideSignUpPage: false,
-            showHideTabs: false,
             showHideHomePage: true,
             showHideHistoryPage: false,
-            token: locStorage['token'],
-            user_id: locStorage['user_id'],
-            user_email: locStorage['user_email'],
-            user_name: locStorage['user_name'],
+            showHideSignInPage: false,
+            showHideSignUpPage: false,
+            showHideTabs: false,
+            token: '',
+            user_id: '',
+            user_email: '',
+            user_name: '',
+            user_memes_history: [],
         };
-        this.callbackLogin = this.callbackLogin.bind(this);
+        this.callbackSignInSuccess = this.callbackSignInSuccess.bind(this);
+        this.callbackSignUpSuccess = this.callbackSignUpSuccess.bind(this);
         this.callbackLogout = this.callbackLogout.bind(this);
+        this.callbackHandleMenu = this.callbackHandleMenu.bind(this);
+        this.getUserMemesHistory = this.getUserMemesHistory.bind(this);
     }
 
-    getLocalStorage() {
-        console.log('__________________________ getLocalStorage');
-        let token = localStorage.getItem("token");
-        let user_id = localStorage.getItem("user_id");
-        let user_email = localStorage.getItem("user_email");
-        let user_name = localStorage.getItem("user_name");
+    async componentDidMount() {
+        console.log('************ App.js ********** componentDidMount ')
 
-        token = token !== null ? token : '';
-        user_id = user_id !== null ? user_id : '';
-        user_email = user_email !== null ? user_email : '';
-        user_name = user_name !== null ? user_name : '';
-
-        return {token: token, user_id: user_id, user_email: user_email, user_name: user_name}
+        /*if (user_id !== '') {
+            await fetch(`http://localhost:5000/api/memes/memes-user-history/${user_id}`)
+                .then(response => response.json())
+                .then(data2 => {
+                        console.log('+- client: componentDidMount: data2 : ', data2);
+                        const nextData1 = ({user_memes_history: data2});
+                        this.setState(nextData1);
+                    }
+                )
+                .catch(err => {
+                        console.error(err);
+                    }
+                );
+        }*/
     }
 
-
-    callbackLogin = async (data) => {
+    callbackSignInSuccess = async (data) => {
         console.log('__________________________ callbackLogin');
-        localStorage.setItem("token", JSON.stringify(data.token));
-        localStorage.setItem("user_id", JSON.stringify(data.user._id));
-        localStorage.setItem("user_email", JSON.stringify(data.user.email));
-        localStorage.setItem("user_name", JSON.stringify(data.user.name));
+        this.state = ({
+            ...this.state,
+            token: data.token,
+            user_id: data.user._id,
+            user_email: data.user.email,
+            user_name: data.user.name
+        })
 
-        console.log('********************** data.user.name: ', data.user.name)
-        console.log('********************** data.user.user_id: ', data.user._id)
+        console.log(`** data.user.name = ${data.user.name}, data.user._id = ${data.user._id}`)
 
-        this.state.user_name = data.user.name;
-        this.state.user_id = data.user._id;
-        this.setState({})
+        // Get user historic memes
+        await this.getUserMemesHistory(data.user._id)
+        // Return to the home page
+        this.callbackHandleMenu("/home");
+    }
+
+    callbackSignUpSuccess(data) {
+        // Return to the home page
+        this.callbackHandleMenu("/home");
+    }
+
+    async getUserMemesHistory(id_user) {
+        let {
+            user_memes_history,
+        } = this.state;
+        console.log(`__________________________ getUserMemesHistory(${id_user})`);
+        await fetch(`http://localhost:5000/api/memes/memes-user-history/${id_user}`)
+            .then(response => response.json())
+            .then(data2 => {
+                    console.log('client/App/getUserMemesHistory: data2: ', data2)
+                    console.log('client/App/getUserMemesHistory: this.state: avant ', this.state)
+                    this.state = ({...this.state, user_memes_history: data2});
+                    console.log('client/App/getUserMemesHistory: this.state: après ', this.state)
+                    this.setState({...this.state});
+                }
+            )
+            .catch(err => {
+                    console.error(err);
+                }
+            );
+    }
+
+    callbackHistorical(data) {
+        this.setState({...this.state, user_memes_history: data});
     }
 
     callbackLogout() {
         console.log('__________________________ callbackLogout');
         localStorage.clear();
-        this.state.user_name = '';
+        this.setState({...this.state, user_name: ''})
+    }
+
+    callbackHandleMenu(data) {
+        console.log('++++ client : callbackMenu : ', data)
+        switch (data) {
+            case "/home":
+                this.state = ({
+                    ...this.state,
+                    showHideHomePage: true,
+                    showHideHistoryPage: false,
+                    showHideSignInPage: false,
+                    showHideSignUpPage: false
+                })
+                break;
+            case "/history":
+                this.state = ({
+                    ...this.state, showHideHomePage: false,
+                    showHideHistoryPage: true,
+                    showHideSignInPage: false,
+                    showHideSignUpPage: false
+                })
+                break;
+            case "/signin":
+                this.state = ({
+                    ...this.state, showHideHomePage: false,
+                    showHideHistoryPage: false,
+                    showHideSignInPage: true,
+                    showHideSignUpPage: false
+                })
+                break;
+            case "/signup":
+                this.state = ({
+                    ...this.state, showHideHomePage: false,
+                    showHideHistoryPage: false,
+                    showHideSignInPage: false,
+                    showHideSignUpPage: true
+                })
+                break;
+            case "/logout":
+                this.state = ({
+                    ...this.state,
+                    showHideHomePage: true,
+                    showHideHistoryPage: false,
+                    showHideSignInPage: false,
+                    showHideSignUpPage: false,
+                    user_name: '',
+                })
+                break;
+        }
+        this.setState({...this.state});
     }
 
     render() {
         const {
-            showHideTabs,
-            showHideLogInPage,
-            showHideLogUpPage,
             showHideHomePage,
             showHideHistoryPage,
-            user_id
+            showHideSignInPage,
+            showHideSignUpPage,
+            user_id,
+            user_memes_history,
+            user_name
         } = this.state;
 
-        let isUserLogged = this.state.user_name !== undefined && this.state.user_name !== '';
+        let isUserLogged = user_name !== undefined && user_name !== '';
+        let _showHistoricButton = window.location.pathname === '/';
+        _showHistoricButton = _showHistoricButton && isUserLogged && (user_memes_history.length > 0);
 
-        console.log('---------------------- data.user.name: ', this.state.user_name)
-        console.log('---------------------- data.user.user_id: ', this.state.user_id)
+        /* console.log(`++++
+          isUserLogged: ${isUserLogged},
+          _showHistoricButton: ${_showHistoricButton},
+          user_memes_history.length: ${user_memes_history.length},
+          user_memes_history: ${user_memes_history},
+          user_name: ${user_name},
+          user_id ${user_id}`)*/
 
         return (
             <div>
-                <NavBar isUserLogged={isUserLogged} callbackLogout={this.callbackLogout}></NavBar>
-                {!isUserLogged ? <h1>Bonjour visiteur</h1> :
-                    <h1>Bonjour {this.state.user_name} !</h1>}
+                <NavBar callbackHandleMenu={this.callbackHandleMenu} isUserLogged={isUserLogged}
+                        showHistoricButton={_showHistoricButton}></NavBar>
+                <h1>{!isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h1>
                 <div className="container">
-                    <Routes>
-                        <Route path="/"
-                               element={<HomePage isUserLogged={isUserLogged} user_id={this.state.user_id}/>}></Route>
-                        <Route path="/signin" element={<SignInPage fromParentApp={this.callbackLogin}/>}></Route>
-                        <Route path="/signup" element={<SignUpPage/>}></Route>
-                    </Routes>
+                    {showHideHomePage &&
+                        <HomePage getUserMemesHistory={this.getUserMemesHistory} isUserLogged={isUserLogged}
+                                  user_id={this.state.user_id}/>}
+                    {showHideHistoryPage && <HistoryPage user_memes_history={user_memes_history} user_id={user_id}
+                                                         fromParentApp={this.callbackHistorical}/>}
+                    {showHideSignInPage &&
+                        <SignInPage callbackSignInSuccess={this.callbackSignInSuccess}/>}
+                    {showHideSignUpPage && <SignUpPage callbackSignUpSuccess={this.callbackSignUpSuccess}/>}
                 </div>
             </div>
         );
@@ -167,4 +264,15 @@ export default App;
                 console.error('Erreur gestion du menu');
         }
     }
+
+                        <Routes>
+                        <Route path="/"
+                               element={<HomePage isUserLogged={isUserLogged} user_id={this.state.user_id}/>}></Route>
+                        <Route path="/signin" element={<SignInPage fromParentApp={this.callbackLogin}/>}></Route>
+                        <Route path="/signup" element={<SignUpPage/>}></Route>
+                        <Route path="/historical"
+                               element={<HistoryPage user_memes_history={user_memes_history}
+                                                     user_id={user_id}
+                                                     fromParentApp={this.callbackHistorical}/>}></Route>
+                    </Routes>
  */

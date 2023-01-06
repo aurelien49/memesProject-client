@@ -1,10 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import React, {Component, useState} from "react";
-import {useNavigate} from "react-router-dom";
 
-const SignUpPage = () => {
-    const navigate = useNavigate()
+function SignUpPage(props) {
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -41,15 +39,21 @@ const SignUpPage = () => {
                     name: event.target.formBasicName.value,
                 })
             })
-                .then(response => response.json())
-                .then(_ => navigate("/"))
+                .then(response => {
+                    console.log('client/SignUpPage/handleSubmit: response.status = ', response.status)
+                    if (response.status === 200) {
+                        props.callbackSignUpSuccess(response.json());
+                    } else {
+                        return {error: response.status};
+                    }
+                })
                 .catch(err => {
                         console.error(err);
                     }
                 );
         }
     }
-    
+
     return (<Form onSubmit={handleSubmit}>
             <h1>Sign-up page</h1>
             <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -70,6 +74,7 @@ const SignUpPage = () => {
         </Form>
     );
 }
+
 //  onClick={handleSubmit}
 /*
 <input type="email" placeholder="Enter email" value={email} onChange={handleEmail}/>

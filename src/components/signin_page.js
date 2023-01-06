@@ -1,10 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import React, {Component, useState} from "react";
-import {useNavigate} from "react-router-dom";
 
 export default function SignInPage(props) {
-    const navigate = useNavigate()
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -18,7 +16,6 @@ export default function SignInPage(props) {
     };
 
     const handleSubmit = async (event) => {
-
         event.preventDefault();
 
         if (event.target.formBasicEmail.value !== ''
@@ -34,11 +31,14 @@ export default function SignInPage(props) {
                     password: event.target.formBasicPassword.value,
                 })
             })
-                .then(response => response.json())
-                .then(data => {
-                    props.fromParentApp(data);
+                .then(async response => {
+                    let rep = await response.json();
+                    if (response.status === 200) {
+                        props.callbackSignInSuccess(rep);
+                    } else {
+                        return {error: response.status};
+                    }
                 })
-                .then(_ => navigate("/"))
                 .catch(err => {
                         console.error(err);
                     }

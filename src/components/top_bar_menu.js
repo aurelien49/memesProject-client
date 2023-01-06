@@ -7,7 +7,7 @@ class TopBarMenu extends Component {
         that: this,
         async trigger(index) {
             this.that.state.MindexMenuSelected = index;
-            this.that.props.menuAppCallBack(this.that.state.MindexMenuSelected);
+            // this.that.props.menuAppCallBack(this.that.state.MindexMenuSelected);
         },
     }
 
@@ -27,7 +27,7 @@ class TopBarMenu extends Component {
                                   onClick={() => this.onMenuTrigger.trigger("gallery")}
                         >Gallery</Tabs.Tab>
                         <Tabs.Tab value="hystory" icon={<IconPhoto size={25}/>}
-                                  onClick={() => this.onMenuTrigger.trigger("hystory")}
+                                  onClick={() => this.onMenuTrigger.trigger("historic")}
                         >History</Tabs.Tab>
                     </Tabs.List>
                 </Tabs>

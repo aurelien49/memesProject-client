@@ -15,13 +15,15 @@ class HistoryPage extends Component {
         };
     }
 
-
     async componentDidMount() {
-        await fetch('http://localhost:5000/api/memes/memes-user-history/')
+
+        console.log('********************** componentDidMount user_id: ', this.props.user_id)
+
+        await fetch(`http://localhost:5000/api/memes/memes-user-history/${this.props.user_id}`)
             .then(response => response.json())
             .then(data => {
                     this.state.memesHistory = data;
-                    console.log('data : ', data);
+                    console.log('data history : ', data);
                     this.setState({})
                 }
             )
