@@ -29,6 +29,7 @@ class HomePage extends Component {
         };
         this.createComponents = this.createComponents.bind(this);
         this.handleSubmitForm = this.handleSubmitForm.bind(this);
+        this.handleModalClose = this.handleModalClose.bind(this);
     }
 
     handleModalClose = () => {
@@ -133,6 +134,9 @@ class HomePage extends Component {
                     // Refresh memes history
                     console.log(`client/HomePage/createMemeOnImgflip: data = `, data)
                     this.props.getUserMemesHistory(data['idUser']);
+
+                    // Close the create modal
+                    this.handleModalClose();
                 }
             ).catch(err => {
                 console.error(err);

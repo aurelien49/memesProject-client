@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import logohistory from "../assets/img/logohistory.svg";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Spinner from 'react-bootstrap/Spinner';
+import Form from 'react-bootstrap/Form';
 
 const app = document.getElementById('App');
 
@@ -13,9 +13,45 @@ class HistoryPage extends Component {
             name: "HistoryPage",
             memesHistory: null,
         };
+
+        this.handleSendPictureByMail = this.handleSendPictureByMail.bind(this);
+    }
+
+    handleSendPictureByMail = async (event) => {
+        event.preventDefault();
+
+        console.log(`__________________________ handleSendPictureByMail email: `, event.target.formBasicEmail.value);
+        console.log(`__________________________ handleSendPictureByMail url: `, event.target.formUrlRetreiveMeme.value);
+
+        fetch('http://localhost:5000/api/users/sendpicturebyemail/', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                user_email: event.target.formBasicEmail.value,
+                url_meme_to_retrive: event.target.formUrlRetreiveMeme.value,
+            })
+        })
+            .then(response => {
+                console.log(`client/HistoryPage/handleSendPictureByMail/response.status: ${response.status}`)
+                console.log(`client/HistoryPage/handleSendPictureByMail/response: `, response)
+                return response.json()
+            })
+            .then(data => {
+                    // Succès de l'envoi de l'image par email
+                    console.log(`client/HistoryPage/handleSendPictureByMail: data = `, data)
+                }
+            ).catch(err => {
+                // Echèc de l'envoi de l'image par email
+                console.error(err);
+            }
+        );
     }
 
     async componentDidMount() {
+        // Récupère les mèmes d'un user
 
         console.log('********************** componentDidMount user_id: ', this.props.user_id)
 
@@ -36,19 +72,6 @@ class HistoryPage extends Component {
             );
     }
 
-    // Check if an HTML compnent is empty
-    isEmpty(id) {
-        return document.getElementById(id).innerHTML.trim() === ""
-    }
-
-    createHistoryComponents = () => {
-        /* cardLi.addEventListener("click", function (e) {
-             that.handleClickCard(
-                 memeHistory.id, memeHistory.name, memeHistory.url, memeHistory.width, memeHistory.height, memeHistory.box_count, memeHistory.captions,
-             );
-         });*/
-    }
-
     render() {
         return (
             <div>
@@ -60,6 +83,7 @@ class HistoryPage extends Component {
                                 <li key={index.toString()}>
                                     <Card style={{width: '18rem', backgroundColor: "dimgrey", borderRadius: 15}}
                                           className="d-flex align-items-center justify-content-center">
+                                        <Card.Title>{e.meme_name}</Card.Title>
                                         <Card.Img variant="top" src={e.urlToRetriveMeme.toString()} style={{
                                             marginTop: 10,
                                             padding: 0,
@@ -68,8 +92,19 @@ class HistoryPage extends Component {
                                             borderRadius: 15
                                         }}/>
                                         <Card.Body>
-                                            <Card.Title>{e.meme_name}</Card.Title>
-                                            <Button variant="primary">Go somewhere</Button>
+
+                                            <Form onSubmit={this.handleSendPictureByMail}>
+                                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                                    <Form.Label>Email address :</Form.Label>
+                                                    <Form.Control type="email"
+                                                                  placeholder="Enter email address"/>
+                                                </Form.Group>
+                                                <Form.Group className="mb-3" controlId="formUrlRetreiveMeme">
+                                                    <Form.Control type="hidden" value={e.urlToRetriveMeme.toString()}/></Form.Group>
+                                                <Button variant="primary" type="submit">
+                                                    Send picture by email
+                                                </Button>
+                                            </Form>
                                         </Card.Body>
                                     </Card>
                                 </li>
