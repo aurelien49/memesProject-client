@@ -18,6 +18,7 @@ class HistoryPage extends Component {
     }
 
     handleSendPictureByMail = async (event) => {
+        // Envoi d'
         event.preventDefault();
 
         console.log(`__________________________ handleSendPictureByMail email: `, event.target.formBasicEmail.value);
@@ -50,8 +51,9 @@ class HistoryPage extends Component {
         );
     }
 
+
     async componentDidMount() {
-        // Récupère les mèmes d'un user
+        // Récupère les mèmes d'un user à afficher sur la page historique
 
         console.log('********************** componentDidMount user_id: ', this.props.user_id)
 
