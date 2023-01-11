@@ -24,7 +24,7 @@ class HistoryPage extends Component {
         console.log(`__________________________ handleSendPictureByMail email: `, event.target.formBasicEmail.value);
         console.log(`__________________________ handleSendPictureByMail url: `, event.target.formUrlRetreiveMeme.value);
 
-        fetch('http://localhost:5000/api/users/sendpicturebyemail/', {
+        fetch('https://meme-project-server-ava.onrender.com/api/users/sendpicturebyemail/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -57,7 +57,7 @@ class HistoryPage extends Component {
 
         console.log('********************** componentDidMount user_id: ', this.props.user_id)
 
-        await fetch(`http://localhost:5000/api/memes/memes-user-history/${this.props.user_id}`)
+        await fetch(`https://meme-project-server-ava.onrender.com/api/memes/memes-user-history/${this.props.user_id}`)
             .then(response => response.json())
             .then(data => {
                     this.state.memesHistory = data;

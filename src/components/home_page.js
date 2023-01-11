@@ -114,7 +114,7 @@ class HomePage extends Component {
     createMemeOnImgflip(data) {
         console.log(`__________________________ createMemeOnImgflip: `, data);
 
-        fetch('http://localhost:5000/api/memes/createMeme/', {
+        fetch('https://meme-project-server-ava.onrender.com/api/memes/createMeme/', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -174,7 +174,7 @@ class HomePage extends Component {
     }
 
     componentDidMount() {
-        fetch('http://localhost:5000/api/memes/imgflip/')
+        fetch('https://meme-project-server-ava.onrender.com/api/memes/imgflip/')
             .then(response => response.json())
             .then(data => {
                     this.memes = data['data']['memes'];
@@ -187,9 +187,9 @@ class HomePage extends Component {
             ).then((_) => this.createComponents())
             .catch(err => {
                     console.error(err);
-                    const errorMessage = document.createElement('marquee');
-                    errorMessage.textContent = `Gah, ${err.message} !`;
-                    app.appendChild(errorMessage);
+                    //const errorMessage = document.createElement('marquee');
+                    //errorMessage.textContent = `Gah, ${err.message} !`;
+                    //app.appendChild(errorMessage);
                 }
             );
     }

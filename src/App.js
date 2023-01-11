@@ -58,7 +58,7 @@ class App extends React.Component {
             user_memes_history,
         } = this.state;
         console.log(`__________________________ getUserMemesHistory(${id_user})`);
-        await fetch(`http://localhost:5000/api/memes/memes-user-history/${id_user}`)
+        await fetch(`https://meme-project-server-ava.onrender.com/api/memes/memes-user-history/${id_user}`)
             .then(response => response.json())
             .then(data2 => {
                     console.log('client/App/getUserMemesHistory: data2: ', data2)
