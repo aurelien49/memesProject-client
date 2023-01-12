@@ -7,6 +7,19 @@ function SignUpPage(props) {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [name, setName] = React.useState('');
+    const [showSignUpError, setShowSignUpError] = React.useState(false);
+
+    const handleChangeEmail = (_) => {
+        setShowSignUpError(false);
+    };
+
+    const handleChangePassword = (_) => {
+        setShowSignUpError(false);
+    };
+
+    const handleChangeName = (_) => {
+        setShowSignUpError(false);
+    };
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -27,7 +40,7 @@ function SignUpPage(props) {
         if (event.target.formBasicEmail.value !== ''
             && event.target.formBasicPassword.value !== ''
             && event.target.formBasicName.value !== '') {
-            fetch('http://localhost:5000/api/users/signup', {
+            fetch('https://meme-project-server-ava.onrender.com/api/users/signup', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -44,6 +57,7 @@ function SignUpPage(props) {
                     if (response.status === 200) {
                         props.callbackSignUpSuccess(response.json());
                     } else {
+                        setShowSignUpError(true);
                         return {error: response.status};
                     }
                 })
@@ -54,24 +68,31 @@ function SignUpPage(props) {
         }
     }
 
-    return (<Form onSubmit={handleSubmit}>
+    return (
+        <>
             <h1>Sign-up page</h1>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Email" onChange={handleEmail}/>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password"/>
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicName">
-                <Form.Label>Name</Form.Label>
-                <Form.Control type="name" placeholder="Name"/>
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
+            {showSignUpError &&
+                <h4 style={{color: "red", backgroundColor: "white"}}>Sign up error: email or password or name
+                    incorrect</h4>}
+            <Form onSubmit={handleSubmit}>
+
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Email" onChange={handleChangeEmail}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" onChange={handleChangePassword}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formBasicName">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="name" placeholder="Name" onChange={handleChangeName}/>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
+        </>
     );
 }
 

@@ -2,6 +2,8 @@ import React, {Component} from "react";
 import logo from "../assets/img/banksy.svg";
 import MydModalWithGrid from "./modal_create_meme2";
 
+const axios = require('axios');
+
 const app = document.getElementById('App');
 
 class HomePage extends Component {
@@ -177,8 +179,8 @@ class HomePage extends Component {
         fetch('https://meme-project-server-ava.onrender.com/api/memes/imgflip/')
             .then(response => response.json())
             .then(data => {
-                    this.memes = data['data']['memes'];
-                    this.memes.length = 10;
+                    this.memes = data;
+                    this.memes.length = 20;
 
                     this.setState({
                         memes: this.memes,

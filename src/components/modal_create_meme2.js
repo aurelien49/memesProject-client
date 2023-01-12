@@ -40,6 +40,7 @@ function MydModalWithGrid(props) {
                     console.log(`client/MydModalWithGrid/fetchJoke: data = `, data[0].joke)
                     setMessage(data[0].joke);
 
+                    // Split the sentences into words without splite word
                     var chunks = splitSentence(data[0].joke, props.props.commentBoxes.length);
                     console.log('chunks: ', chunks)
 

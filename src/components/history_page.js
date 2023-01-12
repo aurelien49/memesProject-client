@@ -4,9 +4,14 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
+const axios = require('axios');
+
 const app = document.getElementById('App');
 
+
 class HistoryPage extends Component {
+
+
     constructor(props) {
         super(props);
         this.state = {
@@ -15,6 +20,30 @@ class HistoryPage extends Component {
         };
 
         this.handleSendPictureByMail = this.handleSendPictureByMail.bind(this);
+        this.refresMemeshHistoryPage = this.refresMemeshHistoryPage.bind(this);
+    }
+
+    handleDeletePicture = async (event) => {
+        event.preventDefault();
+        console.log(`__________________________ handleDeletePicture _id meme to delete: `, event.target.formIdMemeToDelete.value);
+
+        fetch(`https://meme-project-server-ava.onrender.com/api/memes/deleteMemeBdduser/${event.target.formIdMemeToDelete.value}`
+            , {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                data: {message: 'The delete from the client'}
+            })
+            .then((resp) => {
+                console.log('server: ---------------- deleteMeme ok');
+                this.refresMemeshHistoryPage();
+                this.setState({})
+            }).catch(function (error) {
+            console.log(error);
+            console.log('server: ---------------- deleteMeme failed');
+        })
+
     }
 
     handleSendPictureByMail = async (event) => {
@@ -23,6 +52,8 @@ class HistoryPage extends Component {
 
         console.log(`__________________________ handleSendPictureByMail email: `, event.target.formBasicEmail.value);
         console.log(`__________________________ handleSendPictureByMail url: `, event.target.formUrlRetreiveMeme.value);
+        console.log(`__________________________ handleSendPictureByMail url: `, event.target.formNameMeme.value);
+        console.log(`__________________________ handleSendPictureByMail url: `, event.target.formIndex.value);
 
         fetch('https://meme-project-server-ava.onrender.com/api/users/sendpicturebyemail/', {
             method: 'POST',
@@ -33,6 +64,7 @@ class HistoryPage extends Component {
             body: JSON.stringify({
                 user_email: event.target.formBasicEmail.value,
                 url_meme_to_retrive: event.target.formUrlRetreiveMeme.value,
+                meme_name: event.target.formNameMeme.value,
             })
         })
             .then(response => {
@@ -43,6 +75,8 @@ class HistoryPage extends Component {
             .then(data => {
                     // Succès de l'envoi de l'image par email
                     console.log(`client/HistoryPage/handleSendPictureByMail: data = `, data)
+                    // Clear the email input to send picture
+                    document.getElementById(`formTop_${event.target.formIndex.value}`).reset()
                 }
             ).catch(err => {
                 // Echèc de l'envoi de l'image par email
@@ -53,6 +87,10 @@ class HistoryPage extends Component {
 
 
     async componentDidMount() {
+        await this.refresMemeshHistoryPage();
+    }
+
+    async refresMemeshHistoryPage() {
         // Récupère les mèmes d'un user à afficher sur la page historique
 
         console.log('********************** componentDidMount user_id: ', this.props.user_id)
@@ -95,16 +133,30 @@ class HistoryPage extends Component {
                                         }}/>
                                         <Card.Body>
 
-                                            <Form onSubmit={this.handleSendPictureByMail}>
+                                            <Form onSubmit={this.handleSendPictureByMail} id={`formTop_${index}`}>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Email address :</Form.Label>
                                                     <Form.Control type="email"
                                                                   placeholder="Enter email address"/>
                                                 </Form.Group>
                                                 <Form.Group className="mb-3" controlId="formUrlRetreiveMeme">
-                                                    <Form.Control type="hidden" value={e.urlToRetriveMeme.toString()}/></Form.Group>
+                                                    <Form.Control type="hidden" value={e.urlToRetriveMeme.toString()}/>
+                                                </Form.Group>
+                                                <Form.Group className="mb-3" controlId="formNameMeme">
+                                                    <Form.Control type="hidden" value={e.meme_name.toString()}/>
+                                                </Form.Group>
+                                                <Form.Group className="mb-3" controlId="formIndex">
+                                                    <Form.Control type="hidden" value={index}/>
+                                                </Form.Group>
                                                 <Button variant="primary" type="submit">
                                                     Send picture by email
+                                                </Button>
+                                            </Form>
+                                            <Form onSubmit={this.handleDeletePicture}>
+                                                <Form.Group className="mb-3" controlId="formIdMemeToDelete">
+                                                    <Form.Control type="hidden" value={e._id}/></Form.Group>
+                                                <Button variant="secondary" type="submit">
+                                                    Delete picture
                                                 </Button>
                                             </Form>
                                         </Card.Body>
@@ -119,6 +171,5 @@ class HistoryPage extends Component {
         );
     }
 }
-
 
 export default HistoryPage;

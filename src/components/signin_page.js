@@ -6,6 +6,15 @@ export default function SignInPage(props) {
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [showLoginError, setShowLoginError] = React.useState(false);
+
+    const handleChangeEmail = (_) => {
+        setShowLoginError(false);
+    };
+
+    const handleChangePassword = (_) => {
+        setShowLoginError(false);
+    };
 
     const handleEmail = (event) => {
         setEmail(event.target.value);
@@ -20,7 +29,7 @@ export default function SignInPage(props) {
 
         if (event.target.formBasicEmail.value !== ''
             && event.target.formBasicPassword.value !== '') {
-            fetch('http://localhost:5000/api/users/signin', {
+            fetch('https://meme-project-server-ava.onrender.com/api/users/signin', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -36,31 +45,36 @@ export default function SignInPage(props) {
                     if (response.status === 200) {
                         props.callbackSignInSuccess(rep);
                     } else {
+                        setShowLoginError(true);
                         return {error: response.status};
                     }
                 })
                 .catch(err => {
-                        console.error(err);
+                        console.error('+ Error login: ', err);
                     }
                 );
         }
     }
 
     return (
-        <Form onSubmit={handleSubmit}>
+        <>
             <h1>Sign-in page</h1>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email"/>
-            </Form.Group>
+            {showLoginError &&
+                <h4 style={{color: "red", backgroundColor: "white"}}>Login error: email or password incorrect</h4>}
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" onChange={handleChangeEmail}/>
+                </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password"/>
-            </Form.Group>
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" onChange={handleChangePassword}/>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
+        </>
     );
 }
