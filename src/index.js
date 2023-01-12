@@ -5,6 +5,8 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+
+require('dotenv').config();
 import {MantineProvider} from '@mantine/core';
 // Importing the Bootstrap CSS
 //import 'bootstrap/dist/css/bootstrap.min.css';

@@ -6,6 +6,9 @@ import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Form from "react-bootstrap/Form";
 
+require('dotenv').config()
+
+
 function MydModalWithGrid(props) {
 
     const [message, setMessage] = useState('');
@@ -23,14 +26,15 @@ function MydModalWithGrid(props) {
         console.log('old value: ', message);
         // 👇️ set value of input field
         setMessage('');
-        console.log('process.env.X_API_KEY: ', process.env.X_API_KEY);
+        console.log('process.env: ', process.env)
+        console.log('process.env.X_API_KEY: ', process.env.REACT_APP_X_API_KEY);
 
         fetch('https://api.api-ninjas.com/v1/dadjokes?limit=1', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'X-Api-Key': process.env.X_API_KEY
+                'X-Api-Key': process.env.REACT_APP_X_API_KEY
             },
         })
             .then(response => {
