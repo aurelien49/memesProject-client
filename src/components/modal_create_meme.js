@@ -27,7 +27,7 @@ function MydModalWithGrid(props) {
         // 👇️ set value of input field
         setMessage('');
         console.log('process.env: ', process.env)
-        console.log('process.env.X_API_KEY: ', process.env.REACT_APP_X_API_KEY);
+        console.log('process.env.REACT_APP_X_API_KEY: ', process.env.REACT_APP_X_API_KEY);
 
         fetch('https://api.api-ninjas.com/v1/dadjokes?limit=1', {
             method: 'GET',
