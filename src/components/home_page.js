@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import logo from "../assets/img/banksy.svg";
-import MydModalWithGrid from "./modal_create_meme2";
+import MydModalWithGrid from "./modal_create_meme";
 
 const axios = require('axios');
 

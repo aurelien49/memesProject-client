@@ -1,91 +1,134 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
+import React, {useState} from 'react';
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Modal from 'react-bootstrap/Modal';
+import Row from 'react-bootstrap/Row';
+import Form from "react-bootstrap/Form";
 
-const ModalCreateMeme = ({isShowing, hide, title, ...props}) =>
-    isShowing
-        ? ReactDOM.createPortal(
-            <>
-                <div className="modal-overlay">
-                    <div className="modal-wrapper">
-                        <div className="modal">
-                            <div className="modal-header">
-                                <h1>{title}</h1>
-                                <button
-                                    type="button"
-                                    className="modal-close-button"
-                                    onClick={hide}
-                                >
-                                    <span>&times;</span>
-                                </button>
-                            </div>
-                            <div className="modal-body">
-                                {props.children}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+function MydModalWithGrid(props) {
 
-                <style jsx="true">{`
-                  .modal-overlay {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100vw;
-                    height: 100vh;
-                    z-index: 1040;
-                    background-color: rgba(0, 0, 0, 0.5);
-                  }
+    const [message, setMessage] = useState('');
 
-                  .modal-wrapper {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    z-index: 1050;
-                    width: 100%;
-                    height: 100%;
-                    overflow-x: hidden;
-                    overflow-y: auto;
-                    outline: 0;
-                    display: flex;
-                    align-items: center;
-                  }
+    const handleChange = event => {
+        console.log('MydModalWithGrid/handleChange/event: ', event)
+        console.log('MydModalWithGrid/handleChange/event.target: ', event.target)
+        console.log('MydModalWithGrid/handleChange/event.target.value: ', event.target.value)
+        setMessage(event.target.value);
+    };
 
-                  .modal {
-                    z-index: 100;
-                    background: #fff;
-                    position: relative;
-                    margin: auto;
-                    border-radius: 5px;
-                    max-width: 500px;
-                    width: 80%;
-                    padding: 1rem;
-                  }
+    const handleClick = event => {
+        event.preventDefault();
+        // 👇️ value of input field
+        console.log('old value: ', message);
+        // 👇️ set value of input field
+        setMessage('');
 
-                  .modal-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                  }
+        fetch('https://api.api-ninjas.com/v1/dadjokes?limit=1', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-Api-Key': process.env.X_API_KEY
+            },
+        })
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                    // Do something with the sentence
+                    console.log(`client/MydModalWithGrid/fetchJoke: data = `, data[0].joke)
+                    setMessage(data[0].joke);
 
-                  .modal-close-button {
-                    font-size: 1.4rem;
-                    font-weight: 700;
-                    color: #000;
-                    cursor: pointer;
-                    border: none;
-                    background: transparent;
-                  }
-                `}</style>
-            </>,
-            document.body
-        )
-        : null;
+                    // Split the sentences into words without splite word
+                    var chunks = splitSentence(data[0].joke, props.props.commentBoxes.length);
+                    console.log('chunks: ', chunks)
 
-ModalCreateMeme.propTypes = {
-    isShowing: PropTypes.bool.isRequired,
-    hide: PropTypes.func.isRequired,
-    title: PropTypes.string.isRequired
-};
+                    for (let i = 0; i < props.props.commentBoxes.length; i++) {
+                        let id = `message_${i + 1}`;
+                        console.log('id = ', id)
+                        document.getElementById(id.toString()).value = chunks[i];
+                    }
+                }
+            ).catch(err => {
+            console.error(err);
+        });
 
-export default ModalCreateMeme;
+
+    }
+
+    function splitSentence(sentence, numParts) {
+        // split the sentence into an array of words
+        let words = sentence.split(' ');
+        // create an array to hold the split sentence parts
+        let splitSentence = [];
+        // determine the length of each part
+        let partLength = Math.ceil(words.length / numParts);
+        // loop through the words and add them to the split sentence parts
+        for (let i = 0; i < words.length; i += partLength) {
+            splitSentence.push(words.slice(i, i + partLength).join(' '));
+        }
+        // return the split sentence
+        return splitSentence;
+    }
+
+
+    return (
+        <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    {props.props.meme_name}
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="show-grid">
+                <Container>
+                    <Col xs={10} md={20}>
+                        <Row>
+                            <img src={props.props.meme_url}
+                                 alt={props.props.meme_name}/>
+                        </Row>
+                        <Row>
+                            <form onSubmit={(event) => props.props.handleSubmitForm(event)}>
+                                {
+                                    props.props.commentBoxes.map((data, index) => {
+                                        let _title = `Texte ${index + 1}`;
+                                        let id = `message_${index + 1}`;
+
+                                        return <div key={index.toString()}>
+                                            <label htmlFor={_title}>{_title} :</label>
+                                            <input
+                                                type="text"
+                                                //id="message"
+                                                id={id}
+                                                name={_title}
+                                                placeholder={_title}
+                                                // onChange={handleChange}
+                                                //value={message}
+                                            />
+                                        </div>
+                                    })
+                                }
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <br></br>
+                                    <Form.Label>---</Form.Label>
+                                    <Button variant="primary" type="submit">
+                                        Enregistrer
+                                    </Button>
+                                </Form.Group>
+                            </form>
+                            {' '}
+                        </Row>
+                        <Row>
+                            <Button className="mb-3" variant="secondary" onClick={handleClick}>Random texts</Button>
+                        </Row>
+                    </Col>
+                </Container>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={props.onHide}>Fermer</Button>
+            </Modal.Footer>
+        </Modal>
+    );
+}
+
+export default MydModalWithGrid;
