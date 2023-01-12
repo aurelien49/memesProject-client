@@ -115,7 +115,7 @@ class HistoryPage extends Component {
     render() {
         return (
             <div>
-                <h1>HistoryPage</h1>
+                <h1>Memes saved</h1>
                 <div className="result-container-history">
                     <ul>
                         {this.state.memesHistory ? this.state.memesHistory.map((e, index) => {
