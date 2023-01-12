@@ -48,7 +48,7 @@ class App extends React.Component {
         this.callbackHandleMenu("/home");
     }
 
-    callbackSignUpSuccess(data) {
+    callbackSignUpSuccess(_) {
         // Return to the home page
         this.callbackHandleMenu("/home");
     }
@@ -163,7 +163,7 @@ class App extends React.Component {
                         showHistoricButton={_showHistoricButton}></NavBar>
                 <span><br></br></span>
                 <span><img hidden={!isUserLogged} src={support} alt="support face"></img></span>
-                <span><h1>{!isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h1></span>
+                <span><h4>{!isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4></span>
 
                 <div className="container">
                     {showHideHomePage &&
