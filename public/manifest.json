@@ -1,6 +1,12 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Meme-App",
+  "name": "Meme-Application",
+  "start_url": "/index.html",
+  "display": "fullscreen",
+  "background_color": "blue",
+  "theme_color": "yellow",
+  "orientation": "portrait-primary",
+  "description": "Web Application pour la création de memes personnalisés humoristiques. ",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,7 +16,8 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "maskable"
     },
     {
       "src": "logo512.png",
@@ -18,8 +25,11 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "prefer_related_applications": true,
+  "related_applications": [
+    {
+      "platform": "play",
+      "id": "com.google.samples.apps.iosched"
+    }
+  ]
 }
