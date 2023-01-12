@@ -21,7 +21,7 @@ export default function NavBar(props) {
                     </Nav>
                     <Nav.Link value='/home' onClick={onTrigger}>Home</Nav.Link>
                     <Nav.Link value='/history' onClick={onTrigger}
-                              disabled={!props.showHistoricButton}>Historic</Nav.Link>
+                              disabled={!props.showHistoricButton}>Memes saved</Nav.Link>
                     <Nav className="me-auto">
                     </Nav>
                     <Nav>
