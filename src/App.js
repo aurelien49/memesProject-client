@@ -31,7 +31,7 @@ class App extends React.Component {
     }
 
     callbackSignInSuccess = async (data) => {
-        console.log('__________________________ callbackLogin');
+        console.log('_____________ callbackLogin');
         this.state = ({
             ...this.state,
             token: data.token,
