@@ -34,6 +34,7 @@ function MydModalWithGrid(props) {
             },
         })
             .then(response => {
+                console.log('************** client api-ninjas : ok response ', response);
                 return response.json()
             })
             .then(data => {
@@ -52,6 +53,7 @@ function MydModalWithGrid(props) {
                     }
                 }
             ).catch(err => {
+            console.log('************** client api-ninjas : KO  ');
             console.error(err);
         });
 
