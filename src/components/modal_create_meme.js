@@ -8,6 +8,8 @@ import Form from "react-bootstrap/Form";
 
 function MydModalWithGrid(props) {
 
+    const [message, setMessage] = useState('');
+
     const handleChange = event => {
         console.log('MydModalWithGrid/handleChange/event: ', event)
         console.log('MydModalWithGrid/handleChange/event.target: ', event.target)
@@ -17,7 +19,10 @@ function MydModalWithGrid(props) {
 
     const handleClick = event => {
         event.preventDefault();
-
+        // 👇️ value of input field
+        console.log('old value: ', message);
+        // 👇️ set value of input field
+        setMessage('');
         console.log('process.env.X_API_KEY: ', process.env.X_API_KEY);
 
         fetch('https://api.api-ninjas.com/v1/dadjokes?limit=1', {
@@ -94,9 +99,12 @@ function MydModalWithGrid(props) {
                                             <label htmlFor={_title}>{_title} :</label>
                                             <input
                                                 type="text"
+                                                //id="message"
                                                 id={id}
                                                 name={_title}
                                                 placeholder={_title}
+                                                // onChange={handleChange}
+                                                //value={message}
                                             />
                                         </div>
                                     })
