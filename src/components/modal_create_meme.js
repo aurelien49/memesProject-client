@@ -6,9 +6,6 @@ import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Form from "react-bootstrap/Form";
 
-require('dotenv').config()
-
-
 function MydModalWithGrid(props) {
 
     const [message, setMessage] = useState('');
