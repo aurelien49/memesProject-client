@@ -7,32 +7,10 @@ import {Collapse} from "@mantine/core";
 
 export default function NavBar(props) {
 
-    const [collapse, setCollapse] = React.useState(false);
-    const [isAriaExpended, setIsAriaExpended] = React.useState(false);
-
-    const closeNavbar = (_) => {
-        // Collapse the NavBar
-        console.log('closeNavbar: event: ', isAriaExpended)
-        setCollapse(!collapse);
-    };
-
-    const changeNavBar = (_) => {
-        console.log('changeNavBar: event: ', isAriaExpended)
-    };
-
     let onTrigger = (event) => {
         console.log('NavBar: event: ', event.target.attributes.value.nodeValue)
         props.callbackHandleMenu(event.target.attributes.value.nodeValue);
         event.preventDefault();
-
-        if (event.target.attributes.value.nodeValue === "/home") {
-            console.log('target /home')
-            closeNavbar();
-        }
-        if (event.target.attributes.value.nodeValue === "/history") {
-            console.log('target /history')
-            closeNavbar();
-        }
     }
 
     return (
@@ -40,11 +18,11 @@ export default function NavBar(props) {
             <Container>
                 <Navbar.Brand href="#">Meme-App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-                <Navbar.Collapse id="responsive-navbar-nav" aria-expanded={isAriaExpended} onChange={changeNavBar}>
+                <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                     </Nav>
-                    <Nav.Link value='/home' onClick={onTrigger}>Home</Nav.Link>
-                    <Nav.Link value='/history' onClick={onTrigger}>Memes
+                    <Nav.Link id="collasible-nav-dropdown" value='/home' onClick={onTrigger}>Home</Nav.Link>
+                    <Nav.Link value='/history' onClick={onTrigger} disabled={!props.showHistoricButton}>Memes
                         saved</Nav.Link>
                     <Nav className="me-auto">
                     </Nav>
@@ -64,7 +42,7 @@ export default function NavBar(props) {
         </Navbar>
     );
 }
-// disabled={!props.showHistoricButton}
+
 // eventkey='/history'  eventKey='/home'
 /*
 function CustomLink({to, children, ...props}) {
