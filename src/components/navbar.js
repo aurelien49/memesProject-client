@@ -7,11 +7,12 @@ import {Collapse} from "@mantine/core";
 
 export default function NavBar(props) {
 
-    const [collapsed, setCollapsed] = React.useState(true);
+    const [collapse, setCollapse] = React.useState(false);
+    const [isAriaExpended, setIsAriaExpended] = React.useState(false);
 
-    const toggleNavbar = (_) => {
+    const closeNavbar = (_) => {
         // Collapse the NavBar
-        setCollapsed(!collapsed);
+        setCollapse(!collapse);
     };
 
     let onTrigger = (event) => {
@@ -19,7 +20,9 @@ export default function NavBar(props) {
         props.callbackHandleMenu(event.target.attributes.value.nodeValue);
         event.preventDefault();
 
-        toggleNavbar();
+        if (isAriaExpended) {
+            closeNavbar();
+        }
     }
 
     return (
@@ -27,13 +30,13 @@ export default function NavBar(props) {
             <Container>
                 <Navbar.Brand href="#">Meme-App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <Collapse isOpen={!collapsed} navbar>
+                <Navbar.Collapse id="responsive-navbar-nav" aria-expanded={isAriaExpended}>
+                    <Collapse isOpen={collapse} navbar in>
                         <Nav className="me-auto">
                         </Nav>
-                        <Nav.Link data-toggle="collapse" value='/home' onClick={onTrigger}>Home</Nav.Link>
-                        <Nav.Link data-toggle="collapse" value='/history' onClick={onTrigger}
-                                  disabled={!props.showHistoricButton}>Memes saved</Nav.Link>
+                        <Nav.Link value='/home' onClick={onTrigger}>Home</Nav.Link>
+                        <Nav.Link value='/history' onClick={onTrigger} disabled={!props.showHistoricButton}>Memes
+                            saved</Nav.Link>
                         <Nav className="me-auto">
                         </Nav>
                         <Nav>
