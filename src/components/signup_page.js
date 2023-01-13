@@ -54,7 +54,7 @@ function SignUpPage(props) {
         <>
             <h1>Sign-up page</h1>
             <Box sx={{maxWidth: 600}} mx="auto">
-                <form onSubmit={form.onSubmit((values) => handleSubmit())}>
+                <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
                     <TextInput
                         withAsterisk
                         label="Email"
