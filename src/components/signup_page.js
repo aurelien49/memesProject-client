@@ -19,7 +19,7 @@ function SignUpPage(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log((ici))
+        console.log('ivi')
 
         if (event.target.formEmail.value !== ''
             && event.target.formPassword.value !== ''
