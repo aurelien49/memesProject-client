@@ -3,7 +3,7 @@
   "name": "Meme-Application",
   "start_url": "/",
   "display": "fullscreen",
-  "background_color": "blue",
+  "background_color": "#c9dcf0",
   "theme_color": "yellow",
   "orientation": "portrait-primary",
   "description": "Web Application pour la création de memes personnalisés humoristiques. ",
