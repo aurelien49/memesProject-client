@@ -33,6 +33,7 @@ class HomePage extends Component {
         //this.createComponents = this.createComponents.bind(this);
         this.handleSubmitForm = this.handleSubmitForm.bind(this);
         this.handleModalClose = this.handleModalClose.bind(this);
+        this.handleClickCard = this.handleClickCard.bind(this);
     }
 
     handleModalClose = () => {
@@ -43,7 +44,10 @@ class HomePage extends Component {
         });
     };
 
-    async handleClickCard(meme_id, meme_name, meme_url, meme_width, meme_height, meme_box_count, meme_captions) {
+    // async handleClickCard(meme_id, meme_name, meme_url, meme_width, meme_height, meme_box_count, meme_captions) {
+    handleClickCard = (e) => {
+
+        console.log('client/HomePage/handleClickCard/e = ', e)
 
         // Modification available only i a user is logged
         if (this.props.isUserLogged) {
@@ -163,6 +167,7 @@ class HomePage extends Component {
                 <div className="result-container-history">
                     <ul>
                         {this.state.memes ? this.state.memes.map((e, index) => {
+
                             return (
                                 <li key={index.toString()}>
                                     <Card style={{width: '18rem', backgroundColor: "dimgrey", borderRadius: 15}}
@@ -175,8 +180,7 @@ class HomePage extends Component {
                                             alignItems: 'center',
                                             borderRadius: 15
                                         }}
-                                                  onClick={() => this.handleClickCard(
-                                                      e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
+                                                  data-name={"valeur de data-name"} onClick={this.handleClickCard}/>
                                         <Card.Body>
                                             <Card.Title>{e.name}</Card.Title>
                                             <Card.Text>
@@ -209,6 +213,7 @@ class HomePage extends Component {
         return document.getElementById(id).innerHTML.trim() === ""
     }
 
+//  onClick={this.handleClickCard(e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
     componentDidMount() {
         fetch('https://meme-project-server-ava.onrender.com/api/memes/imgflip/')
             .then(response => response.json())
