@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import logo from "../assets/img/banksy.svg";
 import MydModalWithGrid from "./modal_create_meme";
-
-const axios = require('axios');
+import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const app = document.getElementById('App');
 
@@ -149,11 +150,41 @@ class HomePage extends Component {
         );
     }
 
+    /*
+    <!--<div className="result-container">
+                    <ul id="result"></ul>
+                </div>-->
+     */
     render() {
         return (
             <>
-                <div className="result-container">
-                    <ul id="result"></ul>
+                <h1>Memes saved</h1>
+                <div className="result-container-history">
+                    <ul>
+                        {this.state.memes ? this.state.memes.map((e, index) => {
+                            return (
+                                <li key={index.toString()}>
+                                    <Card style={{width: '18rem', backgroundColor: "dimgrey", borderRadius: 15}}
+                                          className="d-flex align-items-center justify-content-center">
+                                        <Card.Title>{e.meme_name}</Card.Title>
+                                        <Card.Img variant="top" src={e.urlToRetriveMeme.toString()} style={{
+                                            marginTop: 10,
+                                            padding: 0,
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            borderRadius: 15
+                                        }}/>
+                                        <Card.Body>
+                                            <Card.Title>Card Title</Card.Title>
+                                            <Card.Text>
+
+                                            </Card.Text>
+                                        </Card.Body>
+                                    </Card>
+                                </li>
+                            );
+                        }) : null}
+                    </ul>
                 </div>
                 <img src={logo} alt="logo"/>
                 {this.state.currentMemeSelected.meme_id ?
