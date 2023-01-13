@@ -175,7 +175,7 @@ class HomePage extends Component {
                                           className="d-flex align-items-center justify-content-center">
                                         <Card.Title style={{color: 'black'}}><strong>{e.meme_name}</strong></Card.Title>
                                         <Card.Img variant="top" src={e.url.toString()} style={{
-                                            marginTop: 10,
+                                            marginTop: 0,
                                             padding: 0,
                                             justifyContent: 'center',
                                             alignItems: 'center',
@@ -183,7 +183,7 @@ class HomePage extends Component {
                                         }}
                                                   onClick={this.handleClickCard.bind(this, e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
                                         <Card.Body>
-                                            <Card.Title>{e.name}</Card.Title>
+                                            <Card.Title style={{color: 'black'}}><strong>{e.name}</strong></Card.Title>
                                             <Card.Subtitle
                                                 className="mb-2 text-muted">{e.width + ' x ' + e.height}
                                             </Card.Subtitle>

@@ -121,7 +121,7 @@ class HistoryPage extends Component {
                                     }}
                                           className="d-flex align-items-center justify-content-center">
                                         <Card.Img variant="top" src={e.urlToRetriveMeme.toString()} style={{
-                                            marginTop: 10,
+                                            marginTop: 0,
                                             padding: 0,
                                             justifyContent: 'center',
                                             alignItems: 'center',
