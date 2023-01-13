@@ -180,7 +180,7 @@ class HomePage extends Component {
                                             alignItems: 'center',
                                             borderRadius: 15
                                         }}
-                                                  data-name={"valeur de data-name"} onClick={this.handleClickCard}/>
+                                                  onClick={(e) => this.handleClickCard(e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
                                         <Card.Body>
                                             <Card.Title>{e.name}</Card.Title>
                                             <Card.Text>
