@@ -162,6 +162,11 @@ class App extends React.Component {
                 <NavBar callbackHandleMenu={this.callbackHandleMenu} isUserLogged={isUserLogged}
                         showHistoricButton={_showHistoricButton}></NavBar>
                 <span><br></br></span>
+                <div style={{
+                    height: 50,
+                    width: 100,
+                    border: '1 solid #4CAF50'
+                }}></div>
                 <span><img hidden={!isUserLogged} src={support} alt="support face"></img></span>
                 <span><h4>{!isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4></span>
 
