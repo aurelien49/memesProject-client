@@ -5,10 +5,19 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 export default function NavBar(props) {
 
+    const [expendMenu, setExpendMenu] = React.useState(false);
+
+    const handleExpendMenu = (_) => {
+        // Collapse the NavBar
+        setExpendMenu(false);
+    };
+
     let onTrigger = (event) => {
         console.log('NavBar: event: ', event.target.attributes.value.nodeValue)
         props.callbackHandleMenu(event.target.attributes.value.nodeValue);
         event.preventDefault();
+
+        handleExpendMenu();
     }
 
     return (
@@ -19,7 +28,7 @@ export default function NavBar(props) {
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                     </Nav>
-                    <Nav.Link value='/home' onClick={onTrigger}>Home</Nav.Link>
+                    <Nav.Link value='/home' onClick={onTrigger} expanded={expendMenu}>Home</Nav.Link>
                     <Nav.Link value='/history' onClick={onTrigger}
                               disabled={!props.showHistoricButton}>Memes saved</Nav.Link>
                     <Nav className="me-auto">
