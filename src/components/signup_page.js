@@ -1,77 +1,55 @@
 //import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import React from "react";
-import {TextInput, Checkbox, Button, Group, Box} from '@mantine/core';
+import {TextInput, Button, Group, Box} from '@mantine/core';
 import {useForm} from '@mantine/form';
 
 function SignUpPage(props) {
     const form = useForm({
         initialValues: {
             email: '',
-            termsOfService: false,
+            password: '',
+            user_name: ''
         },
-
         validate: {
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+            password: (value) => value > 4 ? null : 'Password to short',
+            user_name: (value) => value > 4 ? null : 'User name to short',
         },
     });
-    
-    const [showSignUpError, setShowSignUpError] = React.useState(false);
-
-    const handleChangeEmail = (_) => {
-        setShowSignUpError(false);
-    };
-
-    const handleChangePassword = (_) => {
-        setShowSignUpError(false);
-    };
-
-    const handleChangeName = (_) => {
-        setShowSignUpError(false);
-    };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         console.log('ivi')
 
-        if (event.target.formEmail.value !== ''
-            && event.target.formPassword.value !== ''
-            && event.target.formName.value !== '') {
-            fetch('https://meme-project-server-ava.onrender.com/api/users/signup', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: event.target.formEmail.value,
-                    password: event.target.formPassword.value,
-                    name: event.target.formName.value,
-                })
+        fetch('https://meme-project-server-ava.onrender.com/api/users/signup', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: event.target.formEmail.value,
+                password: event.target.formPassword.value,
+                name: event.target.formName.value,
             })
-                .then(response => {
-                    if (response.status === 200) {
-                        props.callbackSignUpSuccess(response.json());
-                    } else {
-                        setShowSignUpError(true);
-                        return {error: response.status};
-                    }
-                })
-                .catch(err => {
-                        console.error(err);
-                    }
-                );
-        } else {
-            setShowSignUpError(true);
-        }
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    props.callbackSignUpSuccess(response.json());
+                } else {
+                    return {error: response.status};
+                }
+            })
+            .catch(err => {
+                    console.error(err);
+                }
+            );
     }
 
     return (
         <>
             <h1>Sign-up page</h1>
-            {showSignUpError &&
-                <h6 style={{color: "red", backgroundColor: "white"}}>Sign up error: email or password or name
-                    incorrect</h6>}
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formEmail">
                     <Form.Label>Email address</Form.Label>
@@ -89,7 +67,7 @@ function SignUpPage(props) {
                     Submit
                 </Button>
             </Form>
-            <Box sx={{maxWidth: 300}} mx="auto">
+            <Box sx={{maxWidth: 600}} mx="auto">
                 <form onSubmit={form.onSubmit((values) => console.log(values))}>
                     <TextInput
                         withAsterisk
@@ -97,14 +75,19 @@ function SignUpPage(props) {
                         placeholder="your@email.com"
                         {...form.getInputProps('email')}
                     />
-
-                    <Checkbox
-                        mt="md"
-                        label="I agree to sell my privacy"
-                        {...form.getInputProps('termsOfService', {type: 'checkbox'})}
+                    <TextInput
+                        withAsterisk
+                        label="Password"
+                        placeholder="Your password"
+                        {...form.getInputProps('password')}
                     />
-
-                    <Group position="right" mt="md">
+                    <TextInput
+                        withAsterisk
+                        label="User name"
+                        placeholder="Your name"
+                        {...form.getInputProps('user_name')}
+                    />
+                    <Group position="center" mt="md">
                         <Button type="submit">Submit</Button>
                     </Group>
                 </form>
