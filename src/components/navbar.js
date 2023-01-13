@@ -7,21 +7,11 @@ import {Collapse} from "@mantine/core";
 
 export default function NavBar(props) {
 
-    const [isOpen, setIsOpen] = useState(false);
-    const toggle = () => setIsOpen(!isOpen);
+    const [collapsed, setCollapsed] = React.useState(true);
 
-    const mobileToggle = () => {
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            setIsOpen(!isOpen);
-        }
-
-    };
-
-    const [expendMenu, setExpendMenu] = React.useState(false);
-
-    const handleExpendMenu = (_) => {
+    const toggleNavbar = (_) => {
         // Collapse the NavBar
-        setExpendMenu(false);
+        setCollapsed(!collapsed);
     };
 
     let onTrigger = (event) => {
@@ -29,9 +19,7 @@ export default function NavBar(props) {
         props.callbackHandleMenu(event.target.attributes.value.nodeValue);
         event.preventDefault();
 
-        // handleExpendMenu();
-
-        mobileToggle();
+        toggleNavbar();
     }
 
     return (
@@ -40,7 +28,7 @@ export default function NavBar(props) {
                 <Navbar.Brand href="#">Meme-App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Collapse isOpen={isOpen} navbar in>
+                    <Collapse isOpen={!collapsed} navbar>
                         <Nav className="me-auto">
                         </Nav>
                         <Nav.Link data-toggle="collapse" value='/home' onClick={onTrigger}
