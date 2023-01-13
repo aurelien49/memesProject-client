@@ -18,7 +18,8 @@ export default function NavBar(props) {
 
     let handleClickBurger = (event) => {
         console.log('handleClickBurger: ')
-        setIsNavCollapsed(true);
+
+        console.log('Menu collapse ou non: ', isNavCollapsed)
     }
 
     return (
