@@ -31,8 +31,7 @@ export default function NavBar(props) {
                     <Collapse isOpen={!collapsed} navbar>
                         <Nav className="me-auto">
                         </Nav>
-                        <Nav.Link data-toggle="collapse" value='/home' onClick={onTrigger}
-                                  expanded={expendMenu}>Home</Nav.Link>
+                        <Nav.Link data-toggle="collapse" value='/home' onClick={onTrigger}>Home</Nav.Link>
                         <Nav.Link data-toggle="collapse" value='/history' onClick={onTrigger}
                                   disabled={!props.showHistoricButton}>Memes saved</Nav.Link>
                         <Nav className="me-auto">
