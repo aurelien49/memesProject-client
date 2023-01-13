@@ -28,7 +28,7 @@ function SignUpPage(props) {
         <>
             <h1>Sign-up page</h1>
             <Box sx={{maxWidth: 600}} mx="auto">
-                <form onSubmit={form.onSubmit((values) => console.log(values))}>
+                <form onSubmit={form.onSubmit((values) => handleSubmit())}>
                     <TextInput
                         withAsterisk
                         label="Email"
@@ -57,7 +57,7 @@ function SignUpPage(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('ivi', event)
+        console.log('handleSubmit : ', event)
 
         fetch('https://meme-project-server-ava.onrender.com/api/users/signup', {
             method: 'POST',
@@ -66,9 +66,9 @@ function SignUpPage(props) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email: event.target.formEmail.value,
-                password: event.target.formPassword.value,
-                name: event.target.formName.value,
+                email: event.email,
+                password: event.password,
+                name: event.user_name,
             })
         })
             .then(response => {
