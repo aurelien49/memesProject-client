@@ -21,7 +21,7 @@ export default function SignInPage(props) {
                 if (response.status === 200) {
                     props.callbackSignInSuccess(response.json());
                 } else {
-                    formState.error = true;
+                    setError('email', 'email or password incorrect');
                     return {error: response.status};
                 }
             })
@@ -62,25 +62,9 @@ export default function SignInPage(props) {
                         placeholder="Your password"
                         {...form.getInputProps('password')}
                     />
-                    {errors.password && <p>{errors.password.message}</p>}
+                    {errors.email && <p>{errors.email.message}</p>}
                     <Group position="center" mt="md">
-                        <Button type="submit"
-                                onClick={() => {
-                                    [
-                                        {
-                                            type: "manual",
-                                            name: "email",
-                                            message: "Double Check This"
-                                        },
-                                        {
-                                            type: "manual",
-                                            name: "password",
-                                            message: "Triple Check This"
-                                        }
-                                    ].forEach(({name, type, message}) =>
-                                        setError(name, {type, message})
-                                    );
-                                }}>Submit</Button>
+                        <Button type="submit">Submit</Button>
                     </Group>
                 </form>
             </Box>
