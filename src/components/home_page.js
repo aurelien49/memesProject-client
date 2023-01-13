@@ -30,7 +30,7 @@ class HomePage extends Component {
                 handleSubmitForm: null,
             },
         };
-        this.createComponents = this.createComponents.bind(this);
+        //this.createComponents = this.createComponents.bind(this);
         this.handleSubmitForm = this.handleSubmitForm.bind(this);
         this.handleModalClose = this.handleModalClose.bind(this);
     }
