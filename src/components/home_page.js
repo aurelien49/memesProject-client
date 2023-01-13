@@ -223,7 +223,7 @@ class HomePage extends Component {
                     divInfo.setAttribute('className', "info");
 
                     const pNbZoneTexte = document.createElement('div');
-                    pNbZoneTexte.textContent = 'Text zones' + meme.box_count;
+                    pNbZoneTexte.textContent = meme.box_count + ' Text zone' + meme.box_count > 1 ? 's' : '';
 
                     const pTailleImage = document.createElement('div');
                     pTailleImage.textContent = meme.width + ' x ' + meme.height;
