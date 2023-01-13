@@ -6,34 +6,42 @@ import React, {Component, useState} from "react";
 import {Collapse} from "@mantine/core";
 
 export default function NavBar(props) {
+    const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
-    let onTrigger = (event) => {
-        console.log('NavBar: event: ', event.target.attributes.value.nodeValue)
+    let handleLink = (event) => {
+        console.log('clickOnLink: ')
+        //console.log('NavBar: event: ', event.target.attributes.value.nodeValue)
         props.callbackHandleMenu(event.target.attributes.value.nodeValue);
         event.preventDefault();
+        setIsNavCollapsed(false);
+    }
+
+    let handleClickBurger = (event) => {
+        console.log('handleClickBurger: ')
+        setIsNavCollapsed(true);
     }
 
     return (
-        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" rounded>
             <Container>
                 <Navbar.Brand href="#">Meme-App</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-                <Navbar.Collapse id="responsive-navbar-nav">
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleClickBurger}/>
+                <Navbar.Collapse id="responsive-navbar-nav" aria-expanded={isNavCollapsed}>
                     <Nav className="me-auto">
                     </Nav>
-                    <Nav.Link id="collasible-nav-dropdown" value='/home' onClick={onTrigger}>Home</Nav.Link>
-                    <Nav.Link value='/history' onClick={onTrigger} disabled={!props.showHistoricButton}>Memes
+                    <Nav.Link id="collasible-nav-dropdown" value='/home' onClick={handleLink}>Home</Nav.Link>
+                    <Nav.Link value='/history' onClick={handleLink} disabled={!props.showHistoricButton}>Memes
                         saved</Nav.Link>
                     <Nav className="me-auto">
                     </Nav>
                     <Nav>
                         <NavDropdown title="User Management" id="collasible-nav-dropdown">
-                            <NavDropdown.Item value="/signin" onClick={onTrigger}
+                            <NavDropdown.Item value="/signin" onClick={handleLink}
                                               disabled={props.isUserLogged}>Sign-in</NavDropdown.Item>
                             <NavDropdown.Divider/>
-                            <NavDropdown.Item value="/signup" onClick={onTrigger}>Sign-up</NavDropdown.Item>
+                            <NavDropdown.Item value="/signup" onClick={handleLink}>Sign-up</NavDropdown.Item>
                             <NavDropdown.Divider/>
-                            <NavDropdown.Item value="/logout" onClick={onTrigger}
+                            <NavDropdown.Item value="/logout" onClick={handleLink}
                                               disabled={!props.isUserLogged}>Logout</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
