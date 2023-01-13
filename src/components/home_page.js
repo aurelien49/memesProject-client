@@ -175,7 +175,8 @@ class HomePage extends Component {
                                             alignItems: 'center',
                                             borderRadius: 15
                                         }}
-                                                  onClick={this.handleClickCard(e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
+                                                  onClick={() => this.handleClickCard(
+                                                      e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
                                         <Card.Body>
                                             <Card.Title>{e.name}</Card.Title>
                                             <Card.Text>
