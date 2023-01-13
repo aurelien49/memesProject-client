@@ -201,7 +201,7 @@ class HomePage extends Component {
                         onHide={this.handleModalClose}
                         props={this.state.currentMemeSelected}
                     /> : null}
-            </>
+            </div>
         );
     }
 
