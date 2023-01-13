@@ -5,13 +5,24 @@
 
 * {
     list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    background: dodgerblue;
     color: white;
     text-align: center;
     font-family: "font-1", cursive;
+}
+
+#lin_grad {
+
+    /* Set the height of the div to
+       the entire screen */
+    height: 100vh;
+
+    /* linear-gradient syntax */
+    background-image: linear-gradient(lightblue, darkblue);
 }
 
 h1 {
