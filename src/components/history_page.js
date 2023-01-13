@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import logohistory from "../assets/img/logohistory.svg";
 import Button from 'react-bootstrap/Button';
-import {Button2} from '@mui/material/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
@@ -142,20 +141,20 @@ class HistoryPage extends Component {
                                                 <Form.Group className="mb-3" controlId="formIndex">
                                                     <Form.Control type="hidden" value={index}/>
                                                 </Form.Group>
-                                                <Button2 type="submit" size="lg"
-                                                         titleStyle={{
-                                                             color: "white",
-                                                             fontSize: 16,
-                                                         }}
-                                                         buttonStyle={{
-                                                             backgroundColor: "white",
-                                                             borderRadius: 60,
-                                                             flex: 1,
-                                                             height: 30,
-                                                             width: 30,
-                                                         }}>
+                                                <Button type="submit" size="lg"
+                                                        titleStyle={{
+                                                            color: "white",
+                                                            fontSize: 16,
+                                                        }}
+                                                        buttonStyle={{
+                                                            backgroundColor: "white",
+                                                            borderRadius: 60,
+                                                            flex: 1,
+                                                            height: 30,
+                                                            width: 30,
+                                                        }}>
                                                     Send picture by email
-                                                </Button2>
+                                                </Button>
                                             </Form>
                                             <Form onSubmit={this.handleDeletePicture}>
                                                 <Form.Group className="mb-3" controlId="formIdMemeToDelete">
