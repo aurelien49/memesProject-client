@@ -4,8 +4,6 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
-const axios = require('axios');
-
 const app = document.getElementById('App');
 
 
