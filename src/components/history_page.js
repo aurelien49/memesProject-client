@@ -115,7 +115,7 @@ class HistoryPage extends Component {
                             return (
                                 <li key={index.toString()}>
                                     <Card style={{
-                                        width: '18rem',
+                                        width: '14rem',
                                         backgroundColor: "rgba(148,201,210,0.77)",
                                         borderRadius: 15
                                     }}
@@ -131,7 +131,6 @@ class HistoryPage extends Component {
                                             <Card.Title>{e.meme_name}</Card.Title>
                                             <Form onSubmit={this.handleSendPictureByMail} id={`formTop_${index}`}>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                                                    <Form.Label>Email address :</Form.Label>
                                                     <Form.Control type="email"
                                                                   placeholder="Enter email address"/>
                                                 </Form.Group>

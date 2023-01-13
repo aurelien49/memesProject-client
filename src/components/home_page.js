@@ -187,6 +187,9 @@ class HomePage extends Component {
                                             <Card.Text>
                                                 {e.width + ' x ' + e.height}
                                             </Card.Text>
+                                            <Card.Text>
+                                                {e.width + ' text zones '}
+                                            </Card.Text>
                                         </Card.Body>
                                     </Card>
                                 </li>
