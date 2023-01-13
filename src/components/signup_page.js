@@ -1,10 +1,37 @@
-//import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import React from "react";
 import {TextInput, Button, Group, Box} from '@mantine/core';
 import {useForm} from '@mantine/form';
 
 function SignUpPage(props) {
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log('handleSubmit : ', event)
+
+        fetch('https://meme-project-server-ava.onrender.com/api/users/signup', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: event.email,
+                password: event.password,
+                name: event.user_name,
+            })
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    props.callbackSignUpSuccess(response.json());
+                } else {
+                    return {error: response.status};
+                }
+            })
+            .catch(err => {
+                    console.error(err);
+                }
+            );
+    }
+
     const form = useForm({
         initialValues: {
             email: '',
@@ -54,35 +81,6 @@ function SignUpPage(props) {
             </Box>
         </>
     );
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log('handleSubmit : ', event)
-
-        fetch('https://meme-project-server-ava.onrender.com/api/users/signup', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: event.email,
-                password: event.password,
-                name: event.user_name,
-            })
-        })
-            .then(response => {
-                if (response.status === 200) {
-                    props.callbackSignUpSuccess(response.json());
-                } else {
-                    return {error: response.status};
-                }
-            })
-            .catch(err => {
-                    console.error(err);
-                }
-            );
-    }
 }
 
 export default SignUpPage;
