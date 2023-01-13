@@ -223,17 +223,17 @@ class HomePage extends Component {
                     divInfo.setAttribute('className', "info");
 
                     const pNbZoneTexte = document.createElement('div');
-                    pNbZoneTexte.textContent = meme.box_count;
+                    pNbZoneTexte.textContent = 'Text zones' + meme.box_count;
 
                     const pTailleImage = document.createElement('div');
-                    pTailleImage.textContent = meme.width + 'x' + meme.height;
+                    pTailleImage.textContent = meme.width + ' x ' + meme.height;
 
-                    const pIdMovie = document.createElement('div');
-                    pIdMovie.textContent = meme.id;
+                    //const pIdMovie = document.createElement('div');
+                    //pIdMovie.textContent = meme.id;
 
                     divInfo.appendChild(pNbZoneTexte);
                     divInfo.appendChild(pTailleImage);
-                    divInfo.appendChild(pIdMovie);
+                    //divInfo.appendChild(pIdMovie);
 
                     divCardContent.appendChild(image);
                     divCardContent.appendChild(divInfo);
