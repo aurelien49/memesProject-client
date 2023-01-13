@@ -18,7 +18,7 @@ function SignUpPage(props) {
                 return (value.toString().length > 4) ? null : 'Password to short'
             },
             user_name: (value) => {
-                console.log('user name value ', value);
+                console.log('user name value ', value.toString().length);
                 return (value.toString().length > 4) ? null : 'User name to short'
             },
         },
