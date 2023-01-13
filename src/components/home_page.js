@@ -156,6 +156,7 @@ class HomePage extends Component {
                 </div>-->
      */
     render() {
+        console.log('Client/home_page/render: ', this.state.memes)
         return (
             <>
                 <h1>Memes saved</h1>
@@ -175,9 +176,9 @@ class HomePage extends Component {
                                             borderRadius: 15
                                         }}/>
                                         <Card.Body>
-                                            <Card.Title>Card Title</Card.Title>
+                                            <Card.Title>{e.name}</Card.Title>
                                             <Card.Text>
-
+                                                {e.width + ' x ' + e.height}
                                             </Card.Text>
                                         </Card.Body>
                                     </Card>
@@ -227,62 +228,64 @@ class HomePage extends Component {
             );
     }
 
-    componentWillUnmount() {
-        document.getElementById('result').removeEventListener('click', this.handleClick)
-    }
-
-    createComponents() {
-        // Is empty to avoid create twice ...
-        if (this.isEmpty('result')) {
-            var that = this;
-            const container = document.getElementById('result');
-            this.memes.forEach((meme, index) => {
-                    const cardLi = document.createElement('li');
-                    cardLi.setAttribute('key', index.toString());
-
-                    const h2 = document.createElement('h2');
-                    h2.textContent = meme.name;
-
-                    const divCardContent = document.createElement('div');
-                    divCardContent.setAttribute('className', "card-content");
-
-                    const image = document.createElement('img');
-                    image.src = meme.url;
-                    image.alt = "my-image";
-
-                    const divInfo = document.createElement('div');
-                    divInfo.setAttribute('className', "info");
-
-                    const pNbZoneTexte = document.createElement('div');
-                    pNbZoneTexte.textContent = meme.box_count + ' Text zones';
-
-                    const pTailleImage = document.createElement('div');
-                    pTailleImage.textContent = meme.width + ' x ' + meme.height;
-
-                    //const pIdMovie = document.createElement('div');
-                    //pIdMovie.textContent = meme.id;
-
-                    divInfo.appendChild(pNbZoneTexte);
-                    divInfo.appendChild(pTailleImage);
-                    //divInfo.appendChild(pIdMovie);
-
-                    divCardContent.appendChild(image);
-                    divCardContent.appendChild(divInfo);
-
-                    cardLi.appendChild(h2);
-                    cardLi.appendChild(divCardContent);
-
-                    container.appendChild(cardLi);
-
-                    cardLi.addEventListener("click", function (e) {
-                        that.handleClickCard(
-                            meme.id, meme.name, meme.url, meme.width, meme.height, meme.box_count, meme.captions,
-                        );
-                    });
-                },
-            );
+    /*
+        componentWillUnmount() {
+            document.getElementById('result').removeEventListener('click', this.handleClick)
         }
-    }
+
+        createComponents() {
+            // Is empty to avoid create twice ...
+            if (this.isEmpty('result')) {
+                var that = this;
+                const container = document.getElementById('result');
+                this.memes.forEach((meme, index) => {
+                        const cardLi = document.createElement('li');
+                        cardLi.setAttribute('key', index.toString());
+
+                        const h2 = document.createElement('h2');
+                        h2.textContent = meme.name;
+
+                        const divCardContent = document.createElement('div');
+                        divCardContent.setAttribute('className', "card-content");
+
+                        const image = document.createElement('img');
+                        image.src = meme.url;
+                        image.alt = "my-image";
+
+                        const divInfo = document.createElement('div');
+                        divInfo.setAttribute('className', "info");
+
+                        const pNbZoneTexte = document.createElement('div');
+                        pNbZoneTexte.textContent = meme.box_count + ' Text zones';
+
+                        const pTailleImage = document.createElement('div');
+                        pTailleImage.textContent = meme.width + ' x ' + meme.height;
+
+                        //const pIdMovie = document.createElement('div');
+                        //pIdMovie.textContent = meme.id;
+
+                        divInfo.appendChild(pNbZoneTexte);
+                        divInfo.appendChild(pTailleImage);
+                        //divInfo.appendChild(pIdMovie);
+
+                        divCardContent.appendChild(image);
+                        divCardContent.appendChild(divInfo);
+
+                        cardLi.appendChild(h2);
+                        cardLi.appendChild(divCardContent);
+
+                        container.appendChild(cardLi);
+
+                        cardLi.addEventListener("click", function (e) {
+                            that.handleClickCard(
+                                meme.id, meme.name, meme.url, meme.width, meme.height, meme.box_count, meme.captions,
+                            );
+                        });
+                    },
+                );
+            }
+        }
+        */
 }
 
 export default HomePage;
