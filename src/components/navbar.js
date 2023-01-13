@@ -39,9 +39,8 @@ export default function NavBar(props) {
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
                 <Navbar.Brand href="#">Meme-App</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" aria-expanded={isAriaExpended}
-                               onChange={changeNavBar}/>
-                <Navbar.Collapse id="responsive-navbar-nav">
+                <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
+                <Navbar.Collapse id="responsive-navbar-nav" aria-expanded={isAriaExpended} onChange={changeNavBar}>
                     <Nav className="me-auto">
                     </Nav>
                     <Nav.Link value='/home' onClick={onTrigger}>Home</Nav.Link>
