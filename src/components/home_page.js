@@ -33,19 +33,10 @@ class HomePage extends Component {
         //this.createComponents = this.createComponents.bind(this);
         this.handleSubmitForm = this.handleSubmitForm.bind(this);
         this.handleModalClose = this.handleModalClose.bind(this);
-        this.handleClickCard = this.handleClickCard.bind(this);
     }
 
-    handleModalClose = () => {
-        this.setState({
-            currentMemeSelected: {
-                showModalCreateMeme: false
-            }
-        });
-    };
-
-    // async handleClickCard(meme_id, meme_name, meme_url, meme_width, meme_height, meme_box_count, meme_captions) {
-    handleClickCard = (e) => {
+    async handleClickCard(meme_id, meme_name, meme_url, meme_width, meme_height, meme_box_count, meme_captions) {
+        //handleClickCard = (e) => {
 
         console.log('client/HomePage/handleClickCard/e = ', e)
 
@@ -73,6 +64,14 @@ class HomePage extends Component {
             this.setState({});
         }*/
     }
+
+    handleModalClose = () => {
+        this.setState({
+            currentMemeSelected: {
+                showModalCreateMeme: false
+            }
+        });
+    };
 
     handleSubmitForm = async (event) => {
         event.preventDefault();
@@ -180,7 +179,7 @@ class HomePage extends Component {
                                             alignItems: 'center',
                                             borderRadius: 15
                                         }}
-                                                  onClick={(e) => this.handleClickCard(e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
+                                                  onClick={this.handleClickCard.bind(this, e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
                                         <Card.Body>
                                             <Card.Title>{e.name}</Card.Title>
                                             <Card.Text>
