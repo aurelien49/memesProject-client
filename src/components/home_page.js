@@ -42,7 +42,7 @@ class HomePage extends Component {
         console.log('client/HomePage/handleClickCard/e = ', meme_name)
 
         // Modification available only i a user is logged
-        /*if (this.props.isUserLogged) {
+        if (this.props.isUserLogged) {
             let commentBoxes = [];
             for (let i = 0; i < meme_box_count; i++) {
                 commentBoxes.push({key: i, value: i});
@@ -63,7 +63,7 @@ class HomePage extends Component {
             this.state.currentMemeSelected.handleSubmitForm = this.handleSubmitForm;
             this.state.currentMemeSelected.showModalCreateMeme = true;
             this.setState({});
-        }*/
+        }
     }
 
     handleModalClose = () => {
