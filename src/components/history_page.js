@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import logohistory from "../assets/img/logohistory.svg";
 import Button from 'react-bootstrap/Button';
-import {Button as Button2} from '@mui/material/Button';
+import {Button2} from '@mui/material/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 
