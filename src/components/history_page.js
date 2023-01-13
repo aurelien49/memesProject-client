@@ -114,7 +114,11 @@ class HistoryPage extends Component {
                         {this.state.memesHistory ? this.state.memesHistory.map((e, index) => {
                             return (
                                 <li key={index.toString()}>
-                                    <Card style={{width: '18rem', backgroundColor: "dimgrey", borderRadius: 15}}
+                                    <Card style={{
+                                        width: '18rem',
+                                        backgroundColor: "rgba(148,201,210,0.77)",
+                                        borderRadius: 15
+                                    }}
                                           className="d-flex align-items-center justify-content-center">
                                         <Card.Title>{e.meme_name}</Card.Title>
                                         <Card.Img variant="top" src={e.urlToRetriveMeme.toString()} style={{
@@ -141,25 +145,14 @@ class HistoryPage extends Component {
                                                 <Form.Group className="mb-3" controlId="formIndex">
                                                     <Form.Control type="hidden" value={index}/>
                                                 </Form.Group>
-                                                <Button type="submit" size="lg"
-                                                        titleStyle={{
-                                                            color: "white",
-                                                            fontSize: 16,
-                                                        }}
-                                                        buttonStyle={{
-                                                            backgroundColor: "white",
-                                                            borderRadius: 60,
-                                                            flex: 1,
-                                                            height: 30,
-                                                            width: 30,
-                                                        }}>
-                                                    Send picture by email
+                                                <Button variant="primary" type="submit" size="lg">
+                                                    Send by email
                                                 </Button>
                                             </Form>
                                             <Form onSubmit={this.handleDeletePicture}>
                                                 <Form.Group className="mb-3" controlId="formIdMemeToDelete">
                                                     <Form.Control type="hidden" value={e._id}/></Form.Group>
-                                                <Button variant="secondary" type="submit" size="lg">
+                                                <Button variant="danger" type="submit" size="lg">
                                                     Delete picture
                                                 </Button>
                                             </Form>
