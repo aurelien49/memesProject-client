@@ -159,10 +159,9 @@ class HomePage extends Component {
     render() {
         console.log('Client/home_page/render: ', this.state.memes)
         return (
-            <>
+            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
                 <h1>Home</h1>
-                <div className="result-container-history"
-                     style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
+                <div className="result-container-history">
                     <ul>
                         {this.state.memes ? this.state.memes.map((e, index) => {
 
