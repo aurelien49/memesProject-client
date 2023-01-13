@@ -16,11 +16,9 @@ export default function SignInPage(props) {
             })
         })
             .then(async response => {
-                let rep = await response.json();
                 if (response.status === 200) {
-                    props.callbackSignInSuccess(rep);
+                    props.callbackSignInSuccess(response.json());
                 } else {
-                    setShowLoginError(true);
                     return {error: response.status};
                 }
             })
