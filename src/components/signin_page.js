@@ -3,9 +3,7 @@ import {TextInput, Button, Group, Box} from '@mantine/core';
 import {useForm} from '@mantine/form';
 
 export default function SignInPage(props) {
-    const {register, handleSubmit, setError, formState: {errors}} = useForm({
-        criteriaMode: "all"
-    });
+    const {register, setError, formState: {errors}, handleSubmit, clearErrors} = useForm();
 
     const handleSubmitF = async (event) => {
         fetch('https://meme-project-server-ava.onrender.com/api/users/signin', {
@@ -23,10 +21,7 @@ export default function SignInPage(props) {
                 if (response.status === 200) {
                     props.callbackSignInSuccess(response.json());
                 } else {
-                    setError("email", {
-                        type: "manual",
-                        message: "Error message sur l'email"
-                    });
+                    formState.error = true;
                     return {error: response.status};
                 }
             })
@@ -68,7 +63,6 @@ export default function SignInPage(props) {
                         {...form.getInputProps('password')}
                     />
                     {errors.password && <p>{errors.password.message}</p>}
-                    {errors.test && <p>{errors.test.message}</p>}
                     <Group position="center" mt="md">
                         <Button type="submit"
                                 onClick={() => {
