@@ -184,11 +184,10 @@ class HomePage extends Component {
                                                   onClick={this.handleClickCard.bind(this, e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
                                         <Card.Body>
                                             <Card.Title>{e.name}</Card.Title>
+                                            <Card.Subtitle
+                                                className="mb-2 text-muted">{e.width + ' x ' + e.height}</Card.Subtitle>
                                             <Card.Text>
-                                                {e.width + ' x ' + e.height}
-                                            </Card.Text>
-                                            <Card.Text>
-                                                {e.width + ' text zones '}
+                                                {e.box_count + ' text zones '}
                                             </Card.Text>
                                         </Card.Body>
                                     </Card>
