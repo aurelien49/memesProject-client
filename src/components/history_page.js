@@ -141,14 +141,14 @@ class HistoryPage extends Component {
                                                 <Form.Group className="mb-3" controlId="formIndex">
                                                     <Form.Control type="hidden" value={index}/>
                                                 </Form.Group>
-                                                <Button variant="primary" type="submit">
+                                                <Button variant="primary" type="submit" size="lg">
                                                     Send picture by email
                                                 </Button>
                                             </Form>
                                             <Form onSubmit={this.handleDeletePicture}>
                                                 <Form.Group className="mb-3" controlId="formIdMemeToDelete">
                                                     <Form.Control type="hidden" value={e._id}/></Form.Group>
-                                                <Button variant="secondary" type="submit">
+                                                <Button variant="secondary" type="submit" size="lg">
                                                     Delete picture
                                                 </Button>
                                             </Form>
