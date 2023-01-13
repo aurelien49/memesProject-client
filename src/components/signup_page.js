@@ -1,6 +1,8 @@
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import React from "react";
+import {TextInput, Checkbox, Button, Group, Box} from '@mantine/core';
+import {useForm} from '@mantine/form';
 
 function SignUpPage(props) {
     const [showSignUpError, setShowSignUpError] = React.useState(false);
@@ -57,8 +59,8 @@ function SignUpPage(props) {
         <>
             <h1>Sign-up page</h1>
             {showSignUpError &&
-                <h4 style={{color: "red", backgroundColor: "white"}}>Sign up error: email or password or name
-                    incorrect</h4>}
+                <h6 style={{color: "red", backgroundColor: "white"}}>Sign up error: email or password or name
+                    incorrect</h6>}
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formEmail">
                     <Form.Label>Email address</Form.Label>
@@ -76,6 +78,26 @@ function SignUpPage(props) {
                     Submit
                 </Button>
             </Form>
+            <Box sx={{maxWidth: 300}} mx="auto">
+                <form onSubmit={form.onSubmit((values) => console.log(values))}>
+                    <TextInput
+                        withAsterisk
+                        label="Email"
+                        placeholder="your@email.com"
+                        {...form.getInputProps('email')}
+                    />
+
+                    <Checkbox
+                        mt="md"
+                        label="I agree to sell my privacy"
+                        {...form.getInputProps('termsOfService', {type: 'checkbox'})}
+                    />
+
+                    <Group position="right" mt="md">
+                        <Button type="submit">Submit</Button>
+                    </Group>
+                </form>
+            </Box>
         </>
     );
 }
