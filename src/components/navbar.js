@@ -15,6 +15,10 @@ export default function NavBar(props) {
         setCollapse(!collapse);
     };
 
+    const changeNavBar = (_) => {
+        console.log('changeNavBar: event: ', isAriaExpended)
+    };
+
     let onTrigger = (event) => {
         console.log('NavBar: event: ', event.target.attributes.value.nodeValue)
         props.callbackHandleMenu(event.target.attributes.value.nodeValue);
@@ -29,28 +33,27 @@ export default function NavBar(props) {
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
             <Container>
                 <Navbar.Brand href="#">Meme-App</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-                <Navbar.Collapse id="responsive-navbar-nav" aria-expanded={isAriaExpended}>
-                    <Collapse isOpen={collapse} navbar in>
-                        <Nav className="me-auto">
-                        </Nav>
-                        <Nav.Link value='/home' onClick={onTrigger}>Home</Nav.Link>
-                        <Nav.Link value='/history' onClick={onTrigger} disabled={!props.showHistoricButton}>Memes
-                            saved</Nav.Link>
-                        <Nav className="me-auto">
-                        </Nav>
-                        <Nav>
-                            <NavDropdown title="User Management" id="collasible-nav-dropdown">
-                                <NavDropdown.Item value="/signin" onClick={onTrigger}
-                                                  disabled={props.isUserLogged}>Sign-in</NavDropdown.Item>
-                                <NavDropdown.Divider/>
-                                <NavDropdown.Item value="/signup" onClick={onTrigger}>Sign-up</NavDropdown.Item>
-                                <NavDropdown.Divider/>
-                                <NavDropdown.Item value="/logout" onClick={onTrigger}
-                                                  disabled={!props.isUserLogged}>Logout</NavDropdown.Item>
-                            </NavDropdown>
-                        </Nav>
-                    </Collapse>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav" aria-expanded={isAriaExpended}
+                               onChange={changeNavBar}/>
+                <Navbar.Collapse id="responsive-navbar-nav">
+                    <Nav className="me-auto">
+                    </Nav>
+                    <Nav.Link value='/home' onClick={onTrigger}>Home</Nav.Link>
+                    <Nav.Link value='/history' onClick={onTrigger} disabled={!props.showHistoricButton}>Memes
+                        saved</Nav.Link>
+                    <Nav className="me-auto">
+                    </Nav>
+                    <Nav>
+                        <NavDropdown title="User Management" id="collasible-nav-dropdown">
+                            <NavDropdown.Item value="/signin" onClick={onTrigger}
+                                              disabled={props.isUserLogged}>Sign-in</NavDropdown.Item>
+                            <NavDropdown.Divider/>
+                            <NavDropdown.Item value="/signup" onClick={onTrigger}>Sign-up</NavDropdown.Item>
+                            <NavDropdown.Divider/>
+                            <NavDropdown.Item value="/logout" onClick={onTrigger}
+                                              disabled={!props.isUserLogged}>Logout</NavDropdown.Item>
+                        </NavDropdown>
+                    </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
