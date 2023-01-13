@@ -5,6 +5,17 @@ import {TextInput, Checkbox, Button, Group, Box} from '@mantine/core';
 import {useForm} from '@mantine/form';
 
 function SignUpPage(props) {
+    const form = useForm({
+        initialValues: {
+            email: '',
+            termsOfService: false,
+        },
+
+        validate: {
+            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+        },
+    });
+    
     const [showSignUpError, setShowSignUpError] = React.useState(false);
 
     const handleChangeEmail = (_) => {
