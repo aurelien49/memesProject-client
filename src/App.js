@@ -158,7 +158,7 @@ class App extends React.Component {
           user_id ${user_id}`)*/
 
         return (
-            <div>
+            <div id="lin_grad">
                 <NavBar callbackHandleMenu={this.callbackHandleMenu} isUserLogged={isUserLogged}
                         showHistoricButton={_showHistoricButton}></NavBar>
                 <span><br></br></span>

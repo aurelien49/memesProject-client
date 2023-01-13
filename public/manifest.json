@@ -1,7 +1,7 @@
 {
   "short_name": "Meme-App",
   "name": "Meme-Application",
-  "start_url": "/index.html",
+  "start_url": "/",
   "display": "fullscreen",
   "background_color": "blue",
   "theme_color": "yellow",
@@ -12,6 +12,11 @@
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
+    },
+    {
+      "src": "launcher-icon.png",
+      "sizes": "144x144",
+      "type": "image/png"
     },
     {
       "src": "logo192.png",
