@@ -167,7 +167,11 @@ class HomePage extends Component {
 
                             return (
                                 <li key={index.toString()}>
-                                    <Card style={{width: '18rem', backgroundColor: "dimgrey", borderRadius: 15}}
+                                    <Card style={{
+                                        width: '18rem',
+                                        backgroundColor: "rgba(148,201,210,0.77)",
+                                        borderRadius: 15
+                                    }}
                                           className="d-flex align-items-center justify-content-center">
                                         <Card.Title>{e.meme_name}</Card.Title>
                                         <Card.Img variant="top" src={e.url.toString()} style={{
