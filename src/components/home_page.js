@@ -187,7 +187,7 @@ class HomePage extends Component {
                                             <Card.Subtitle
                                                 className="mb-2 text-muted">{e.width + ' x ' + e.height}</Card.Subtitle>
                                             <Card.Text>
-                                                {e.box_count + ' text zones '}
+                                                {e.box_count + ' text zones'}
                                             </Card.Text>
                                         </Card.Body>
                                     </Card>
