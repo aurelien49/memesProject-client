@@ -16,7 +16,7 @@ export default function NavBar(props) {
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" rounded>
             <Container>
                 <Navbar.Brand href="#">Meme-App</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleClickBurger}/>
+                <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                     </Nav>

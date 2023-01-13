@@ -48,11 +48,6 @@ class HistoryPage extends Component {
         // Envoi d'
         event.preventDefault();
 
-        console.log(`__________________________ handleSendPictureByMail email: `, event.target.formBasicEmail.value);
-        console.log(`__________________________ handleSendPictureByMail url: `, event.target.formUrlRetreiveMeme.value);
-        console.log(`__________________________ handleSendPictureByMail url: `, event.target.formNameMeme.value);
-        console.log(`__________________________ handleSendPictureByMail url: `, event.target.formIndex.value);
-
         fetch('https://meme-project-server-ava.onrender.com/api/users/sendpicturebyemail/', {
             method: 'POST',
             headers: {
