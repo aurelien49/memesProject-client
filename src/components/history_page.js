@@ -152,7 +152,7 @@ class HistoryPage extends Component {
                                                 <Form.Group className="mb-3" controlId="formIdMemeToDelete">
                                                     <Form.Control type="hidden" value={e._id}/>
                                                 </Form.Group>
-                                                <Button variant="danger" type="submit" size="sm">
+                                                <Button variant="secondary" type="submit" size="sm">
                                                     Delete picture
                                                 </Button>
                                             </Form>
