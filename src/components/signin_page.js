@@ -1,80 +1,70 @@
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import React, {Component, useState} from "react";
+import React from "react";
+import {TextInput, Button, Group, Box} from '@mantine/core';
+import {useForm} from '@mantine/form';
 
 export default function SignInPage(props) {
-
-    const [email, setEmail] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [showLoginError, setShowLoginError] = React.useState(false);
-
-    const handleChangeEmail = (_) => {
-        setShowLoginError(false);
-    };
-
-    const handleChangePassword = (_) => {
-        setShowLoginError(false);
-    };
-
-    const handleEmail = (event) => {
-        setEmail(event.target.value);
-    };
-
-    const handlePassword = (event) => {
-        setPassword(event.target.value);
-    };
-
     const handleSubmit = async (event) => {
-        event.preventDefault();
-
-        if (event.target.formBasicEmail.value !== ''
-            && event.target.formBasicPassword.value !== '') {
-            fetch('https://meme-project-server-ava.onrender.com/api/users/signin', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email: event.target.formBasicEmail.value,
-                    password: event.target.formBasicPassword.value,
-                })
+        fetch('https://meme-project-server-ava.onrender.com/api/users/signin', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: event.email,
+                password: event.password,
             })
-                .then(async response => {
-                    let rep = await response.json();
-                    if (response.status === 200) {
-                        props.callbackSignInSuccess(rep);
-                    } else {
-                        setShowLoginError(true);
-                        return {error: response.status};
-                    }
-                })
-                .catch(err => {
-                        console.error('+ Error login: ', err);
-                    }
-                );
-        }
+        })
+            .then(async response => {
+                let rep = await response.json();
+                if (response.status === 200) {
+                    props.callbackSignInSuccess(rep);
+                } else {
+                    setShowLoginError(true);
+                    return {error: response.status};
+                }
+            })
+            .catch(err => {
+                    console.error('+ Error login: ', err);
+                }
+            );
     }
+
+    const form = useForm({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        validate: {
+            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+            password: (value) =>
+                (value.toString().length > 4) ? null : 'Password to short'
+            ,
+        },
+    });
 
     return (
         <>
             <h1>Sign-in page</h1>
-            {showLoginError &&
-                <h4 style={{color: "red", backgroundColor: "white"}}>Login error: email or password incorrect</h4>}
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" onChange={handleChangeEmail}/>
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" onChange={handleChangePassword}/>
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
+            <Box sx={{maxWidth: 600}} mx="auto">
+                <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+                    <TextInput
+                        withAsterisk
+                        label="Email"
+                        placeholder="your@email.com"
+                        {...form.getInputProps('email')}
+                    />
+                    <TextInput
+                        withAsterisk
+                        label="Password"
+                        placeholder="Your password"
+                        {...form.getInputProps('password')}
+                    />
+                    <Group position="center" mt="md">
+                        <Button type="submit">Submit</Button>
+                    </Group>
+                </form>
+            </Box>
         </>
     );
 }

@@ -4,8 +4,6 @@ import {useForm} from '@mantine/form';
 
 function SignUpPage(props) {
     const handleSubmit = async (event) => {
-        console.log('handleSubmit : ', event)
-
         fetch('https://meme-project-server-ava.onrender.com/api/users/signup', {
             method: 'POST',
             headers: {
@@ -39,14 +37,12 @@ function SignUpPage(props) {
         },
         validate: {
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-            password: (value) => {
-                console.log('password value ', value);
-                return (value.toString().length > 4) ? null : 'Password to short'
-            },
-            user_name: (value) => {
-                console.log('user name value ', value.toString().length);
-                return (value.toString().length > 4) ? null : 'User name to short'
-            },
+            password: (value) =>
+                (value.toString().length > 4) ? null : 'Password to short'
+            ,
+            user_name: (value) =>
+                (value.toString().length > 4) ? null : 'User name to short'
+            ,
         },
     });
 
@@ -83,23 +79,3 @@ function SignUpPage(props) {
 }
 
 export default SignUpPage;
-
-/*
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Email" onChange={handleChangeEmail}/>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" onChange={handleChangePassword}/>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formName">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control type="name" placeholder="Name" onChange={handleChangeName}/>
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
- */
