@@ -48,9 +48,6 @@ class HomePage extends Component {
                 commentBoxes.push({key: i, value: i});
             }
 
-            console.log('+++++++++++++++++++++++++++ this.props.isUserLogged: ', this.props.isUserLogged);
-            console.log('+++++++++++++++++++++++++++ this.props.user_id: ', this.props.user_id);
-
             this.state.currentMemeSelected.user_id = this.props.user_id;
             this.state.currentMemeSelected.meme_id = meme_id;
             this.state.currentMemeSelected.meme_name = meme_name;
@@ -164,7 +161,8 @@ class HomePage extends Component {
         return (
             <>
                 <h1>Home</h1>
-                <div className="result-container-history">
+                <div className="result-container-history"
+                     style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh'}}>
                     <ul>
                         {this.state.memes ? this.state.memes.map((e, index) => {
 
