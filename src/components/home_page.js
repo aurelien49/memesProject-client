@@ -159,7 +159,7 @@ class HomePage extends Component {
         console.log('Client/home_page/render: ', this.state.memes)
         return (
             <>
-                <h1>Memes saved</h1>
+                <h1>Home</h1>
                 <div className="result-container-history">
                     <ul>
                         {this.state.memes ? this.state.memes.map((e, index) => {
@@ -174,7 +174,8 @@ class HomePage extends Component {
                                             justifyContent: 'center',
                                             alignItems: 'center',
                                             borderRadius: 15
-                                        }}/>
+                                        }}
+                                                  onClick={this.handleClickCard(e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
                                         <Card.Body>
                                             <Card.Title>{e.name}</Card.Title>
                                             <Card.Text>
