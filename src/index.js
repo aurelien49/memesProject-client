@@ -6,7 +6,7 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
-import {MantineProvider} from '@mantine/core';
+
 // Importing the Bootstrap CSS
 //import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,7 +18,8 @@ root.render(
         </BrowserRouter>
     </React.StrictMode>
 );
-//  <MantineProvider>
+// import {MantineProvider} from '@mantine/core';
+// <MantineProvider>
 // withGlobalStyles withNormalizeCSS
 
 // If you want your app to work offline and load faster, you can change
