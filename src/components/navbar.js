@@ -18,7 +18,11 @@ export default function NavBar(props) {
 
     let handleClickBurger = (event) => {
         console.log('handleClickBurger: ')
+        console.log('Menu collapse ou non: ', isNavCollapsed)
+    }
 
+    let handleCollapse = (event) => {
+        console.log('handleCollapse: ')
         console.log('Menu collapse ou non: ', isNavCollapsed)
     }
 
@@ -27,7 +31,7 @@ export default function NavBar(props) {
             <Container>
                 <Navbar.Brand href="#">Meme-App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleClickBurger}/>
-                <Navbar.Collapse id="responsive-navbar-nav" aria-expanded={isNavCollapsed}>
+                <Navbar.Collapse id="responsive-navbar-nav" aria-expanded={isNavCollapsed} onChange={handleCollapse}>
                     <Nav className="me-auto">
                     </Nav>
                     <Nav.Link id="collasible-nav-dropdown" value='/home' onClick={handleLink}>Home</Nav.Link>
