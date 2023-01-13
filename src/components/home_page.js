@@ -169,11 +169,11 @@ class HomePage extends Component {
                                 <li key={index.toString()}>
                                     <Card style={{
                                         width: '16rem',
-                                        backgroundColor: "rgba(148,201,210,0.77)",
+                                        backgroundColor: "whitesmoke",
                                         borderRadius: 15
                                     }}
                                           className="d-flex align-items-center justify-content-center">
-                                        <Card.Title style={{color: 'black'}}>{e.meme_name}</Card.Title>
+                                        <Card.Title style={{color: 'black'}}><strong>{e.meme_name}</strong></Card.Title>
                                         <Card.Img variant="top" src={e.url.toString()} style={{
                                             marginTop: 10,
                                             padding: 0,
@@ -185,10 +185,11 @@ class HomePage extends Component {
                                         <Card.Body>
                                             <Card.Title>{e.name}</Card.Title>
                                             <Card.Subtitle
-                                                className="mb-2 text-muted">{e.width + ' x ' + e.height}</Card.Subtitle>
-                                            <Card.Text>
-                                                {e.box_count + ' text zones'}
-                                            </Card.Text>
+                                                className="mb-2 text-muted">{e.width + ' x ' + e.height}
+                                            </Card.Subtitle>
+                                            <Card.Subtitle
+                                                className="mb-2 text-muted">{e.box_count + ' text zones'}
+                                            </Card.Subtitle>
                                         </Card.Body>
                                     </Card>
                                 </li>

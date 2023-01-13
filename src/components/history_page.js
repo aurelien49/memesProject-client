@@ -116,7 +116,7 @@ class HistoryPage extends Component {
                                 <li key={index.toString()}>
                                     <Card style={{
                                         width: '16rem',
-                                        backgroundColor: "rgba(148,201,210,0.77)",
+                                        backgroundColor: "whitesmoke",
                                         borderRadius: 15
                                     }}
                                           className="d-flex align-items-center justify-content-center">
@@ -128,7 +128,8 @@ class HistoryPage extends Component {
                                             borderRadius: 15
                                         }}/>
                                         <Card.Body>
-                                            <Card.Title style={{color: 'black'}}>{e.meme_name}</Card.Title>
+                                            <Card.Title
+                                                style={{color: 'black'}}><strong>{e.meme_name}</strong></Card.Title>
                                             <Form onSubmit={this.handleSendPictureByMail} id={`formTop_${index}`}>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Control type="email"
