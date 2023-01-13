@@ -120,7 +120,6 @@ class HistoryPage extends Component {
                                         borderRadius: 15
                                     }}
                                           className="d-flex align-items-center justify-content-center">
-                                        <Card.Title>{e.meme_name}</Card.Title>
                                         <Card.Img variant="top" src={e.urlToRetriveMeme.toString()} style={{
                                             marginTop: 10,
                                             padding: 0,
@@ -129,7 +128,7 @@ class HistoryPage extends Component {
                                             borderRadius: 15
                                         }}/>
                                         <Card.Body>
-
+                                            <Card.Title>{e.meme_name}</Card.Title>
                                             <Form onSubmit={this.handleSendPictureByMail} id={`formTop_${index}`}>
                                                 <Form.Group className="mb-3" controlId="formBasicEmail">
                                                     <Form.Label>Email address :</Form.Label>
