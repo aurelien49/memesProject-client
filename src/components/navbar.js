@@ -12,6 +12,7 @@ export default function NavBar(props) {
 
     const closeNavbar = (_) => {
         // Collapse the NavBar
+        console.log('closeNavbar: event: ', isAriaExpended)
         setCollapse(!collapse);
     };
 
@@ -24,7 +25,10 @@ export default function NavBar(props) {
         props.callbackHandleMenu(event.target.attributes.value.nodeValue);
         event.preventDefault();
 
-        if (isAriaExpended) {
+        if (event.target.attributes.value.nodeValue === "/home") {
+            closeNavbar();
+        }
+        if (event.target.attributes.value.nodeValue === "/history") {
             closeNavbar();
         }
     }
