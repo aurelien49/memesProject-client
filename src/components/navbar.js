@@ -9,7 +9,7 @@ export default function NavBar(props) {
     const [isNavCollapsed, setIsNavCollapsed] = useState(true);
 
     let handleLink = (event) => {
-        console.log('clickOnLink: ')
+        console.log('handleLink: ')
         //console.log('NavBar: event: ', event.target.attributes.value.nodeValue)
         props.callbackHandleMenu(event.target.attributes.value.nodeValue);
         event.preventDefault();
@@ -31,11 +31,12 @@ export default function NavBar(props) {
             <Container>
                 <Navbar.Brand href="#">Meme-App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleClickBurger}/>
-                <Navbar.Collapse id="responsive-navbar-nav" aria-expanded={isNavCollapsed} onChange={handleCollapse}>
+                <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
                     </Nav>
-                    <Nav.Link id="collasible-nav-dropdown" value='/home' onClick={handleLink}>Home</Nav.Link>
-                    <Nav.Link value='/history' onClick={handleLink} disabled={!props.showHistoricButton}>Memes
+                    <Nav.Link eventKey={"1"} id="collasible-nav-dropdown" value='/home'
+                              onClick={handleLink}>Home</Nav.Link>
+                    <Nav.Link eventKey={"1"} value='/history' onClick={handleLink} disabled={!props.showHistoricButton}>Memes
                         saved</Nav.Link>
                     <Nav className="me-auto">
                     </Nav>
