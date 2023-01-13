@@ -4,7 +4,6 @@ import {useForm} from '@mantine/form';
 
 function SignUpPage(props) {
     const handleSubmit = async (event) => {
-        event.preventDefault();
         console.log('handleSubmit : ', event)
 
         fetch('https://meme-project-server-ava.onrender.com/api/users/signup', {
