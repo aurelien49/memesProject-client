@@ -26,9 +26,11 @@ export default function NavBar(props) {
         event.preventDefault();
 
         if (event.target.attributes.value.nodeValue === "/home") {
+            console.log('target /home')
             closeNavbar();
         }
         if (event.target.attributes.value.nodeValue === "/history") {
+            console.log('target /history')
             closeNavbar();
         }
     }
@@ -43,7 +45,7 @@ export default function NavBar(props) {
                     <Nav className="me-auto">
                     </Nav>
                     <Nav.Link value='/home' onClick={onTrigger}>Home</Nav.Link>
-                    <Nav.Link value='/history' onClick={onTrigger} disabled={!props.showHistoricButton}>Memes
+                    <Nav.Link value='/history' onClick={onTrigger}>Memes
                         saved</Nav.Link>
                     <Nav className="me-auto">
                     </Nav>
@@ -63,7 +65,7 @@ export default function NavBar(props) {
         </Navbar>
     );
 }
-
+// disabled={!props.showHistoricButton}
 // eventkey='/history'  eventKey='/home'
 /*
 function CustomLink({to, children, ...props}) {
