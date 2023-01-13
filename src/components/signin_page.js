@@ -3,7 +3,11 @@ import {TextInput, Button, Group, Box} from '@mantine/core';
 import {useForm} from '@mantine/form';
 
 export default function SignInPage(props) {
-    const handleSubmit = async (event) => {
+    const {register, handleSubmit, setError, formState: {errors}} = useForm({
+        criteriaMode: "all"
+    });
+
+    const handleSubmitF = async (event) => {
         fetch('https://meme-project-server-ava.onrender.com/api/users/signin', {
             method: 'POST',
             headers: {
@@ -19,6 +23,10 @@ export default function SignInPage(props) {
                 if (response.status === 200) {
                     props.callbackSignInSuccess(response.json());
                 } else {
+                    setError("email", {
+                        type: "manual",
+                        message: "Error message sur l'email"
+                    });
                     return {error: response.status};
                 }
             })
@@ -45,21 +53,40 @@ export default function SignInPage(props) {
         <>
             <h1>Sign-in page</h1>
             <Box sx={{maxWidth: 600}} mx="auto">
-                <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+                <form onSubmit={form.onSubmit((values) => handleSubmitF(values))}>
                     <TextInput
                         withAsterisk
                         label="Email"
                         placeholder="your@email.com"
                         {...form.getInputProps('email')}
                     />
+                    {errors.email && <p>{errors.email.message}</p>}
                     <TextInput
                         withAsterisk
                         label="Password"
                         placeholder="Your password"
                         {...form.getInputProps('password')}
                     />
+                    {errors.password && <p>{errors.password.message}</p>}
+                    {errors.test && <p>{errors.test.message}</p>}
                     <Group position="center" mt="md">
-                        <Button type="submit">Submit</Button>
+                        <Button type="submit"
+                                onClick={() => {
+                                    [
+                                        {
+                                            type: "manual",
+                                            name: "email",
+                                            message: "Double Check This"
+                                        },
+                                        {
+                                            type: "manual",
+                                            name: "password",
+                                            message: "Triple Check This"
+                                        }
+                                    ].forEach(({name, type, message}) =>
+                                        setError(name, {type, message})
+                                    );
+                                }}>Submit</Button>
                     </Group>
                 </form>
             </Box>
