@@ -15,11 +15,11 @@ function SignUpPage(props) {
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
             password: (value) => {
                 console.log('password value ', value);
-                return (value > 4) ? null : 'Password to short'
+                return (value.toString().length > 4) ? null : 'Password to short'
             },
             user_name: (value) => {
                 console.log('user name value ', value);
-                return (value > 4) ? null : 'User name to short'
+                return (value.toString().length > 4) ? null : 'User name to short'
             },
         },
     });
