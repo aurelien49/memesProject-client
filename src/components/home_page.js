@@ -38,7 +38,8 @@ class HomePage extends Component {
     async handleClickCard(meme_id, meme_name, meme_url, meme_width, meme_height, meme_box_count, meme_captions) {
         //handleClickCard = (e) => {
 
-        console.log('client/HomePage/handleClickCard/e = ', e)
+        console.log('client/HomePage/handleClickCard/e = ', meme_id)
+        console.log('client/HomePage/handleClickCard/e = ', meme_name)
 
         // Modification available only i a user is logged
         /*if (this.props.isUserLogged) {
