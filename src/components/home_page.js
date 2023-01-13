@@ -168,7 +168,7 @@ class HomePage extends Component {
                                     <Card style={{width: '18rem', backgroundColor: "dimgrey", borderRadius: 15}}
                                           className="d-flex align-items-center justify-content-center">
                                         <Card.Title>{e.meme_name}</Card.Title>
-                                        <Card.Img variant="top" src={e.urlToRetriveMeme.toString()} style={{
+                                        <Card.Img variant="top" src={e.url.toString()} style={{
                                             marginTop: 10,
                                             padding: 0,
                                             justifyContent: 'center',
@@ -218,7 +218,7 @@ class HomePage extends Component {
                         memes: this.memes,
                     });
                 }
-            ).then((_) => this.createComponents())
+            )//.then((_) => this.createComponents())
             .catch(err => {
                     console.error(err);
                     //const errorMessage = document.createElement('marquee');
