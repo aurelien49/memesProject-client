@@ -18,55 +18,9 @@ function SignUpPage(props) {
         },
     });
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        console.log('ivi')
-
-        fetch('https://meme-project-server-ava.onrender.com/api/users/signup', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: event.target.formEmail.value,
-                password: event.target.formPassword.value,
-                name: event.target.formName.value,
-            })
-        })
-            .then(response => {
-                if (response.status === 200) {
-                    props.callbackSignUpSuccess(response.json());
-                } else {
-                    return {error: response.status};
-                }
-            })
-            .catch(err => {
-                    console.error(err);
-                }
-            );
-    }
-
     return (
         <>
             <h1>Sign-up page</h1>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Email" onChange={handleChangeEmail}/>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" onChange={handleChangePassword}/>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formName">
-                    <Form.Label>Name</Form.Label>
-                    <Form.Control type="name" placeholder="Name" onChange={handleChangeName}/>
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
             <Box sx={{maxWidth: 600}} mx="auto">
                 <form onSubmit={form.onSubmit((values) => console.log(values))}>
                     <TextInput
@@ -94,6 +48,55 @@ function SignUpPage(props) {
             </Box>
         </>
     );
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log('ivi', event)
+
+        fetch('https://meme-project-server-ava.onrender.com/api/users/signup', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: event.target.formEmail.value,
+                password: event.target.formPassword.value,
+                name: event.target.formName.value,
+            })
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    props.callbackSignUpSuccess(response.json());
+                } else {
+                    return {error: response.status};
+                }
+            })
+            .catch(err => {
+                    console.error(err);
+                }
+            );
+    }
 }
 
 export default SignUpPage;
+
+/*
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control type="email" placeholder="Email" onChange={handleChangeEmail}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Password" onChange={handleChangePassword}/>
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="formName">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control type="name" placeholder="Name" onChange={handleChangeName}/>
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
+ */
