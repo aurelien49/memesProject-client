@@ -5,13 +5,16 @@ import NavBar from "./components/navbar";
 import SignInPage from "./components/signin_page";
 import SignUpPage from "./components/signup_page";
 import HistoryPage from "./components/history_page";
-import support from "./assets/img/support.svg";
 
 class App extends React.Component {
-// Main class of app
     constructor(props) {
         super(props);
-        // Properties
+        this.callbackSignInSuccess = this.callbackSignInSuccess.bind(this);
+        this.callbackSignUpSuccess = this.callbackSignUpSuccess.bind(this);
+        this.callbackLogout = this.callbackLogout.bind(this);
+        this.callbackHandleMenu = this.callbackHandleMenu.bind(this);
+        this.getUserMemesHistory = this.getUserMemesHistory.bind(this);
+
         this.state = {
             showHideHomePage: true,
             showHideHistoryPage: false,
@@ -24,12 +27,6 @@ class App extends React.Component {
             user_name: '',
             user_memes_history: [],
         };
-        // Methods binding
-        this.callbackSignInSuccess = this.callbackSignInSuccess.bind(this);
-        this.callbackSignUpSuccess = this.callbackSignUpSuccess.bind(this);
-        this.callbackLogout = this.callbackLogout.bind(this);
-        this.callbackHandleMenu = this.callbackHandleMenu.bind(this);
-        this.getUserMemesHistory = this.getUserMemesHistory.bind(this);
     }
 
     callbackSignInSuccess = async (data) => {
@@ -155,15 +152,6 @@ class App extends React.Component {
             <div>
                 <NavBar callbackHandleMenu={this.callbackHandleMenu} isUserLogged={isUserLogged}
                         showHistoricButton={_showHistoricButton}></NavBar>
-
-                <span><br></br></span>
-
-                <span><img id="imgUser" hidden={!isUserLogged} src={support} alt="support face"></img></span>
-
-                <span><br></br></span>
-
-                <span><h4>{!isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4></span>
-
                 <div className="container">
                     {showHideHomePage &&
                         <HomePage getUserMemesHistory={this.getUserMemesHistory} isUserLogged={isUserLogged}

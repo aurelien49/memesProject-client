@@ -1,5 +1,5 @@
 import React from "react";
-import {TextInput, Button, Group, Box} from '@mantine/core';
+import {TextInput, Button, Group} from '@mantine/core';
 import {useForm} from '@mantine/form';
 
 function SignUpPage(props) {
@@ -49,7 +49,7 @@ function SignUpPage(props) {
     return (
         <div className="col-md-12">
             <h1>Sign-up page</h1>
-            <Box sx={{maxWidth: 600}} mx="auto">
+            <div className="card card-container">
                 <img
                     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
                     alt="profile-img"
@@ -78,7 +78,7 @@ function SignUpPage(props) {
                         <Button type="submit">Submit</Button>
                     </Group>
                 </form>
-            </Box>
+            </div>
         </div>
     );
 }
