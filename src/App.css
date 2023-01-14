@@ -116,6 +116,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-.className {
-    color: red;
+p.className {
+    color: #bf1650;
+    height: 12px;
 }
