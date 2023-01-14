@@ -144,47 +144,56 @@ class HomePage extends Component {
         console.log('Client/home_page/render: ', this.state.memes)
         return (
             <>
-                <div className={"sizedBox"}></div>
-                <img id="imgUser" hidden={!this.props.isUserLogged} src={support} alt="support face"></img>
-                <h4>{!this.props.isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4>
-                <h1 className={"title-page"}>Home</h1>
-                <div className="result-container-history">
-                    <ul>
-                        {this.state.memes ? this.state.memes.map((e, index) => {
+                <div className="main-container">
+                    <div className="sub-main-container">
+                        <div className="top-container">
+                            <img id="imgUser" hidden={!this.props.isUserLogged} src={support} alt="support face"></img>
+                            <h4>{!this.props.isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4>
+                            <h1 className={"title-page"}>Home</h1>
+                        </div>
+                        <div className="body-container">
+                            <ul>
+                                {this.state.memes ? this.state.memes.map((e, index) => {
 
-                            return (
-                                <li key={index.toString()}>
-                                    <Card style={{
-                                        width: '14rem',
-                                        backgroundColor: "whitesmoke",
-                                        borderRadius: 12
-                                    }}
-                                          className="d-flex align-items-center justify-content-center">
-                                        <Card.Title style={{color: 'black'}}><strong>{e.meme_name}</strong></Card.Title>
-                                        <Card.Img variant="top" src={e.url.toString()} style={{
-                                            marginTop: 0,
-                                            padding: 0,
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            borderRadius: 12
-                                        }} alt={'image brute'}
-                                                  onClick={this.handleClickCard.bind(this, e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
-                                        <Card.Body>
-                                            <Card.Title style={{color: 'black'}}><strong>{e.name}</strong></Card.Title>
-                                            <Card.Subtitle
-                                                className="mb-2 text-muted">{e.width + ' x ' + e.height}
-                                            </Card.Subtitle>
-                                            <Card.Subtitle
-                                                className="mb-2 text-muted">{e.box_count + ' text zones'}
-                                            </Card.Subtitle>
-                                        </Card.Body>
-                                    </Card>
-                                </li>
-                            );
-                        }) : null}
-                    </ul>
+                                    return (
+                                        <li key={index.toString()}>
+                                            <Card style={{
+                                                width: '14rem',
+                                                backgroundColor: "whitesmoke",
+                                                borderRadius: 12
+                                            }}
+                                                  className="d-flex align-items-center justify-content-center">
+                                                <Card.Title
+                                                    style={{color: 'black'}}><strong>{e.meme_name}</strong></Card.Title>
+                                                <Card.Img variant="top" src={e.url.toString()} style={{
+                                                    marginTop: 0,
+                                                    padding: 0,
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                    borderRadius: 12
+                                                }} alt={'image brute'}
+                                                          onClick={this.handleClickCard.bind(this, e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
+                                                <Card.Body>
+                                                    <Card.Title
+                                                        style={{color: 'black'}}><strong>{e.name}</strong></Card.Title>
+                                                    <Card.Subtitle
+                                                        className="mb-2 text-muted">{e.width + ' x ' + e.height}
+                                                    </Card.Subtitle>
+                                                    <Card.Subtitle
+                                                        className="mb-2 text-muted">{e.box_count + ' text zones'}
+                                                    </Card.Subtitle>
+                                                </Card.Body>
+                                            </Card>
+                                        </li>
+                                    );
+                                }) : null}
+                            </ul>
+                        </div>
+                        <div className="bottom-container">
+                            <img src={logo} alt="logo"/>
+                        </div>
+                    </div>
                 </div>
-                <img src={logo} alt="logo"/>
                 {this.state.currentMemeSelected.meme_id ?
                     <MydModalWithGrid
                         backdrop="static"

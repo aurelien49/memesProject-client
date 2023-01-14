@@ -16,6 +16,7 @@ body {
     color: white;
     text-align: center;
     font-family: "font-1", cursive;
+    -webkit-font-smoothing: antialiased;
 }
 
 h1 {
@@ -174,8 +175,31 @@ img.profile-img-card {
     border-style: none;
 }
 
-.result-container-history {
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #b1b0b0;
+/* Home page and historic page*/
+.main-container {
+    margin-right: 2em;
+    margin-left: 2em;
+    margin-top: 0.5em;
 }
+
+.sub-main-container {
+    display: block;
+}
+
+.top-container {
+
+}
+
+.body-container {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.bottom-container {
+
+}
+
+
+
