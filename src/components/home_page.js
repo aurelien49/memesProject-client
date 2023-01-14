@@ -155,9 +155,9 @@ class HomePage extends Component {
                             return (
                                 <li key={index.toString()}>
                                     <Card style={{
-                                        width: '16rem',
+                                        width: '14rem',
                                         backgroundColor: "whitesmoke",
-                                        borderRadius: 15
+                                        borderRadius: 20
                                     }}
                                           className="d-flex align-items-center justify-content-center">
                                         <Card.Title style={{color: 'black'}}><strong>{e.meme_name}</strong></Card.Title>
