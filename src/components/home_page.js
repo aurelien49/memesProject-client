@@ -157,7 +157,7 @@ class HomePage extends Component {
                                     <Card style={{
                                         width: '14rem',
                                         backgroundColor: "whitesmoke",
-                                        borderRadius: 20
+                                        borderRadius: 12
                                     }}
                                           className="d-flex align-items-center justify-content-center">
                                         <Card.Title style={{color: 'black'}}><strong>{e.meme_name}</strong></Card.Title>
@@ -166,7 +166,7 @@ class HomePage extends Component {
                                             padding: 0,
                                             justifyContent: 'center',
                                             alignItems: 'center',
-                                            borderRadius: 15
+                                            borderRadius: 12
                                         }} alt={'image brute'}
                                                   onClick={this.handleClickCard.bind(this, e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
                                         <Card.Body>
