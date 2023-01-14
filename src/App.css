@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
 @font-face {
     font-family: "font-1";
     src: url(assets/LibreBaskerville-Regular.ttf);
@@ -24,6 +26,16 @@ h1 {
 
 .sizedBox {
     height: 10px;
+}
+
+
+h1.title-page {
+    font-weight: 700;
+    font-size: 50px;
+    color: sandybrown;
+    font-family: 'Varela Round', Arial, Georgia, sans-serif;
+    margin: auto;
+    text-align: center;
 }
 
 /* ---------- Modal ---------- */

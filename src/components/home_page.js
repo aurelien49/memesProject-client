@@ -147,7 +147,7 @@ class HomePage extends Component {
                 <div className={"sizedBox"}></div>
                 <img id="imgUser" hidden={!this.props.isUserLogged} src={support} alt="support face"></img>
                 <h4>{!this.props.isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4>
-                <h1>Home</h1>
+                <h1 className={title - page}>Home</h1>
                 <div className="result-container-history">
                     <ul>
                         {this.state.memes ? this.state.memes.map((e, index) => {
@@ -208,7 +208,8 @@ class HomePage extends Component {
         fetch('https://meme-project-server-ava.onrender.com/api/memes/imgflip/')
             .then(response => response.json())
             .then(data => {
-                    this.memes = data;
+                    // Shuffle the result
+                    this.memes = data.sort(() => Math.random() - 0.5);
                     // The maximum memes from imgFlip is 100
                     // Here it limited to 50
                     this.memes.length = 50;
