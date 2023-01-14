@@ -1,6 +1,7 @@
 import React from "react";
 import {TextInput, Button, Group, Box} from '@mantine/core';
 import {useForm} from '@mantine/form';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function SignUpPage(props) {
     const handleSubmit = async (event) => {
@@ -49,7 +50,7 @@ function SignUpPage(props) {
     return (
         <div className="col-md-12">
             <h1>Sign-up page</h1>
-            <Box sx={{maxWidth: 600}} mx="auto">
+            <Box sx={{maxWidth: 600, backgroundColor: 'dimgrey'}} mx="auto">
                 <img
                     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
                     alt="profile-img"
