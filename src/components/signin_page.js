@@ -1,6 +1,6 @@
 import React from "react";
 import {TextInput, Button, Group, Box} from '@mantine/core';
-import {useForm} from "react-hook-form";
+import {useForm} from '@mantine/form';
 
 export default function SignInPage(props) {
     const {register, setError, formState: {errors}, handleSubmit, clearErrors} = useForm();

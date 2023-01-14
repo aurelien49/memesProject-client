@@ -180,7 +180,7 @@ class HomePage extends Component {
                                             justifyContent: 'center',
                                             alignItems: 'center',
                                             borderRadius: 15
-                                        }}
+                                        }} alt={'image brute'}
                                                   onClick={this.handleClickCard.bind(this, e.id, e.name, e.url, e.width, e.height, e.box_count, e.captions)}/>
                                         <Card.Body>
                                             <Card.Title style={{color: 'black'}}><strong>{e.name}</strong></Card.Title>
