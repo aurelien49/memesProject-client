@@ -22,6 +22,10 @@ h1 {
     margin: 40px 10px 40px;
 }
 
+.sizedBox {
+    height: 10px;
+}
+
 /* ---------- Modal ---------- */
 .modal-group input {
     background: powderblue;

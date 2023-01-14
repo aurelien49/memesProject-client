@@ -144,6 +144,7 @@ class HomePage extends Component {
         console.log('Client/home_page/render: ', this.state.memes)
         return (
             <>
+                <div className={"sizedBox"}></div>
                 <img id="imgUser" hidden={!this.props.isUserLogged} src={support} alt="support face"></img>
                 <h4>{!this.props.isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4>
                 <h1>Home</h1>
@@ -208,7 +209,9 @@ class HomePage extends Component {
             .then(response => response.json())
             .then(data => {
                     this.memes = data;
-                    this.memes.length = 20;
+                    // The maximum memes from imgFlip is 100
+                    // Here it limited to 50
+                    this.memes.length = 50;
 
                     this.setState({
                         memes: this.memes,

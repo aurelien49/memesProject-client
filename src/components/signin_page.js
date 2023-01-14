@@ -51,7 +51,7 @@ export default function SignInPage(props) {
 
     return (
         <div className="col-md-12">
-            <h1>Sign-in page</h1>
+            <h1>Sign-in</h1>
             <div className="card card-container">
                 <img
                     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
