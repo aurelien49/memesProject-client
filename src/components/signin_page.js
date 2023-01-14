@@ -60,14 +60,14 @@ export default function SignInPage(props) {
                         placeholder="your@email.com"
                         {...form.getInputProps('email')}
                     />
-                    {errors.email && <p>{errors.email.message}</p>}
+                    {errors.email && <p className={"formMsgError"}>{errors.email.message}</p>}
                     <TextInput
                         withAsterisk
                         label="Password"
                         placeholder="Your password"
                         {...form.getInputProps('password')}
                     />
-                    {errors.email && <p>{errors.email.message}</p>}
+                    {errors.email && <p className={"formMsgError"}>{errors.email.message}</p>}
                     <Group position="center" mt="md">
                         <Button type="submit">Submit</Button>
                     </Group>
