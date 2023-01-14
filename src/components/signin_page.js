@@ -52,27 +52,34 @@ export default function SignInPage(props) {
     return (
         <>
             <h1>Sign-in page</h1>
-            <Box sx={{maxWidth: 600}} mx="auto">
-                <form onSubmit={form.onSubmit((values) => handleSubmitF(values))}>
-                    <TextInput
-                        withAsterisk
-                        label="Email"
-                        placeholder="your@email.com"
-                        {...form.getInputProps('email')}
+            <div className="col-md-12">
+                <div className="card card-container">
+                    <img
+                        src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                        alt="profile-img"
+                        className="profile-img-card"
                     />
-                    {errors.email && <p className={"formMsgError"}>{errors.email.message}</p>}
-                    <TextInput
-                        withAsterisk
-                        label="Password"
-                        placeholder="Your password"
-                        {...form.getInputProps('password')}
-                    />
-                    {errors.email && <p className={"formMsgError"}>{errors.email.message}</p>}
-                    <Group position="center" mt="md">
-                        <Button type="submit">Submit</Button>
-                    </Group>
-                </form>
-            </Box>
+                    <form onSubmit={form.onSubmit((values) => handleSubmitF(values))}>
+                        <TextInput
+                            withAsterisk
+                            label="Email"
+                            placeholder="your@email.com"
+                            {...form.getInputProps('email')}
+                        />
+                        {errors.email && <p className={"formMsgError"}>{errors.email.message}</p>}
+                        <TextInput
+                            withAsterisk
+                            label="Password"
+                            placeholder="Your password"
+                            {...form.getInputProps('password')}
+                        />
+                        {errors.email && <p className={"formMsgError"}>{errors.email.message}</p>}
+                        <Group position="center" mt="md">
+                            <Button type="submit">Submit</Button>
+                        </Group>
+                    </form>
+                </div>
+            </div>
         </>
     );
 }
