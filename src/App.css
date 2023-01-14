@@ -127,7 +127,7 @@ p.formMsgError {
     max-width: 100%;
 }
 
-.card-container.card {
+.card-container {
     max-width: 350px !important;
     padding: 40px 40px;
 }
