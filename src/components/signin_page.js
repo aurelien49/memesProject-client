@@ -4,7 +4,7 @@ import {useForm} from '@mantine/form';
 import {useForm as useForm2} from "react-hook-form";
 
 export default function SignInPage(props) {
-    const {register, setError, formState: {errors}, handleSubmit, clearErrors} = useForm2();
+    const {setError, formState: {errors}} = useForm2();
 
     const handleSubmitF = async (event) => {
         fetch('https://meme-project-server-ava.onrender.com/api/users/signin', {
@@ -23,6 +23,8 @@ export default function SignInPage(props) {
                     props.callbackSignInSuccess(response.json());
                 } else {
                     setError('email', {type: 'manual', message: 'email or password incorrect'});
+                    console.log('response.status = ', response.status)
+                    this.setState({...this.state})
                     return {error: response.status};
                 }
             })
