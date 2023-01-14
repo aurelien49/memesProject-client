@@ -1,9 +1,10 @@
 import React from "react";
 import {TextInput, Button, Group, Box} from '@mantine/core';
 import {useForm} from '@mantine/form';
+import {useForm as useForm2} from "react-hook-form";
 
 export default function SignInPage(props) {
-    const {register, setError, formState: {errors}, handleSubmit, clearErrors} = useForm();
+    const {register, setError, formState: {errors}, handleSubmit, clearErrors} = useForm2();
 
     const handleSubmitF = async (event) => {
         fetch('https://meme-project-server-ava.onrender.com/api/users/signin', {
