@@ -147,7 +147,7 @@ class HomePage extends Component {
                 <div className={"sizedBox"}></div>
                 <img id="imgUser" hidden={!this.props.isUserLogged} src={support} alt="support face"></img>
                 <h4>{!this.props.isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4>
-                <h1 className={title - page}>Home</h1>
+                <h1 className={"title-page"}>Home</h1>
                 <div className="result-container-history">
                     <ul>
                         {this.state.memes ? this.state.memes.map((e, index) => {
