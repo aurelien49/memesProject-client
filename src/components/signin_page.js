@@ -4,7 +4,7 @@ import {useForm} from '@mantine/form';
 import {useForm as useForm2} from "react-hook-form";
 
 export default function SignInPage(props) {
-    const {setError, formState: {errors}, clearError} = useForm2();
+    const {setError, formState: {errors}} = useForm2();
     const [value, setValue] = useState(0);
 
 
@@ -59,7 +59,6 @@ export default function SignInPage(props) {
                         label="Email"
                         placeholder="your@email.com"
                         {...form.getInputProps('email')}
-                        onChange={() => clearError("email")}
                     />
                     {errors.email && <p className={"formMsgError"}>{errors.email.message}</p>}
                     <TextInput
@@ -67,7 +66,6 @@ export default function SignInPage(props) {
                         label="Password"
                         placeholder="Your password"
                         {...form.getInputProps('password')}
-                        onChange={() => clearError("email")}
                     />
                     {errors.email && <p className={"formMsgError"}>{errors.email.message}</p>}
                     <Group position="center" mt="md">
