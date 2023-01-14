@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {TextInput, Button, Group} from '@mantine/core';
 import {useForm} from '@mantine/form';
 import {useForm as useForm2} from "react-hook-form";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function SignInPage(props) {
     const {setError, formState: {errors}} = useForm2();
