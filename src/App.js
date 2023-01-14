@@ -33,6 +33,7 @@ class App extends React.Component {
     }
 
     callbackSignInSuccess = async (data) => {
+        console.log('Client/callbackSignInSuccess/data = ', data)
         this.state = ({
             ...this.state,
             token: data.token,
@@ -154,7 +155,7 @@ class App extends React.Component {
             <div>
                 <NavBar callbackHandleMenu={this.callbackHandleMenu} isUserLogged={isUserLogged}
                         showHistoricButton={_showHistoricButton}></NavBar>
-                
+
                 <span><br></br></span>
 
                 <span><img id="imgUser" hidden={!isUserLogged} src={support} alt="support face"></img></span>
