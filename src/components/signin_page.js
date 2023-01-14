@@ -22,7 +22,7 @@ export default function SignInPage(props) {
                 if (response.status === 200) {
                     props.callbackSignInSuccess(response.json());
                 } else {
-                    setError('email', 'email or password incorrect');
+                    setError('email', {type: 'manual', message: 'email or password incorrect'});
                     return {error: response.status};
                 }
             })
