@@ -50,7 +50,7 @@ function SignUpPage(props) {
     return (
         <div className="col-md-12">
             <h1>Sign-up page</h1>
-            <Box sx={{maxWidth: 600, backgroundColor: 'dimgrey'}} mx="auto">
+            <Box sx={{maxWidth: 600, backgroundColor: '#2596be'}} mx="auto">
                 <img
                     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
                     alt="profile-img"

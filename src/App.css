@@ -120,3 +120,8 @@ p.formMsgError {
     color: #bf1650;
     height: 12px;
 }
+
+.profile-img-card {
+    border-radius: 50%;
+    text-align: center;
+}
