@@ -79,7 +79,7 @@ function SignUpPage(props) {
                     </Group>
                 </form>
             </Box>
-        </>
+        </div>
     );
 }
 
