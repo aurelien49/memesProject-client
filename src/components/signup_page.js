@@ -1,7 +1,6 @@
 import React from "react";
 import {TextInput, Button, Group, Box} from '@mantine/core';
 import {useForm} from '@mantine/form';
-import "bootstrap/dist/css/bootstrap.min.css";
 
 function SignUpPage(props) {
     const handleSubmit = async (event) => {
