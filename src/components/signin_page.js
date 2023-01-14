@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {TextInput, Button, Group, Box} from '@mantine/core';
+import {TextInput, Button, Group} from '@mantine/core';
 import {useForm} from '@mantine/form';
 import {useForm as useForm2} from "react-hook-form";
 
@@ -60,23 +60,29 @@ export default function SignInPage(props) {
                         className="profile-img-card"
                     />
                     <form onSubmit={form.onSubmit((values) => handleSubmitF(values))}>
-                        <TextInput
-                            withAsterisk
-                            label="Email"
-                            placeholder="your@email.com"
-                            {...form.getInputProps('email')}
-                        />
-                        {errors.email && <p className={"formMsgError"}>{errors.email.message}</p>}
-                        <TextInput
-                            withAsterisk
-                            label="Password"
-                            placeholder="Your password"
-                            {...form.getInputProps('password')}
-                        />
-                        {errors.email && <p className={"formMsgError"}>{errors.email.message}</p>}
-                        <Group position="center" mt="md">
-                            <Button type="submit">Submit</Button>
-                        </Group>
+                        <div className="form-group">
+                            <TextInput
+                                withAsterisk
+                                label="Email"
+                                placeholder="your@email.com"
+                                {...form.getInputProps('email')}
+                            />
+                            {errors.email && <p className={"formMsgError"}>{errors.email.message}</p>}
+                        </div>
+                        <div className="form-group">
+                            <TextInput
+                                withAsterisk
+                                label="Password"
+                                placeholder="Your password"
+                                {...form.getInputProps('password')}
+                            />
+                            {errors.email && <p className={"formMsgError"}>{errors.email.message}</p>}
+                        </div>
+                        <div className="form-group">
+                            <Group position="center" mt="md">
+                                <Button type="submit">Submit</Button>
+                            </Group>
+                        </div>
                     </form>
                 </div>
             </div>
