@@ -151,7 +151,7 @@ class HomePage extends Component {
                             <h4>{!this.props.isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4>
                             <h1 className={"title-page"}>Home</h1>
                         </div>
-                        <div className="body-container">
+                        <div className="body-container d-flex justify-content-around">
                             <ul>
                                 {this.state.memes ? this.state.memes.map((e, index) => {
 
