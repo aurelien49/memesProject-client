@@ -19,10 +19,16 @@ h1 {
     margin: 40px 10px 40px;
 }
 
+#root div {
+    display: block;
+    background-color: red;
+}
+
 .container {
     margin-right: 2em;
     margin-left: 2em;
     margin-top: 0.5em;
+    background-color: sandybrown;
 }
 
 .container.div {
