@@ -17,6 +17,16 @@ body {
     text-align: center;
     font-family: "font-1", cursive;
     -webkit-font-smoothing: antialiased;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+#root {
+
+}
+
+div {
+    display: block;
 }
 
 h1 {
