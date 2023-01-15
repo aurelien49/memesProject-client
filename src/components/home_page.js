@@ -191,7 +191,7 @@ class HomePage extends Component {
                                 }) : null}
                             </ul>
                         </div>
-                        <div className="bottom-container">
+                        <div className="d-flex justify-content-around">
                             <img src={logo} alt="logo"/>
                         </div>
                     </div>
