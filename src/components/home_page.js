@@ -142,14 +142,15 @@ class HomePage extends Component {
             <>
                 <div className="main-container">
                     <div className="sub-main-container">
-                        <div className="top-container">
+                        <div className="d-flex">
                             <Avatar hidden={!this.props.isUserLogged} color="cyan"
                                     radius="xl">{firstLetterUppercase}</Avatar>
                             <div className="d-flex justify-content-center">
-                                <h4>{!this.props.isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4>
+                                <h4>{!this.props.isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.data_user.user_name}</h4>
                             </div>
-                            <h1 className={"title-page"}>Home</h1>
+
                         </div>
+                        <h1 className={"title-page"}>Home</h1>
                         <div className="d-flex justify-content-between">
                             <ul>
                                 {this.state.memes ? this.state.memes.map((e, index) => {
