@@ -189,12 +189,15 @@ img.profile-img-card {
 }
 
 
-.parent {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
-    grid-gap: 2rem;
-    margin-block: 2rem;
-    padding: 0 1rem;
-    align-items: center;
-    justify-items: center;
+.parent-card {
+    display: flex;
+    justify-content: space-between;
 }
+
+.enfant-card {
+    margin: 0 10px;
+    width: 10rem;
+    background-color: whitesmoke;
+    border-radius: 12px;
+}
+
