@@ -18,14 +18,12 @@ export default function NavBar(props) {
             <Container>
                 <Navbar.Brand href="#">Meme-App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
-                <Navbar.Collapse id="responsive-navbar-nav">
-                    <div className={"d-flex justify-content-around"}>
-                        <Nav.Link eventKey={"1"} id="collasible-nav-dropdown" value='/home'
-                                  onClick={handleLink}>Home</Nav.Link>
-                        <Nav.Link eventKey={"2"} value='/history' onClick={handleLink}
-                                  disabled={!props.showHistoricButton}>Memes
-                            saved</Nav.Link>
-                    </div>
+                <Navbar.Collapse id="responsive-navbar-nav" className={"d-flex justify-content-around"}>
+                    <Nav.Link eventKey={"1"} id="collasible-nav-dropdown" value='/home'
+                              onClick={handleLink}>Home</Nav.Link>
+                    <Nav.Link eventKey={"2"} value='/history' onClick={handleLink}
+                              disabled={!props.showHistoricButton}>Memes
+                        saved</Nav.Link>
                     <Nav>
                         <NavDropdown title="User Management" id="collasible-nav-dropdown">
                             <NavDropdown.Item value="/signin" onClick={handleLink}
