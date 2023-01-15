@@ -142,13 +142,13 @@ class HomePage extends Component {
                             </div>
                             <h1 className={"title-page"}>Home</h1>
                         </div>
-                        <div className="parent-card">
+                        <div className="d-flex justify-content-between">
                             <ul>
                                 {this.state.memes ? this.state.memes.map((e, index) => {
 
                                     return (
                                         <li key={index.toString()}>
-                                            <Card className="parent-card">
+                                            <Card className="card mx-2">
                                                 <Card.Title
                                                     style={{color: 'black'}}><strong>{e.meme_name}</strong></Card.Title>
                                                 <Card.Img variant="top" src={e.url.toString()} style={{
