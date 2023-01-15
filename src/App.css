@@ -25,7 +25,6 @@ h1 {
 }
 
 .container {
-    width: 100%;
     margin-right: 2em;
     margin-left: 2em;
     margin-top: 0.5em;
@@ -34,9 +33,12 @@ h1 {
 
 .container.div {
     display: block;
+    background-color: yellow;
 }
 
 .top-menubar {
+    width: 100%;
+    background-color: green;
 }
 
 .body-content {
@@ -45,6 +47,7 @@ h1 {
     align-items: center;
     -webkit-box-pack: justify;
     justify-content: space-between;
+    background-color: rebeccapurple;
 }
 
 h1.title-page {
