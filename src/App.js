@@ -165,10 +165,7 @@ class App extends React.Component {
 
                     </div>
                 </div>
-                <div className={"top-menubar"}>
-                    <NavBar callbackHandleMenu={this.callbackHandleMenu} isUserLogged={isUserLogged}
-                            showHistoricButton={_showHistoricButton}></NavBar>
-                </div>
+
                 <div className={"body-content"}>
                     {showHideHomePage &&
                         <HomePage getUserMemesHistory={this.getUserMemesHistory} isUserLogged={isUserLogged}
@@ -184,4 +181,10 @@ class App extends React.Component {
     }
 }
 
+/*
+    <div className={"top-menubar"}>
+                    <NavBar callbackHandleMenu={this.callbackHandleMenu} isUserLogged={isUserLogged}
+                            showHistoricButton={_showHistoricButton}></NavBar>
+                </div>
+ */
 export default App;
