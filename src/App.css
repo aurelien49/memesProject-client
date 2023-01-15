@@ -26,11 +26,6 @@ h1 {
 }
 
 .body-content {
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
 }
 
 h1.title-page {
