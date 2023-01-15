@@ -148,7 +148,7 @@ class HomePage extends Component {
                     <div className="sub-main-container">
                         <div className="top-container">
                             <img id="imgUser" hidden={!this.props.isUserLogged} src={support} alt="support face"></img>
-                            <div className="position-absolute top-0 start-50 translate-middle-x">
+                            <div className="position-relative top-0 start-50 translate-middle-x">
                                 <h4>{!this.props.isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4>
                             </div>
                             <h1 className={"title-page"}>Home</h1>
