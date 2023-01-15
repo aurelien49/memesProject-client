@@ -36,10 +36,6 @@ class HomePage extends Component {
     }
 
     async handleClickCard(meme_id, meme_name, meme_url, meme_width, meme_height, meme_box_count, meme_captions) {
-        //handleClickCard = (e) => {
-
-        console.log('client/HomePage/handleClickCard/e = ', meme_id)
-        console.log('client/HomePage/handleClickCard/e = ', meme_name)
 
         // Modification available only i a user is logged
         if (this.props.isUserLogged) {
@@ -77,7 +73,6 @@ class HomePage extends Component {
         let commentBoxes = [];
         let str = "";
         for (let i = 0; i < event.target.length - 1; i++) {
-            // console.log(`event.target.elements: Text ${i + 1}`, event.target.elements[i].value);
             str += `&boxes[${i}][text]=${event.target.elements[i].value}&boxes[${i}][color]=%23C0C0C0`;
 
             // Save comments
@@ -105,8 +100,6 @@ class HomePage extends Component {
     }
 
     createMemeOnImgflip(data) {
-        console.log(`__________________________ createMemeOnImgflip: `, data);
-
         fetch('https://meme-project-server-ava.onrender.com/api/memes/createMeme/', {
             method: 'POST',
             headers: {
@@ -118,14 +111,11 @@ class HomePage extends Component {
             })
         })
             .then(response => {
-                console.log(`client/HomePage/createMemeOnImgflip/response.status: ${response.status}`)
-                console.log(`client/HomePage/createMemeOnImgflip/response: `, response)
                 return response.json()
             })
             .then(data => {
                     this.state.currentMemeSelected.urlToRetriveMeme = data['urlToRetriveMeme'];
                     // Refresh memes history
-                    console.log(`client/HomePage/createMemeOnImgflip: data = `, data)
                     this.props.getUserMemesHistory(data['idUser']);
 
                     // Close the create modal
@@ -141,7 +131,6 @@ class HomePage extends Component {
     }
 
     render() {
-        console.log('Client/home_page/render: ', this.state.memes)
         return (
             <>
                 <div className="main-container">
@@ -160,7 +149,7 @@ class HomePage extends Component {
                                     return (
                                         <li key={index.toString()}>
                                             <Card style={{
-                                                width: '14rem',
+                                                width: '10rem',
                                                 backgroundColor: "whitesmoke",
                                                 borderRadius: 12
                                             }}

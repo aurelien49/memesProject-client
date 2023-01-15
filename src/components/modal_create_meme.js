@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -8,23 +8,8 @@ import Form from "react-bootstrap/Form";
 
 function MydModalWithGrid(props) {
 
-    const [message, setMessage] = useState('');
-
-    const handleChange = event => {
-        console.log('MydModalWithGrid/handleChange/event: ', event)
-        console.log('MydModalWithGrid/handleChange/event.target: ', event.target)
-        console.log('MydModalWithGrid/handleChange/event.target.value: ', event.target.value)
-        setMessage(event.target.value);
-    };
-
     const handleClick = event => {
         event.preventDefault();
-        // 👇️ value of input field
-        console.log('old value: ', message);
-        // 👇️ set value of input field
-        setMessage('');
-        console.log('process.env: ', process.env)
-        console.log('process.env.REACT_APP_X_API_KEY: ', process.env.REACT_APP_X_API_KEY);
 
         fetch('https://api.api-ninjas.com/v1/dadjokes?limit=1', {
             method: 'GET',
@@ -35,26 +20,20 @@ function MydModalWithGrid(props) {
             },
         })
             .then(response => {
-                console.log('************** client api-ninjas : ok response ', response);
                 return response.json()
             })
             .then(data => {
-                    // Do something with the sentence
-                    console.log(`client/MydModalWithGrid/fetchJoke: data = `, data[0].joke)
                     setMessage(data[0].joke);
 
                     // Split the sentences into words without splite word
-                    var chunks = splitSentence(data[0].joke, props.props.commentBoxes.length);
-                    console.log('chunks: ', chunks)
+                    let chunks = splitSentence(data[0].joke, props.props.commentBoxes.length);
 
                     for (let i = 0; i < props.props.commentBoxes.length; i++) {
                         let id = `message_${i + 1}`;
-                        console.log('id = ', id)
                         document.getElementById(id.toString()).value = chunks[i];
                     }
                 }
             ).catch(err => {
-            console.log('************** client api-ninjas : KO  ');
             console.error(err);
         });
 

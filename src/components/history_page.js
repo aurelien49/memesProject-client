@@ -24,7 +24,6 @@ class HistoryPage extends Component {
 
     handleDeletePicture = async (event) => {
         event.preventDefault();
-        console.log(`__________________________ handleDeletePicture _id meme to delete: `, event.target.formIdMemeToDelete.value);
 
         fetch(`https://meme-project-server-ava.onrender.com/api/memes/deleteMemeBdduser/${event.target.formIdMemeToDelete.value}`
             , {
@@ -34,13 +33,11 @@ class HistoryPage extends Component {
                 },
                 data: {message: 'The delete from the client'}
             })
-            .then((resp) => {
-                console.log('server: ---------------- deleteMeme ok');
+            .then((_) => {
                 this.refresMemeshHistoryPage();
                 this.setState({})
             }).catch(function (error) {
             console.log(error);
-            console.log('server: ---------------- deleteMeme failed');
         })
 
     }
@@ -62,13 +59,9 @@ class HistoryPage extends Component {
             })
         })
             .then(response => {
-                console.log(`client/HistoryPage/handleSendPictureByMail/response.status: ${response.status}`)
-                console.log(`client/HistoryPage/handleSendPictureByMail/response: `, response)
                 return response.json()
             })
-            .then(data => {
-                    // Succès de l'envoi de l'image par email
-                    console.log(`client/HistoryPage/handleSendPictureByMail: data = `, data)
+            .then(_ => {
                     // Clear the email input to send picture
                     document.getElementById(`formTop_${event.target.formIndex.value}`).reset()
                 }
@@ -87,13 +80,10 @@ class HistoryPage extends Component {
     async refresMemeshHistoryPage() {
         // Récupère les mèmes d'un user à afficher sur la page historique
 
-        console.log('********************** componentDidMount user_id: ', this.props.user_id)
-
         await fetch(`https://meme-project-server-ava.onrender.com/api/memes/memes-user-history/${this.props.user_id}`)
             .then(response => response.json())
             .then(data => {
                     this.state.memesHistory = data;
-                    console.log('data history : ', data);
                     this.setState({})
                 }
             )
@@ -109,7 +99,9 @@ class HistoryPage extends Component {
     render() {
         return (
             <div>
-                <h1>Memes saved</h1>
+                <div className="d-flex justify-content-center">
+                    <h1>Memes saved</h1>
+                </div>
                 <div className="result-container-history">
                     <ul>
                         {this.state.memesHistory ? this.state.memesHistory.map((e, index) => {
