@@ -150,16 +150,20 @@ class App extends React.Component {
 
         return (
             <div className="container">
-                <NavBar callbackHandleMenu={this.callbackHandleMenu} isUserLogged={isUserLogged}
-                        showHistoricButton={_showHistoricButton}></NavBar>
-                {showHideHomePage &&
-                    <HomePage getUserMemesHistory={this.getUserMemesHistory} isUserLogged={isUserLogged}
-                              user_id={this.state.user_id}/>}
-                {showHideHistoryPage && <HistoryPage user_memes_history={user_memes_history} user_id={user_id}
-                                                     fromParentApp={this.callbackHistorical}/>}
-                {showHideSignInPage &&
-                    <SignInPage callbackSignInSuccess={this.callbackSignInSuccess}/>}
-                {showHideSignUpPage && <SignUpPage callbackSignUpSuccess={this.callbackSignUpSuccess}/>}
+                <div className={"top-menubar"}>
+                    <NavBar callbackHandleMenu={this.callbackHandleMenu} isUserLogged={isUserLogged}
+                            showHistoricButton={_showHistoricButton}></NavBar>
+                </div>
+                <div className={"body-content"}>
+                    {showHideHomePage &&
+                        <HomePage getUserMemesHistory={this.getUserMemesHistory} isUserLogged={isUserLogged}
+                                  user_id={this.state.user_id}/>}
+                    {showHideHistoryPage && <HistoryPage user_memes_history={user_memes_history} user_id={user_id}
+                                                         fromParentApp={this.callbackHistorical}/>}
+                    {showHideSignInPage &&
+                        <SignInPage callbackSignInSuccess={this.callbackSignInSuccess}/>}
+                    {showHideSignUpPage && <SignUpPage callbackSignUpSuccess={this.callbackSignUpSuccess}/>}
+                </div>
             </div>
         );
     }
