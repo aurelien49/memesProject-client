@@ -188,13 +188,6 @@ img.profile-img-card {
 
 }
 
-.body-container {
-    display: flex;
-    -webkit-box-pack: center;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
 .bottom-container {
 
 }

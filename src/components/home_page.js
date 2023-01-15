@@ -153,7 +153,7 @@ class HomePage extends Component {
                             </div>
                             <h1 className={"title-page"}>Home</h1>
                         </div>
-                        <div className="body-container d-flex justify-content-around">
+                        <div className="d-flex justify-content-around">
                             <ul>
                                 {this.state.memes ? this.state.memes.map((e, index) => {
 
