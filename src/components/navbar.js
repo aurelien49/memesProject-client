@@ -22,6 +22,8 @@ export default function NavBar(props) {
                     </Nav>
                     <Nav.Link eventKey={"1"} id="collasible-nav-dropdown" value='/home'
                               onClick={handleLink}>Home</Nav.Link>
+                    <Nav className="p-2">
+                    </Nav>
                     <Nav.Link eventKey={"2"} value='/history' onClick={handleLink} disabled={!props.showHistoricButton}>Memes
                         saved</Nav.Link>
                     <Nav className="me-auto">
