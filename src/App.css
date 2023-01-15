@@ -25,23 +25,17 @@ h1 {
     margin-top: 0.5em;
 }
 
-.container.div {
-    background-color: yellow;
-}
-
 .body-content {
     display: flex;
     -webkit-box-align: center;
     align-items: center;
     -webkit-box-pack: justify;
     justify-content: space-between;
-    background-color: rebeccapurple;
 }
 
 h1.title-page {
     font-weight: 700;
     font-size: 50px;
-    color: sandybrown;
     font-family: 'Varela Round', Arial, Georgia, sans-serif;
     margin: auto;
     text-align: center;
