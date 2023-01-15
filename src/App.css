@@ -20,8 +20,6 @@ h1 {
 }
 
 .container {
-    margin-right: 2em;
-    margin-left: 2em;
     margin-top: 0.5em;
     background-color: sandybrown;
 }
@@ -37,13 +35,6 @@ h1 {
     align-items: center;
     -webkit-box-pack: justify;
     justify-content: space-between;
-}
-
-.top-menubar {
-    display: flex;
-    background-color: green;
-    margin-right: 2em;
-    margin-left: 2em;
 }
 
 .body-content {
