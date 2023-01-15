@@ -20,26 +20,13 @@ h1 {
 }
 
 .container {
+    margin-right: 2em;
+    margin-left: 2em;
     margin-top: 0.5em;
-    background-color: sandybrown;
-
-    position: absolute;
-    left: 50px;
-    width: calc(100% - 100px);
-    border: 1px solid black;
-    padding: 0;
-    text-align: center;
 }
 
 .container.div {
     background-color: yellow;
-}
-
-.mantine-hpmcve {
-    display: flex;
-    -webkit-box-align: center;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
 }
 
 .body-content {
