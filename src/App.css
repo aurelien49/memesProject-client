@@ -5,13 +5,13 @@
     src: url(assets/LibreBaskerville-Regular.ttf);
 }
 
-/*
+
 * {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    /*margin: 0;
+    padding: 0;*/
 }
- */
+
 
 h1 {
     font-size: 3rem;
