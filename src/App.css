@@ -195,6 +195,6 @@ img.profile-img-card {
     grid-gap: 2rem;
     margin-block: 2rem;
     padding: 0 1rem;
-    justify-items: center;
     align-items: center;
+    justify-items: center;
 }
