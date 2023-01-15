@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
@@ -8,8 +8,15 @@ import Form from "react-bootstrap/Form";
 
 function MydModalWithGrid(props) {
 
+    const [message, setMessage] = useState('');
+
+    const handleChange = event => {
+        setMessage(event.target.value);
+    };
+
     const handleClick = event => {
         event.preventDefault();
+        setMessage('');
 
         fetch('https://api.api-ninjas.com/v1/dadjokes?limit=1', {
             method: 'GET',
