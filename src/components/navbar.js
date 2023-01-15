@@ -19,7 +19,7 @@ export default function NavBar(props) {
                 <Navbar.Brand href="#">Meme-App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <div className={"spacer-items-menu"}>
+                    <div className={"d-flex justify-content-around"}>
                         <Nav.Link eventKey={"1"} id="collasible-nav-dropdown" value='/home'
                                   onClick={handleLink}>Home</Nav.Link>
                         <Nav.Link eventKey={"2"} value='/history' onClick={handleLink}

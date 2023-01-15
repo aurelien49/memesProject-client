@@ -42,12 +42,6 @@ h1.title-page {
     text-align: center;
 }
 
-.spacer-items-menu {
-    display: flex;
-    justify-content: space-between;
-}
-
-
 /* ---------- Modal ---------- */
 .modal-group input {
     background: powderblue;
