@@ -146,7 +146,7 @@ class HomePage extends Component {
                             <Avatar hidden={!this.props.isUserLogged} color="cyan"
                                     radius="xl">{firstLetterUppercase}</Avatar>
                             <div className="d-flex justify-content-center">
-                                <h4>{!this.props.isUserLogged ? 'No user connected !' : 'Connected with ' + this.props.data_user.user_name}</h4>
+                                <h4>{!this.props.isUserLogged ? 'No user connected !' : this.props.data_user.user_name}</h4>
                             </div>
 
                         </div>

@@ -151,7 +151,9 @@ class HistoryPage extends Component {
                         }) : null}
                     </ul>
                 </div>
-                <img src={logohistory} alt="logohistory"/>
+                <div className="d-flex justify-content-around">
+                    <img src={logohistory} alt="logohistory"/>
+                </div>
             </div>
         );
     }
