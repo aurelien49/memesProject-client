@@ -3,6 +3,7 @@ import logohistory from "../assets/img/logohistory.svg";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const app = document.getElementById('App');
 

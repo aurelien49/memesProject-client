@@ -3,7 +3,7 @@ import logo from "../assets/img/banksy.svg";
 import MydModalWithGrid from "./modal_create_meme";
 import Card from "react-bootstrap/Card";
 import support from "../assets/img/support.svg";
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const app = document.getElementById('App');
 

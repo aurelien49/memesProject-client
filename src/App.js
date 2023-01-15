@@ -6,8 +6,6 @@ import SignInPage from "./components/signin_page";
 import SignUpPage from "./components/signup_page";
 import HistoryPage from "./components/history_page";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 class App extends React.Component {
     constructor(props) {
         super(props);
