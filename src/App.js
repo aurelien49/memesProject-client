@@ -154,14 +154,14 @@ class App extends React.Component {
                     <img src={"../assets/img/cocktail.453b4e0dfb1d01d3b061116811e21cdf.svg"} alt={"logo"}/>
                     <div>
                         <a href={"/"}>Home</a>
-                        <a href={"/"}>Cocktail</a>
+                        <a href={"/"}>Next</a>
                         <a href={"/"}>Favorite</a>
                         <a href={"/"}>Random</a>
                     </div>
                     <div>
                         <input className="mantine-Input-input mantine-TextInput-input mantine-1y8wd0o"
                                id="mantine-r0" type="text" placeholder="Search a cocktail"
-                               aria-label="Search a cocktail" aria-invalid="false" value=""/>
+                               aria-label="Search something" aria-invalid="false" value=""/>
 
                     </div>
                 </div>
