@@ -149,19 +149,17 @@ class App extends React.Component {
         let _showHistoricButton = isUserLogged && (user_memes_history.length > 0);
 
         return (
-            <div>
+            <div className="container">
                 <NavBar callbackHandleMenu={this.callbackHandleMenu} isUserLogged={isUserLogged}
                         showHistoricButton={_showHistoricButton}></NavBar>
-                <div className="container">
-                    {showHideHomePage &&
-                        <HomePage getUserMemesHistory={this.getUserMemesHistory} isUserLogged={isUserLogged}
-                                  user_id={this.state.user_id}/>}
-                    {showHideHistoryPage && <HistoryPage user_memes_history={user_memes_history} user_id={user_id}
-                                                         fromParentApp={this.callbackHistorical}/>}
-                    {showHideSignInPage &&
-                        <SignInPage callbackSignInSuccess={this.callbackSignInSuccess}/>}
-                    {showHideSignUpPage && <SignUpPage callbackSignUpSuccess={this.callbackSignUpSuccess}/>}
-                </div>
+                {showHideHomePage &&
+                    <HomePage getUserMemesHistory={this.getUserMemesHistory} isUserLogged={isUserLogged}
+                              user_id={this.state.user_id}/>}
+                {showHideHistoryPage && <HistoryPage user_memes_history={user_memes_history} user_id={user_id}
+                                                     fromParentApp={this.callbackHistorical}/>}
+                {showHideSignInPage &&
+                    <SignInPage callbackSignInSuccess={this.callbackSignInSuccess}/>}
+                {showHideSignUpPage && <SignUpPage callbackSignUpSuccess={this.callbackSignUpSuccess}/>}
             </div>
         );
     }

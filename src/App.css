@@ -35,8 +35,10 @@ h1 {
     margin: 40px 10px 40px;
 }
 
-.sizedBox {
-    height: 10px;
+.container {
+    margin-right: 2em;
+    margin-left: 2em;
+    margin-top: 0.5em;
 }
 
 
