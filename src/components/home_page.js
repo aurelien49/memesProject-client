@@ -148,7 +148,9 @@ class HomePage extends Component {
                     <div className="sub-main-container">
                         <div className="top-container">
                             <img id="imgUser" hidden={!this.props.isUserLogged} src={support} alt="support face"></img>
-                            <h4>{!this.props.isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4>
+                            <div className="position-absolute top-50 start-50 translate-middle">
+                                <h4>{!this.props.isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4>
+                            </div>
                             <h1 className={"title-page"}>Home</h1>
                         </div>
                         <div className="body-container d-flex justify-content-around">
