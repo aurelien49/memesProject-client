@@ -139,10 +139,20 @@ class App extends React.Component {
             showHideHistoryPage,
             showHideSignInPage,
             showHideSignUpPage,
+            token,
             user_id,
+            user_email,
+            user_name,
             user_memes_history,
-            user_name
         } = this.state;
+
+        let data_user = {
+            token: token,
+            user_id: user_id,
+            user_email: user_email,
+            user_name: this.state.user_name,
+            user_memes_history: user_memes_history,
+        }
 
         // Manage the disable state of button to access 'Memes saved' menu
         let isUserLogged = user_name !== undefined && user_name !== '';
@@ -157,7 +167,7 @@ class App extends React.Component {
                 <div className={"body-content"}>
                     {showHideHomePage &&
                         <HomePage getUserMemesHistory={this.getUserMemesHistory} isUserLogged={isUserLogged}
-                                  user_id={this.state.user_id}/>}
+                                  data_user={data_user}/>}
                     {showHideHistoryPage && <HistoryPage user_memes_history={user_memes_history} user_id={user_id}
                                                          fromParentApp={this.callbackHistorical}/>}
                     {showHideSignInPage &&

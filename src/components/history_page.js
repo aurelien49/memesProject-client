@@ -102,17 +102,12 @@ class HistoryPage extends Component {
                 <div className="d-flex justify-content-center">
                     <h1>Memes saved</h1>
                 </div>
-                <div className="result-container-history">
+                <div className="d-flex justify-content-between">
                     <ul>
                         {this.state.memesHistory ? this.state.memesHistory.map((e, index) => {
                             return (
                                 <li key={index.toString()}>
-                                    <Card style={{
-                                        width: '16rem',
-                                        backgroundColor: "whitesmoke",
-                                        borderRadius: 15
-                                    }}
-                                          className="d-flex align-items-center justify-content-center">
+                                    <Card className="card mx-2">
                                         <Card.Img variant="top" src={e.urlToRetriveMeme.toString()} style={{
                                             marginTop: 0,
                                             padding: 0,

@@ -188,16 +188,3 @@ img.profile-img-card {
 
 }
 
-
-.parent-card {
-    display: flex;
-    justify-content: space-between;
-}
-
-.enfant-card {
-    margin: 0 10px;
-    /* width: 10rem;
-     background-color: whitesmoke;
-     border-radius: 12px;*/
-}
-

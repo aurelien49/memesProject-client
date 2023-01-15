@@ -2,8 +2,9 @@ import React, {Component} from "react";
 import logo from "../assets/img/banksy.svg";
 import MydModalWithGrid from "./modal_create_meme";
 import Card from "react-bootstrap/Card";
-import support from "../assets/img/support.svg";
+// import support from "../assets/img/support.svg";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {Avatar} from '@mantine/core';
 
 const app = document.getElementById('App');
 
@@ -44,7 +45,7 @@ class HomePage extends Component {
                 commentBoxes.push({key: i, value: i});
             }
 
-            this.state.currentMemeSelected.user_id = this.props.user_id;
+            this.state.currentMemeSelected.user_id = this.props.data_user.user_id;
             this.state.currentMemeSelected.meme_id = meme_id;
             this.state.currentMemeSelected.meme_name = meme_name;
             this.state.currentMemeSelected.meme_url = meme_url;
@@ -131,12 +132,19 @@ class HomePage extends Component {
     }
 
     render() {
+        // <img id="imgUser" hidden={!this.props.isUserLogged} src={support} alt="support face"></img>
+
+        // Get the 2 first letters for the avatar
+        let firstTwoLetters = this.props.data_user.user_name.substring(0, 2);
+        var firstLetterUppercase = firstTwoLetters.charAt(0).toUpperCase() + firstTwoLetters.slice(1);
+
         return (
             <>
                 <div className="main-container">
                     <div className="sub-main-container">
                         <div className="top-container">
-                            <img id="imgUser" hidden={!this.props.isUserLogged} src={support} alt="support face"></img>
+                            <Avatar hidden={!this.props.isUserLogged} color="cyan"
+                                    radius="xl">{firstLetterUppercase}</Avatar>
                             <div className="d-flex justify-content-center">
                                 <h4>{!this.props.isUserLogged ? 'No user connected !' : 'Connected with ' + this.state.user_name}</h4>
                             </div>
