@@ -5,7 +5,9 @@ import Card from "react-bootstrap/Card";
 // import support from "../assets/img/support.svg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Avatar} from '@mantine/core';
-import {Circles} from 'react-loader-spinner'
+import {Circles} from 'react-loader-spinner';
+
+const jwt = require('jsonwebtoken');
 
 const app = document.getElementById('App');
 
