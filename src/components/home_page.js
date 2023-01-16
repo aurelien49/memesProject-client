@@ -47,7 +47,7 @@ class HomePage extends Component {
 
         if (decodedToken != null && decodedToken.payload.exp < dateNow.getTime()) {
             // The token is over, disconnect the user display the sign-in page
-            this.props.data_user.handleTokenUserDisconnection();
+            this.props.handleTokenUserDisconnection();
         } else {
             // Modification available only i a user is logged
             if (this.props.isUserLogged) {

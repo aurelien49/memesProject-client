@@ -6,8 +6,7 @@ import {useForm as useForm2} from "react-hook-form";
 export default function SignInPage(props) {
     const {setError, formState: {errors}} = useForm2();
     const [value, setValue] = useState(0);
-
-
+    
     const handleSubmitF = async (event) => {
         console.log('client/SignInPage/handleSubmitF/event: ', event)
         fetch('https://meme-project-server-ava.onrender.com/api/users/signin', {
