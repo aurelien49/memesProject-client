@@ -5,6 +5,7 @@ import Card from "react-bootstrap/Card";
 // import support from "../assets/img/support.svg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Avatar} from '@mantine/core';
+import {Circles} from 'react-loader-spinner'
 
 const app = document.getElementById('App');
 
@@ -181,7 +182,15 @@ class HomePage extends Component {
                                             </Card>
                                         </li>
                                     );
-                                }) : null}
+                                }) : <Circles
+                                    height="80"
+                                    width="80"
+                                    color="#808080"
+                                    ariaLabel="circles-loading"
+                                    wrapperStyle={{}}
+                                    wrapperClass=""
+                                    visible={true}
+                                />}
                             </ul>
                         </div>
                         <div className="d-flex justify-content-around">
