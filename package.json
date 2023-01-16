@@ -27,6 +27,7 @@
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.42.0",
+    "react-loader-spinner": "^5.3.4",
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
     "sendgrid": "^5.2.3",
