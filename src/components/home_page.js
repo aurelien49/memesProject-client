@@ -46,7 +46,7 @@ class HomePage extends Component {
 
         console.log('client/home_page/handleClickCard/dateNow: ', dateNow)
         console.log('client/home_page/handleClickCard/decodedToken.: ', decodedToken)
-        console.log('client/home_page/handleClickCard/decodedToken.exp: ', decodedToken.exp)
+        console.log('client/home_page/handleClickCard/decodedToken.exp: ', decodedToken.payload.exp)
         console.log('client/home_page/handleClickCard/this.props.data_user: ', this.props.data_user)
 
         if (decodedToken.payload.exp < dateNow.getTime()) {
