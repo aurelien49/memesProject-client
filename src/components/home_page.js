@@ -45,6 +45,9 @@ class HomePage extends Component {
         let dateNow = new Date();
         let decodedToken = jwt.decode(this.props.data_user.token, {complete: true});
 
+        console.log('client/home_page/handleClickCard/this.props.decodedToken: ', decodedToken)
+        console.log('client/home_page/handleClickCard/this.props.decodedToken.payload.exp: ', decodedToken.payload.exp)
+
         if (decodedToken != null && decodedToken.payload.exp < dateNow.getTime()) {
             // The token is over, disconnect the user display the sign-in page
             this.props.handleTokenUserDisconnection();
