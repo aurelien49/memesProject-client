@@ -31,6 +31,7 @@ class App extends React.Component {
     }
 
     callbackSignInSuccess = async (data) => {
+        console.log('client/App/callbackSignInSuccess/data: ', data)
         // Get data from the user just connected
         this.state = ({
             ...this.state,

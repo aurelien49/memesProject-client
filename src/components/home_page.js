@@ -41,17 +41,11 @@ class HomePage extends Component {
     async handleClickCard(meme_id, meme_name, meme_url, meme_width, meme_height, meme_box_count, meme_captions) {
 
         console.log('client/home_page/handleClickCard/this.props.data_user: ', this.props.data_user)
-        console.log('client/home_page/handleClickCard/this.props.data_user.token: ', this.props.data_user.token)
         // Check if user token is valid
-        let decodedToken = jwt.decode(this.props.data_user.token, {complete: true});
         let dateNow = new Date();
+        let decodedToken = jwt.decode(this.props.data_user.token, {complete: true});
 
-        console.log('client/home_page/handleClickCard/dateNow: ', dateNow)
-        console.log('client/home_page/handleClickCard/decodedToken.: ', decodedToken)
-        console.log('client/home_page/handleClickCard/this.props.data_user: ', this.props.data_user)
-        console.log('client/home_page/handleClickCard/decodedToken.exp: ', decodedToken.payload.exp)
-
-        if (decodedToken.payload.exp < dateNow.getTime()) {
+        if (decodedToken != null && decodedToken.payload.exp < dateNow.getTime()) {
             // The token is over, disconnect the user display the sign-in page
             this.props.data_user.handleTokenUserDisconnection();
         } else {
