@@ -42,15 +42,15 @@ class HomePage extends Component {
     async handleClickCard(meme_id, meme_name, meme_url, meme_width, meme_height, meme_box_count, meme_captions) {
 
         // Check if user token is valid
-        var decodedToken = jwt.decode(this.props.data_user.token, {complete: true});
-        var dateNow = new Date();
+        let decodedToken = jwt.decode(this.props.data_user.token, {complete: true});
+        let dateNow = new Date();
 
         console.log('client/home_page/handleClickCard/dateNow: ', dateNow)
         console.log('client/home_page/handleClickCard/decodedToken.exp: ', decodedToken.exp)
 
         if (decodedToken.exp < dateNow.getTime()) {
             // The token is over, disconnect the user display the sign-in page
-            his.props.data_user.handleTokenUserDisconnection();
+            this.props.data_user.handleTokenUserDisconnection();
         } else {
             // Modification available only i a user is logged
             if (this.props.isUserLogged) {
@@ -151,7 +151,7 @@ class HomePage extends Component {
 
         // Get the 2 first letters for the avatar
         let firstTwoLetters = this.props.data_user.user_name.substring(0, 2);
-        var firstLetterUppercase = firstTwoLetters.charAt(0).toUpperCase() + firstTwoLetters.slice(1);
+        let firstLetterUppercase = firstTwoLetters.charAt(0).toUpperCase() + firstTwoLetters.slice(1);
 
         return (
             <>
