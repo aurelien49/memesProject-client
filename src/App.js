@@ -55,7 +55,17 @@ class App extends React.Component {
 
     async getUserMemesHistory(id_user) {
         console.log('client/App/getUserMemesHistory/ avant : ', id_user)
-        await fetch(`https://meme-project-server-ava.onrender.com/api/memes/memes-user-history/${id_user}`)
+        await fetch(`https://meme-project-server-ava.onrender.com/api/memes/memes-user-history/${id_user}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'email': this.state.user_email,
+                    'authorization': this.state.token,
+                },
+            }
+        )
             .then(response => response.json())
             .then(data2 => {
                     console.log('client/App/getUserMemesHistory/ then : ', data2)
