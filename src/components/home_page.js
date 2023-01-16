@@ -45,9 +45,9 @@ class HomePage extends Component {
         let dateNow = new Date();
 
         console.log('client/home_page/handleClickCard/dateNow: ', dateNow)
+        console.log('client/home_page/handleClickCard/decodedToken.: ', decodedToken)
         console.log('client/home_page/handleClickCard/decodedToken.exp: ', decodedToken.exp)
-        console.log('client/home_page/handleClickCard/decodedToken.exp: ', decodedToken)
-        console.log('client/home_page/handleClickCard/decodedToken.exp: ', this.props.data_user)
+        console.log('client/home_page/handleClickCard/this.props.data_user: ', this.props.data_user)
 
         if (decodedToken.payload.exp < dateNow.getTime()) {
             // The token is over, disconnect the user display the sign-in page
