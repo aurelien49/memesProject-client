@@ -9,6 +9,7 @@ export default function SignInPage(props) {
 
 
     const handleSubmitF = async (event) => {
+        console.log('client/SignInPage/handleSubmitF/event: ', event)
         fetch('https://meme-project-server-ava.onrender.com/api/users/signin', {
             method: 'POST',
             headers: {
