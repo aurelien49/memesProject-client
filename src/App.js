@@ -43,6 +43,7 @@ class App extends React.Component {
 
 
         await this.getUserMemesHistory(data.user._id)
+        console.log('client/App/callbackSignInSuccess/ après getUserMemesHistory : ', data.user._id)
         // Back to home page
         this.callbackHandleMenu("/home");
     }
@@ -53,14 +54,17 @@ class App extends React.Component {
     }
 
     async getUserMemesHistory(id_user) {
+        console.log('client/App/getUserMemesHistory/ avant : ', id_user)
         await fetch(`https://meme-project-server-ava.onrender.com/api/memes/memes-user-history/${id_user}`)
             .then(response => response.json())
             .then(data2 => {
+                    console.log('client/App/getUserMemesHistory/ then : ', data2)
                     this.state = ({...this.state, user_memes_history: data2});
                     this.setState({...this.state});
                 }
             )
             .catch(err => {
+                    console.log('client/App/getUserMemesHistory/ catch : ', err)
                     console.error(err);
                 }
             );
