@@ -39,25 +39,37 @@ class HomePage extends Component {
 
     async handleClickCard(meme_id, meme_name, meme_url, meme_width, meme_height, meme_box_count, meme_captions) {
 
-        // Modification available only i a user is logged
-        if (this.props.isUserLogged) {
-            let commentBoxes = [];
-            for (let i = 0; i < meme_box_count; i++) {
-                commentBoxes.push({key: i, value: i});
-            }
+        // Check if user token is valid
+        var decodedToken = jwt.decode(this.props.data_user.token, {complete: true});
+        var dateNow = new Date();
 
-            this.state.currentMemeSelected.user_id = this.props.data_user.user_id;
-            this.state.currentMemeSelected.meme_id = meme_id;
-            this.state.currentMemeSelected.meme_name = meme_name;
-            this.state.currentMemeSelected.meme_url = meme_url;
-            this.state.currentMemeSelected.meme_width = meme_width;
-            this.state.currentMemeSelected.meme_height = meme_height;
-            this.state.currentMemeSelected.meme_box_count = meme_box_count;
-            this.state.currentMemeSelected.meme_captions = meme_captions;
-            this.state.currentMemeSelected.commentBoxes = commentBoxes;
-            this.state.currentMemeSelected.handleSubmitForm = this.handleSubmitForm;
-            this.state.currentMemeSelected.showModalCreateMeme = true;
-            this.setState({});
+        console.log('client/home_page/handleClickCard/dateNow: ', dateNow)
+        console.log('client/home_page/handleClickCard/decodedToken.exp: ', decodedToken.exp)
+
+        if (decodedToken.exp < dateNow.getTime()) {
+            // The token is over, disconnect the user display the sign-in page
+            his.props.data_user.handleTokenUserDisconnection();
+        } else {
+            // Modification available only i a user is logged
+            if (this.props.isUserLogged) {
+                let commentBoxes = [];
+                for (let i = 0; i < meme_box_count; i++) {
+                    commentBoxes.push({key: i, value: i});
+                }
+
+                this.state.currentMemeSelected.user_id = this.props.data_user.user_id;
+                this.state.currentMemeSelected.meme_id = meme_id;
+                this.state.currentMemeSelected.meme_name = meme_name;
+                this.state.currentMemeSelected.meme_url = meme_url;
+                this.state.currentMemeSelected.meme_width = meme_width;
+                this.state.currentMemeSelected.meme_height = meme_height;
+                this.state.currentMemeSelected.meme_box_count = meme_box_count;
+                this.state.currentMemeSelected.meme_captions = meme_captions;
+                this.state.currentMemeSelected.commentBoxes = commentBoxes;
+                this.state.currentMemeSelected.handleSubmitForm = this.handleSubmitForm;
+                this.state.currentMemeSelected.showModalCreateMeme = true;
+                this.setState({});
+            }
         }
     }
 

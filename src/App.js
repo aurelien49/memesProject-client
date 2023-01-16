@@ -14,6 +14,7 @@ class App extends React.Component {
         this.callbackLogout = this.callbackLogout.bind(this);
         this.callbackHandleMenu = this.callbackHandleMenu.bind(this);
         this.getUserMemesHistory = this.getUserMemesHistory.bind(this);
+        this.handleTokenUserDisconnection = this.handleTokenUserDisconnection.bind(this);
 
         this.state = {
             showHideHomePage: true,
@@ -78,6 +79,13 @@ class App extends React.Component {
             user_id: '',
             user_email: '',
         })
+    }
+
+    handleTokenUserDisconnection() {
+        // Erase user data
+        this.callbackLogout();
+        // Display sign-in page
+        this.callbackHandleMenu("/signin");
     }
 
     callbackHandleMenu(data) {
@@ -167,7 +175,8 @@ class App extends React.Component {
                 <div className={"body-content"}>
                     {showHideHomePage &&
                         <HomePage getUserMemesHistory={this.getUserMemesHistory} isUserLogged={isUserLogged}
-                                  data_user={data_user}/>}
+                                  data_user={data_user}
+                                  handleTokenUserDisconnection={this.handleTokenUserDisconnection}/>}
                     {showHideHistoryPage && <HistoryPage user_memes_history={user_memes_history} user_id={user_id}
                                                          fromParentApp={this.callbackHistorical}/>}
                     {showHideSignInPage &&
