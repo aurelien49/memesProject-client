@@ -5,7 +5,6 @@ import Card from "react-bootstrap/Card";
 // import support from "../assets/img/support.svg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Avatar} from '@mantine/core';
-import {Circles} from 'react-loader-spinner';
 
 const jwt = require('jsonwebtoken');
 
@@ -50,7 +49,7 @@ class HomePage extends Component {
         console.log('client/home_page/handleClickCard/decodedToken.exp: ', decodedToken)
         console.log('client/home_page/handleClickCard/decodedToken.exp: ', this.props.data_user)
 
-        if (decodedToken.exp < dateNow.getTime()) {
+        if (decodedToken.payload.exp < dateNow.getTime()) {
             // The token is over, disconnect the user display the sign-in page
             this.props.data_user.handleTokenUserDisconnection();
         } else {
@@ -198,15 +197,7 @@ class HomePage extends Component {
                                             </Card>
                                         </li>
                                     );
-                                }) : <Circles
-                                    height="80"
-                                    width="80"
-                                    color="#808080"
-                                    ariaLabel="circles-loading"
-                                    wrapperStyle={{}}
-                                    wrapperClass=""
-                                    visible={true}
-                                />}
+                                }) : null}
                             </ul>
                         </div>
                         <div className="d-flex justify-content-around">
