@@ -31,7 +31,7 @@
     "react-hook-form": "^7.42.0",
     "react-loader-spinner": "^5.3.4",
     "react-router-dom": "^6.6.1",
-    "react-scripts": "5.0.1",
+    "react-scripts": "4.0.2",
     "sendgrid": "^5.2.3",
     "stream": "^0.0.2",
     "web-vitals": "^2.1.4",
