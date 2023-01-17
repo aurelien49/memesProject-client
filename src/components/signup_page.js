@@ -1,8 +1,12 @@
 import React from "react";
 import {TextInput, Button, Group} from '@mantine/core';
 import {useForm} from '@mantine/form';
+import {useForm as useForm2} from "react-hook-form/dist/useForm";
 
 function SignUpPage(props) {
+    const {setError, formState: {errors}} = useForm2();
+    const [value, setValue] = useState(0);
+
     const handleSubmit = async (event) => {
         fetch('https://meme-project-server-ava.onrender.com/api/users/signup', {
             method: 'POST',
@@ -20,6 +24,9 @@ function SignUpPage(props) {
                 if (response.status === 200) {
                     props.callbackSignUpSuccess(response.json());
                 } else {
+                    setError('email', {type: 'manual', message: 'email already exist'});
+                    // Refresh the UI
+                    setValue(value + 1);
                     return {error: response.status};
                 }
             })
@@ -62,6 +69,7 @@ function SignUpPage(props) {
                         placeholder="your@email.com"
                         {...form.getInputProps('email')}
                     />
+                    {errors.email && <p className={"formMsgError"}>{errors.email.message}</p>}
                     <TextInput
                         withAsterisk
                         label="Password"
