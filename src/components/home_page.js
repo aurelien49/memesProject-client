@@ -122,6 +122,7 @@ class HomePage extends Component {
                 'Content-Type': 'application/json',
                 'email': this.props.data_user.user_email,
                 'authorization': this.props.data_user.token,
+                'x-msg': 'home_page POST memes/imgflip'
             },
             body: JSON.stringify({
                 data: data
@@ -235,6 +236,7 @@ class HomePage extends Component {
                     'Content-Type': 'application/json',
                     'email': this.props.data_user.user_email,
                     'authorization': this.props.data_user.token,
+                    'x-msg': 'home_page GET memes/imgflip'
                 }
             }
         )
