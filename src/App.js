@@ -86,6 +86,7 @@ class App extends React.Component {
     }
 
     callbackLogout() {
+        console.log('Client --> logout')
         // Clear user data when logout
         this.setState({
             ...this.state,
@@ -94,6 +95,7 @@ class App extends React.Component {
             user_id: '',
             user_email: '',
         })
+        console.log('Client --> logout this.state.token = ', this.state.token)
     }
 
     handleTokenUserDisconnection() {
@@ -149,8 +151,8 @@ class App extends React.Component {
                     showHideHistoryPage: false,
                     showHideSignInPage: false,
                     showHideSignUpPage: false,
-                    user_name: '',
                 })
+                this.callbackLogout();
                 break;
         }
         this.setState({...this.state});
