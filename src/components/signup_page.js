@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {TextInput, Button, Group} from '@mantine/core';
 import {useForm} from '@mantine/form';
-import {useForm as useForm2} from "react-hook-form/dist/useForm";
+import {useForm as useForm2} from "react-hook-form";
 
 function SignUpPage(props) {
     const {setError, formState: {errors}} = useForm2();
