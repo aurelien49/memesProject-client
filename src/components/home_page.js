@@ -49,7 +49,7 @@ class HomePage extends Component {
         console.log('client/home_page/handleClickCard/this.props.decodedToken.payload.exp: ', decodedToken.payload.exp)
         console.log('client/home_page/handleClickCard/this.props.isUserLogged: ', this.props.isUserLogged)
 
-        if (decodedToken != null && decodedToken.payload.exp > dateNow && this.props.isUserLogged) {
+        if (decodedToken.payload.exp > dateNow && this.props.isUserLogged) {
             let commentBoxes = [];
             for (let i = 0; i < meme_box_count; i++) {
                 commentBoxes.push({key: i, value: i});
@@ -122,7 +122,7 @@ class HomePage extends Component {
                 'Content-Type': 'application/json',
                 'email': this.props.data_user.user_email,
                 'authorization': this.props.data_user.token,
-                'x-msg': 'home_page POST memes/imgflip'
+                'X-Custom-Header': 'home_page_POST_memes/imgflip'
             },
             body: JSON.stringify({
                 data: data
@@ -236,7 +236,7 @@ class HomePage extends Component {
                     'Content-Type': 'application/json',
                     'email': this.props.data_user.user_email,
                     'authorization': this.props.data_user.token,
-                    'x-msg': 'home_page GET memes/imgflip'
+                    'X-Custom-Header': 'home_page_GET_memes_imgflip'
                 }
             }
         )

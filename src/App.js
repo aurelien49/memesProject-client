@@ -63,6 +63,7 @@ class App extends React.Component {
                     'Content-Type': 'application/json',
                     'email': this.state.user_email,
                     'authorization': this.state.token,
+                    'X-Custom-Header': 'App_GET_getUserMemesHistory'
                 },
             }
         )
@@ -165,7 +166,6 @@ class App extends React.Component {
             token,
             user_id,
             user_email,
-            user_name,
             user_memes_history,
         } = this.state;
 
