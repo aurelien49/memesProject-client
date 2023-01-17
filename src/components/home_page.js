@@ -130,6 +130,7 @@ class HomePage extends Component {
                 return response.json()
             })
             .then(data => {
+                    console.log('client/home_page/createMemeOnImgflip/ then : ', data)
                     this.state.currentMemeSelected.urlToRetriveMeme = data['urlToRetriveMeme'];
                     // Refresh memes history
                     this.props.getUserMemesHistory(data['idUser']);
