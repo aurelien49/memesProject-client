@@ -178,10 +178,10 @@ class App extends React.Component {
         }
 
         // Manage the disable state of button to access 'Memes saved' menu
-        let isUserLogged = user_name !== undefined && user_name !== '';
+        let isUserLogged = token !== undefined && token !== '';
         let _showHistoricButton = isUserLogged && (user_memes_history.length > 0);
 
-        console.log('client/App/avant render: ', user_name)
+        console.log('client/App/avant render: ', token)
 
         return (
             <div className="container">
