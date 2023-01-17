@@ -86,8 +86,11 @@ class App extends React.Component {
     }
 
     callbackLogout() {
-        console.log('Client --> logout')
         // Clear user data when logout
+        this.state.user_name = '';
+        this.state.token = '';
+        this.state.user_id = '';
+        this.state.user_email = '';
         this.setState({
             ...this.state,
             user_name: '',
