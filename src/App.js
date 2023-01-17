@@ -181,6 +181,8 @@ class App extends React.Component {
         let isUserLogged = user_name !== undefined && user_name !== '';
         let _showHistoricButton = isUserLogged && (user_memes_history.length > 0);
 
+        console.log('client/App/avant render: ', user_name)
+
         return (
             <div className="container">
                 <div className={"top-menubar"}>

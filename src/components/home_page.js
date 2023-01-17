@@ -42,42 +42,40 @@ class HomePage extends Component {
 
         // Check if user token is valid
         let dateNow = new Date();
-        dateNow = dateNow.getTime() / 1000;
+        dateNow = Math.floor(dateNow.getTime() / 1000);
+        let decodedToken = jwt.decode(this.props.data_user.token, {complete: true});
 
         console.log('client/home_page/handleClickCard/dateNow.getTime(): ', dateNow)
-        console.log('client/home_page/handleClickCard/this.props.data_user.token: ', this.props.data_user.token)
-
-        let decodedToken = jwt.decode(this.props.data_user.token, {complete: true});
         console.log('client/home_page/handleClickCard/this.props.decodedToken.payload.exp: ', decodedToken.payload.exp)
+        console.log('client/home_page/handleClickCard/this.props.isUserLogged: ', this.props.isUserLogged)
 
-        if (decodedToken != null && decodedToken.payload.exp > dateNow) {
-            // Modification available only i a user is logged
-            if (this.props.isUserLogged) {
-                let commentBoxes = [];
-                for (let i = 0; i < meme_box_count; i++) {
-                    commentBoxes.push({key: i, value: i});
-                }
-
-                this.state.currentMemeSelected.user_id = this.props.data_user.user_id;
-                this.state.currentMemeSelected.meme_id = meme_id;
-                this.state.currentMemeSelected.meme_name = meme_name;
-                this.state.currentMemeSelected.meme_url = meme_url;
-                this.state.currentMemeSelected.meme_width = meme_width;
-                this.state.currentMemeSelected.meme_height = meme_height;
-                this.state.currentMemeSelected.meme_box_count = meme_box_count;
-                this.state.currentMemeSelected.meme_captions = meme_captions;
-                this.state.currentMemeSelected.commentBoxes = commentBoxes;
-                this.state.currentMemeSelected.handleSubmitForm = this.handleSubmitForm;
-                this.state.currentMemeSelected.showModalCreateMeme = true;
-                this.setState({});
-            } else {  // The token is over, disconnect the user display the sign-in page
-                this.props.handleTokenUserDisconnection();
+        if (decodedToken != null && decodedToken.payload.exp > dateNow && this.props.isUserLogged) {
+            let commentBoxes = [];
+            for (let i = 0; i < meme_box_count; i++) {
+                commentBoxes.push({key: i, value: i});
             }
+
+            this.state.currentMemeSelected.user_id = this.props.data_user.user_id;
+            this.state.currentMemeSelected.meme_id = meme_id;
+            this.state.currentMemeSelected.meme_name = meme_name;
+            this.state.currentMemeSelected.meme_url = meme_url;
+            this.state.currentMemeSelected.meme_width = meme_width;
+            this.state.currentMemeSelected.meme_height = meme_height;
+            this.state.currentMemeSelected.meme_box_count = meme_box_count;
+            this.state.currentMemeSelected.meme_captions = meme_captions;
+            this.state.currentMemeSelected.commentBoxes = commentBoxes;
+            this.state.currentMemeSelected.handleSubmitForm = this.handleSubmitForm;
+            this.state.currentMemeSelected.showModalCreateMeme = true;
+            this.setState({});
+        } else {  // The token is over, disconnect the user display the sign-in page
+            console.log('client/home_page/handleClickCard/token is over: else : ')
+            this.props.handleTokenUserDisconnection();
         }
     }
 
     handleModalClose = () => {
         this.setState({
+            ...this.state,
             currentMemeSelected: {
                 showModalCreateMeme: false
             }
