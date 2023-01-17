@@ -122,7 +122,6 @@ class HomePage extends Component {
                 'Content-Type': 'application/json',
                 'email': this.props.data_user.user_email,
                 'authorization': this.props.data_user.token,
-                'X-Custom-Header': 'home_page_POST_memes/imgflip'
             },
             body: JSON.stringify({
                 data: data
@@ -137,8 +136,7 @@ class HomePage extends Component {
                     this.state.currentMemeSelected.urlToRetriveMeme = data['urlToRetriveMeme'];
                     // Refresh memes history
                     this.props.getUserMemesHistory(data['idUser']);
-
-                    // Close the create modal
+                    
                     this.handleModalClose();
                 }
             ).catch(err => {
@@ -236,7 +234,6 @@ class HomePage extends Component {
                     'Content-Type': 'application/json',
                     'email': this.props.data_user.user_email,
                     'authorization': this.props.data_user.token,
-                    'X-Custom-Header': 'home_page_GET_memes_imgflip'
                 }
             }
         )

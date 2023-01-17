@@ -33,7 +33,6 @@ class HistoryPage extends Component {
                     'Content-Type': 'application/json',
                     'email': this.props.data_user.user_email,
                     'authorization': this.props.data_user.token,
-                    'X-Custom-Header': 'history_page_DELETE_deleteMemeBdduser'
                 },
                 data: {message: 'The delete from the client'}
             })
@@ -57,7 +56,6 @@ class HistoryPage extends Component {
                 'Content-Type': 'application/json',
                 'email': this.props.data_user.user_email,
                 'authorization': this.props.data_user.token,
-                'X-Custom-Header': 'history_page_POST_sendpicturebyemail'
             },
             body: JSON.stringify({
                 user_email: event.target.formBasicEmail.value,
@@ -95,7 +93,6 @@ class HistoryPage extends Component {
                     'Content-Type': 'application/json',
                     'email': this.props.data_user.user_email,
                     'authorization': this.props.data_user.token,
-                    'X-Custom-Header': 'history_page_GET_memes-user-history'
                 },
                 data: {message: 'The delete from the client'}
             })
