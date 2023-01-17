@@ -119,7 +119,9 @@ class HomePage extends Component {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'email': this.props.data_user.user_email,
+                'authorization': this.props.data_user.token,
             },
             body: JSON.stringify({
                 data: data
@@ -225,14 +227,23 @@ class HomePage extends Component {
     }
 
     componentDidMount() {
-        fetch('https://meme-project-server-ava.onrender.com/api/memes/imgflip/')
+        fetch('https://meme-project-server-ava.onrender.com/api/memes/imgflip/',
+            {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'email': this.props.data_user.user_email,
+                    'authorization': this.props.data_user.token,
+                }
+            }
+        )
             .then(response => response.json())
             .then(data => {
                     // Shuffle the result
                     this.memes = data.sort(() => Math.random() - 0.5);
                     // The maximum memes from imgFlip is 100
-                    // Here it limited to 50
-                    this.memes.length = 50;
+                    this.memes.length = 30;
 
                     this.setState({
                         memes: this.memes,

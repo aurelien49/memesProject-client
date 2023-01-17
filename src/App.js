@@ -195,6 +195,7 @@ class App extends React.Component {
                                   data_user={data_user}
                                   handleTokenUserDisconnection={this.handleTokenUserDisconnection}/>}
                     {showHideHistoryPage && <HistoryPage user_memes_history={user_memes_history} user_id={user_id}
+                                                         data_user={data_user}
                                                          fromParentApp={this.callbackHistorical}/>}
                     {showHideSignInPage &&
                         <SignInPage callbackSignInSuccess={this.callbackSignInSuccess}/>}

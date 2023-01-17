@@ -29,7 +29,10 @@ class HistoryPage extends Component {
             , {
                 method: 'DELETE',
                 headers: {
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json',
+                    'email': this.props.data_user.user_email,
+                    'authorization': this.props.data_user.token,
                 },
                 data: {message: 'The delete from the client'}
             })
@@ -50,7 +53,9 @@ class HistoryPage extends Component {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'email': this.state.user_email,
+                'authorization': this.props.data_user.token,
             },
             body: JSON.stringify({
                 user_email: event.target.formBasicEmail.value,
@@ -80,7 +85,17 @@ class HistoryPage extends Component {
     async refresMemeshHistoryPage() {
         // Récupère les mèmes d'un user à afficher sur la page historique
 
-        await fetch(`https://meme-project-server-ava.onrender.com/api/memes/memes-user-history/${this.props.user_id}`)
+        await fetch(`https://meme-project-server-ava.onrender.com/api/memes/memes-user-history/${this.props.user_id}`,
+            {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'email': this.props.data_user.user_email,
+                    'authorization': this.props.data_user.token,
+                },
+                data: {message: 'The delete from the client'}
+            })
             .then(response => response.json())
             .then(data => {
                     this.state.memesHistory = data;
