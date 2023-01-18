@@ -6,7 +6,7 @@ import {useForm as useForm2} from "react-hook-form";
 export default function SignInPage(props) {
     const {setError, formState: {errors}} = useForm2();
     const [value, setValue] = useState(0);
-    
+
     const handleSubmitF = async (event) => {
         console.log('client/SignInPage/handleSubmitF/event: ', event)
         fetch('https://meme-project-server-ava.onrender.com/api/users/signin', {
@@ -49,6 +49,14 @@ export default function SignInPage(props) {
         },
     });
 
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+
     return (
         <div className="col-md-12">
             <h1 className="d-flex mt-2 justify-content-center">Sign-in</h1>
@@ -82,6 +90,8 @@ export default function SignInPage(props) {
                             <Button type="submit">Submit</Button>
                         </Group>
                     </div>
+                    <div>{}</div>
+                    <div className="g-signin2" data-onsuccess="onSignIn"></div>
                 </form>
             </div>
         </div>
