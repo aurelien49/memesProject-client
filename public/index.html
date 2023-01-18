@@ -53,6 +53,14 @@
   To begin the development, run `npm start` or `yarn start`.
   To create a production bundle, use `npm run build` or `yarn build`.
 -->
-<script async defer src="https://apis.google.com/js/platform.js"></script>
+
+<script async defer src="https://apis.google.com/js/platform.js?onload=onLoadCallback"></script>
+<script>
+    window.onLoadCallback = function () {
+        gapi.auth2.init({
+            client_id: 'filler_text_for_client_id.apps.googleusercontent.com'
+        });
+    }
+</script>
 </body>
 </html>
