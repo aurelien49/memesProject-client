@@ -86,6 +86,8 @@ class App extends React.Component {
     }
 
     callbackLogout() {
+        //
+        this.signOut();
         // Clear user data when logout
         this.state.user_name = '';
         this.state.token = '';
@@ -99,6 +101,13 @@ class App extends React.Component {
             user_email: '',
         })
         console.log('Client --> logout this.state.token = ', this.state.token)
+    }
+
+    signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
     }
 
     handleTokenUserDisconnection() {
