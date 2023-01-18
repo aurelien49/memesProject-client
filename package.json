@@ -30,6 +30,7 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.42.0",
     "react-loader-spinner": "^5.3.4",
+    "react-oauth2-login": "^1.0.3",
     "react-router-dom": "^6.6.1",
     "react-scripts": "4.0.2",
     "sendgrid": "^5.2.3",

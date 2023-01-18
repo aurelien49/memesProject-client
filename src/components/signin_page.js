@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import {TextInput, Button, Group} from '@mantine/core';
 import {useForm} from '@mantine/form';
 import {useForm as useForm2} from "react-hook-form";
+import LoginOAuth2 from 'react-oauth2-login';
 
 export default function SignInPage(props) {
     const {setError, formState: {errors}} = useForm2();
@@ -57,6 +58,9 @@ export default function SignInPage(props) {
         console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     }
 
+    const onSuccess = response => console.log('client google success: ', response);
+    const onFailure = response => console.error('client google error: ', response);
+
     return (
         <div className="col-md-12">
             <h1 className="d-flex mt-2 justify-content-center">Sign-in</h1>
@@ -92,6 +96,12 @@ export default function SignInPage(props) {
                     </div>
                     <div>{}</div>
                     <div className="g-signin2" data-onsuccess="onSignIn"></div>
+                    <LoginOAuth2
+                        clientId="476772010168-qcjl2r4gl2hudufipa1a8bc0nduj3567.apps.googleusercontent.com"
+                        authorizeUri="https://mem-project-client-ava.netlify.app/"
+                        onSuccess={onSuccess}
+                        onFailure={onFailure}
+                    />,
                 </form>
             </div>
         </div>
