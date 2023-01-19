@@ -6,6 +6,8 @@ import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Form from "react-bootstrap/Form";
 
+require('dotenv').config();
+
 function MydModalWithGrid(props) {
 
     const [message, setMessage] = useState('');
@@ -18,12 +20,14 @@ function MydModalWithGrid(props) {
         event.preventDefault();
         setMessage('');
 
+        console.log('Click sur card : process.env.REACT_APP_X_API_KEY', process.env.REACT_APP_API_NINJA_KEY)
+
         fetch('https://api.api-ninjas.com/v1/dadjokes?limit=1', {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'X-Api-Key': process.env.REACT_APP_X_API_KEY
+                'X-Api-Key': process.env.REACT_APP_API_NINJA_KEY
             },
         })
             .then(response => {

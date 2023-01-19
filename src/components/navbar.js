@@ -13,7 +13,7 @@ export default function NavBar(props) {
     }
 
     return (
-        <Navbar collapseOnSelect expand="lg" bg="light" variant="light" rounded>
+        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
             <Container>
                 <Navbar.Brand href="#">Meme-App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>

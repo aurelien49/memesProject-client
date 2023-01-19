@@ -5,6 +5,7 @@ import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+require('dotenv').config();
 const app = document.getElementById('App');
 
 
@@ -25,7 +26,12 @@ class HistoryPage extends Component {
     handleDeletePicture = async (event) => {
         event.preventDefault();
 
-        fetch(`https://meme-project-server-ava.onrender.com/api/memes/deleteMemeBdduser/${event.target.formIdMemeToDelete.value}`
+        let url = `http://localhost:${process.env.REACT_APP_SERVER_PORT}`;
+        if (process.env.NODE_ENV === 'production') {
+            url = 'https://meme-project-server-ava.onrender.com';
+        }
+
+        fetch(`${url}/api/memes/deleteMemeBdduser/${event.target.formIdMemeToDelete.value}`
             , {
                 method: 'DELETE',
                 headers: {
@@ -49,7 +55,12 @@ class HistoryPage extends Component {
         // Envoi d'
         event.preventDefault();
 
-        fetch('https://meme-project-server-ava.onrender.com/api/users/sendpicturebyemail/', {
+        let url = `http://localhost:${process.env.REACT_APP_SERVER_PORT}`;
+        if (process.env.NODE_ENV === 'production') {
+            url = 'https://meme-project-server-ava.onrender.com';
+        }
+
+        fetch(`${url}/api/users/sendpicturebyemail/`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -85,7 +96,12 @@ class HistoryPage extends Component {
     async refresMemeshHistoryPage() {
         // Récupère les mèmes d'un user à afficher sur la page historique
 
-        await fetch(`https://meme-project-server-ava.onrender.com/api/memes/memes-user-history/${this.props.user_id}`,
+        let url = `http://localhost:${process.env.REACT_APP_SERVER_PORT}`;
+        if (process.env.NODE_ENV === 'production') {
+            url = 'https://meme-project-server-ava.onrender.com';
+        }
+
+        await fetch(`${url}/api/memes/memes-user-history/${this.props.user_id}`,
             {
                 method: 'GET',
                 headers: {

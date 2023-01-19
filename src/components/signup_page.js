@@ -3,12 +3,19 @@ import {TextInput, Button, Group} from '@mantine/core';
 import {useForm} from '@mantine/form';
 import {useForm as useForm2} from "react-hook-form";
 
+require('dotenv').config();
+
 function SignUpPage(props) {
     const {setError, formState: {errors}} = useForm2();
     const [value, setValue] = useState(0);
 
     const handleSubmit = async (event) => {
-        fetch('https://meme-project-server-ava.onrender.com/api/users/signup', {
+        let url = `http://localhost:${process.env.REACT_APP_SERVER_PORT}`;
+        if (process.env.NODE_ENV === 'production') {
+            url = 'https://meme-project-server-ava.onrender.com';
+        }
+
+        fetch(`${url}/api/users/signup`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

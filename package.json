@@ -20,6 +20,7 @@
     "bcrypt": "^5.1.0",
     "bootstrap": "^5.2.3",
     "dayjs": "^1.11.6",
+    "dotenv": "^16.0.3",
     "holderjs": "^2.9.9",
     "jsonwebtoken": "^9.0.0",
     "jsx-to-string": "^1.4.0",
@@ -30,10 +31,9 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.42.0",
     "react-loader-spinner": "^5.3.4",
-    "react-oauth2-login": "^1.0.3",
     "react-router-dom": "^6.6.1",
-    "react-scripts": "4.0.2",
-    "sendgrid": "^5.2.3",
+    "react-scripts": "^4.0.3",
+    "sendgrid": "^4.10.0",
     "stream": "^0.0.2",
     "web-vitals": "^2.1.4",
     "workbox-background-sync": "^6.5.4",
@@ -51,7 +51,7 @@
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

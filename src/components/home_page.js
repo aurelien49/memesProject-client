@@ -6,6 +6,8 @@ import Card from "react-bootstrap/Card";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Avatar} from '@mantine/core';
 
+require('dotenv').config();
+
 const jwt = require('jsonwebtoken');
 
 const app = document.getElementById('App');
@@ -40,36 +42,39 @@ class HomePage extends Component {
 
     async handleClickCard(meme_id, meme_name, meme_url, meme_width, meme_height, meme_box_count, meme_captions) {
 
-        // Check if user token is valid
-        let dateNow = new Date();
-        dateNow = Math.floor(dateNow.getTime() / 1000);
-        let decodedToken = jwt.decode(this.props.data_user.token, {complete: true});
+        if (this.props.isUserLogged) {
 
-        console.log('client/home_page/handleClickCard/dateNow.getTime(): ', dateNow)
-        console.log('client/home_page/handleClickCard/this.props.decodedToken.payload.exp: ', decodedToken.payload.exp)
-        console.log('client/home_page/handleClickCard/this.props.isUserLogged: ', this.props.isUserLogged)
+            // Check if user token is valid
+            let dateNow = new Date();
+            dateNow = Math.floor(dateNow.getTime() / 1000);
+            let decodedToken = jwt.decode(this.props.data_user.token, {complete: true});
 
-        if (decodedToken.payload.exp > dateNow && this.props.isUserLogged) {
-            let commentBoxes = [];
-            for (let i = 0; i < meme_box_count; i++) {
-                commentBoxes.push({key: i, value: i});
+            console.log('client/home_page/handleClickCard/dateNow.getTime(): ', dateNow)
+            console.log('client/home_page/handleClickCard/this.props.decodedToken.payload.exp: ', decodedToken.payload.exp)
+            console.log('client/home_page/handleClickCard/this.props.isUserLogged: ', this.props.isUserLogged)
+
+            if (decodedToken.payload.exp > dateNow) {
+                let commentBoxes = [];
+                for (let i = 0; i < meme_box_count; i++) {
+                    commentBoxes.push({key: i, value: i});
+                }
+
+                this.state.currentMemeSelected.user_id = this.props.data_user.user_id;
+                this.state.currentMemeSelected.meme_id = meme_id;
+                this.state.currentMemeSelected.meme_name = meme_name;
+                this.state.currentMemeSelected.meme_url = meme_url;
+                this.state.currentMemeSelected.meme_width = meme_width;
+                this.state.currentMemeSelected.meme_height = meme_height;
+                this.state.currentMemeSelected.meme_box_count = meme_box_count;
+                this.state.currentMemeSelected.meme_captions = meme_captions;
+                this.state.currentMemeSelected.commentBoxes = commentBoxes;
+                this.state.currentMemeSelected.handleSubmitForm = this.handleSubmitForm;
+                this.state.currentMemeSelected.showModalCreateMeme = true;
+                this.setState({});
+            } else {  // The token is over, disconnect the user display the sign-in page
+                console.log('client/home_page/handleClickCard/token is over: else : ')
+                this.props.handleTokenUserDisconnection();
             }
-
-            this.state.currentMemeSelected.user_id = this.props.data_user.user_id;
-            this.state.currentMemeSelected.meme_id = meme_id;
-            this.state.currentMemeSelected.meme_name = meme_name;
-            this.state.currentMemeSelected.meme_url = meme_url;
-            this.state.currentMemeSelected.meme_width = meme_width;
-            this.state.currentMemeSelected.meme_height = meme_height;
-            this.state.currentMemeSelected.meme_box_count = meme_box_count;
-            this.state.currentMemeSelected.meme_captions = meme_captions;
-            this.state.currentMemeSelected.commentBoxes = commentBoxes;
-            this.state.currentMemeSelected.handleSubmitForm = this.handleSubmitForm;
-            this.state.currentMemeSelected.showModalCreateMeme = true;
-            this.setState({});
-        } else {  // The token is over, disconnect the user display the sign-in page
-            console.log('client/home_page/handleClickCard/token is over: else : ')
-            this.props.handleTokenUserDisconnection();
         }
     }
 
@@ -115,7 +120,12 @@ class HomePage extends Component {
     }
 
     createMemeOnImgflip(data) {
-        fetch('https://meme-project-server-ava.onrender.com/api/memes/createMeme/', {
+        let url = `http://localhost:${process.env.REACT_APP_SERVER_PORT}`;
+        if (process.env.NODE_ENV === 'production') {
+            url = 'https://meme-project-server-ava.onrender.com';
+        }
+
+        fetch(`${url}/api/memes/createMeme/`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -136,7 +146,7 @@ class HomePage extends Component {
                     this.state.currentMemeSelected.urlToRetriveMeme = data['urlToRetriveMeme'];
                     // Refresh memes history
                     this.props.getUserMemesHistory(data['idUser']);
-                    
+
                     this.handleModalClose();
                 }
             ).catch(err => {
@@ -226,7 +236,12 @@ class HomePage extends Component {
     }
 
     componentDidMount() {
-        fetch('https://meme-project-server-ava.onrender.com/api/memes/imgflip/',
+        let url = `http://localhost:${process.env.REACT_APP_SERVER_PORT}`;
+        if (process.env.NODE_ENV === 'production') {
+            url = 'https://meme-project-server-ava.onrender.com';
+        }
+
+        fetch(`${url}/api/memes/imgflip/`,
             {
                 method: 'GET',
                 headers: {

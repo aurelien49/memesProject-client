@@ -2,15 +2,20 @@ import React, {useState} from "react";
 import {TextInput, Button, Group} from '@mantine/core';
 import {useForm} from '@mantine/form';
 import {useForm as useForm2} from "react-hook-form";
-import LoginOAuth2 from 'react-oauth2-login';
 
+require('dotenv').config();
 export default function SignInPage(props) {
     const {setError, formState: {errors}} = useForm2();
     const [value, setValue] = useState(0);
 
     const handleSubmitF = async (event) => {
         console.log('client/SignInPage/handleSubmitF/event: ', event)
-        fetch('https://meme-project-server-ava.onrender.com/api/users/signin', {
+
+        let url = `http://localhost:${process.env.REACT_APP_SERVER_PORT}`;
+        if (process.env.NODE_ENV === 'production') {
+            url = 'https://meme-project-server-ava.onrender.com';
+        }
+        fetch(`${url}/api/users/signin`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -50,14 +55,6 @@ export default function SignInPage(props) {
         },
     });
 
-    function onSignIn(googleUser) {
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    }
-
     const onSuccess = response => console.log('client google success: ', response);
     const onFailure = response => console.error('client google error: ', response);
 
@@ -96,12 +93,6 @@ export default function SignInPage(props) {
                     </div>
                     <div>{}</div>
                     <div className="g-signin2" data-onsuccess="onSignIn"></div>
-                    <LoginOAuth2
-                        clientId="476772010168-qcjl2r4gl2hudufipa1a8bc0nduj3567.apps.googleusercontent.com"
-                        authorizeUri="https://mem-project-client-ava.netlify.app/"
-                        onSuccess={onSuccess}
-                        onFailure={onFailure}
-                    />,
                 </form>
             </div>
         </div>
