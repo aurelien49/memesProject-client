@@ -20,8 +20,6 @@ function MydModalWithGrid(props) {
         event.preventDefault();
         setMessage('');
 
-        console.log('Click sur card : process.env.REACT_APP_X_API_KEY', process.env.REACT_APP_API_NINJA_KEY)
-
         fetch('https://api.api-ninjas.com/v1/dadjokes?limit=1', {
             method: 'GET',
             headers: {

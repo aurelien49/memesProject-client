@@ -49,10 +49,6 @@ class HomePage extends Component {
             dateNow = Math.floor(dateNow.getTime() / 1000);
             let decodedToken = jwt.decode(this.props.data_user.token, {complete: true});
 
-            console.log('client/home_page/handleClickCard/dateNow.getTime(): ', dateNow)
-            console.log('client/home_page/handleClickCard/this.props.decodedToken.payload.exp: ', decodedToken.payload.exp)
-            console.log('client/home_page/handleClickCard/this.props.isUserLogged: ', this.props.isUserLogged)
-
             if (decodedToken.payload.exp > dateNow) {
                 let commentBoxes = [];
                 for (let i = 0; i < meme_box_count; i++) {
@@ -72,7 +68,6 @@ class HomePage extends Component {
                 this.state.currentMemeSelected.showModalCreateMeme = true;
                 this.setState({});
             } else {  // The token is over, disconnect the user display the sign-in page
-                console.log('client/home_page/handleClickCard/token is over: else : ')
                 this.props.handleTokenUserDisconnection();
             }
         }
@@ -142,7 +137,6 @@ class HomePage extends Component {
                 return response.json()
             })
             .then(data => {
-                    console.log('client/home_page/createMemeOnImgflip/ then : ', data)
                     this.state.currentMemeSelected.urlToRetriveMeme = data['urlToRetriveMeme'];
                     // Refresh memes history
                     this.props.getUserMemesHistory(data['idUser']);
@@ -150,7 +144,6 @@ class HomePage extends Component {
                     this.handleModalClose();
                 }
             ).catch(err => {
-                console.error(err);
                 const errorMessage = document.createElement('marquee');
                 errorMessage.textContent = `Gah, ${err.message} !`;
                 app.appendChild(errorMessage);

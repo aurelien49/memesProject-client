@@ -34,7 +34,6 @@ class App extends React.Component {
     }
 
     callbackSignInSuccess = async (data) => {
-        console.log('client/App/callbackSignInSuccess/data: ', data)
         // Get data from the user just connected
         this.state = ({
             ...this.state,
@@ -46,7 +45,6 @@ class App extends React.Component {
 
 
         await this.getUserMemesHistory(data.user._id)
-        console.log('client/App/callbackSignInSuccess/ après getUserMemesHistory : ', data.user._id)
         // Back to home page
         this.callbackHandleMenu("/home");
     }
@@ -57,8 +55,6 @@ class App extends React.Component {
     }
 
     async getUserMemesHistory(id_user) {
-        console.log('client/App/getUserMemesHistory/ avant : ', id_user)
-
         let url = `http://localhost:${process.env.REACT_APP_SERVER_PORT}`;
         if (process.env.NODE_ENV === 'production') {
             url = 'https://meme-project-server-ava.onrender.com';
@@ -77,13 +73,11 @@ class App extends React.Component {
         )
             .then(response => response.json())
             .then(data2 => {
-                    console.log('client/App/getUserMemesHistory/ then : ', data2)
                     this.state = ({...this.state, user_memes_history: data2});
                     this.setState({...this.state});
                 }
             )
             .catch(err => {
-                    console.log('client/App/getUserMemesHistory/ catch : ', err)
                     console.error(err);
                 }
             );
@@ -107,7 +101,6 @@ class App extends React.Component {
             user_id: '',
             user_email: '',
         })
-        console.log('Client --> logout this.state.token = ', this.state.token)
     }
 
     handleTokenUserDisconnection() {
@@ -193,8 +186,6 @@ class App extends React.Component {
         // Manage the disable state of button to access 'Memes saved' menu
         let isUserLogged = token !== undefined && token !== '';
         let _showHistoricButton = isUserLogged && (user_memes_history.length > 0);
-
-        console.log('client/App/avant render: ', token)
 
         return (
             <div className="container">

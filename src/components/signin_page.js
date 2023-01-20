@@ -9,8 +9,6 @@ export default function SignInPage(props) {
     const [value, setValue] = useState(0);
 
     const handleSubmitF = async (event) => {
-        console.log('client/SignInPage/handleSubmitF/event: ', event)
-
         let url = `http://localhost:${process.env.REACT_APP_SERVER_PORT}`;
         if (process.env.NODE_ENV === 'production') {
             url = 'https://meme-project-server-ava.onrender.com';
@@ -54,9 +52,6 @@ export default function SignInPage(props) {
             ,
         },
     });
-
-    const onSuccess = response => console.log('client google success: ', response);
-    const onFailure = response => console.error('client google error: ', response);
 
     return (
         <div className="col-md-12">
